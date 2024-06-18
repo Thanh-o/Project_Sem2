@@ -1,0 +1,25 @@
+
+.footer-container {
+display: flex;
+justify-content: space-between;
+padding: 20px;
+background-color: #f8f8f8;
+}
+.footer-container a{color: #333;text-decoration: none; font-size: 13px;}
+.a{color: #333;text-decoration: none; font-size: 13px;}
+.container {
+width: 50%;
+}
+.title {
+font-weight: bold;
+color: #d32f2f;
+margin-bottom: 10px;
+}
+.container p {
+margin: 5px 0;
+}
+.social-icons{margin-top: 20px;}
+.post1 ul{display: flex;}
+.post2 ul{display: flex;}
+.post1 ul img{width: 15%;height: 100%;}
+.post2 ul img{width: 15%;height: 100%;}
