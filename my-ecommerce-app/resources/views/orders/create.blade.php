@@ -48,7 +48,7 @@
                 <input type="text" class="form-control" id="status" name="status" required>
             </div>
 
-            <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('orders.index') }}'">Create</button>
+            <button type="submit" class="btn btn-primary" >Create</button>
         </form>
     </div>
 

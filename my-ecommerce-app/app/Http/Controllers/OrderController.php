@@ -34,7 +34,7 @@ class OrderController extends Controller
         $order->status = $request->input('status');
         $order->save();
 
-        return redirect()->back()->with('status', 'Order created successfully');
+        return redirect()->route('orders.index')->with('status', 'Product created successfully');
     }
 
     // READ
@@ -78,7 +78,7 @@ class OrderController extends Controller
     }
 
     // DELETE
-    public function destroy($id)
+    public function delete($id)
     {
         $order = Order::findOrFail($id);
         $order->delete();

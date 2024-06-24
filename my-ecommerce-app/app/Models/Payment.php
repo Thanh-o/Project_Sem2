@@ -10,6 +10,7 @@ class Payment extends Model
     use HasFactory;
     protected $table = 'payment';
     protected $primaryKey = 'payment_id';
+    public $timestamps = false;
 
     protected $fillable = [
         'payment_type', 'order_id'

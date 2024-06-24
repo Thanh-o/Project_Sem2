@@ -16,12 +16,12 @@ class Product extends Model
 
     public function catalog()
     {
-        return $this->belongsTo(Catalog::class);
+        return $this->belongsTo(Catalog::class, 'catalog_id', 'catalog_id');
     }
 
     public function multimedia()
     {
-        return $this->hasOne(Multimedia::class);
+        return $this->hasMany(Multimedia::class, 'product_id', 'product_id');
     }
 
     public function orderDetails()

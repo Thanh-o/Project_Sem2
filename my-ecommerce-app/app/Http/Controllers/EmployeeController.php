@@ -27,18 +27,11 @@ class EmployeeController extends Controller
             'admin_id' => 'nullable|exists:admins,admin_id'
         ]);
 
-        $employee = new Employee;
-        $employee->name = $request->input('name');
-        $employee->email = $request->input('email');
-        $employee->phone = $request->input('phone');
-        $employee->username = $request->input('username');
+        $employee = new Employee($request->except('password'));
         $employee->password = Hash::make($request->input('password'));
-        $employee->hire_date = $request->input('hire_date');
-        $employee->job_title = $request->input('job_title');
-        $employee->admin_id = $request->input('admin_id');
         $employee->save();
 
-        return redirect()->back()->with('status', 'Employee created successfully');
+        return redirect()->route('employees.index')->with('status', 'Employee created successfully');
     }
 
     // READ
@@ -51,43 +44,41 @@ class EmployeeController extends Controller
     // UPDATE
     public function edit($id)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::findOrFail($id);
         return view('employees.edit', compact('employee'));
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|string|max:50',
-            'email' => 'required|email|unique:employees,email,' . $id,
-            'phone' => 'nullable|string|max:20',
-            'username' => 'required|string|min:6|unique:employees,username,' . $id,
-            'password' => 'nullable|string|min:6',
-            'hire_date' => 'nullable|date',
-            'job_title' => 'nullable|string|max:50',
-            'admin_id' => 'nullable|exists:admins,admin_id'
-        ]);
+{
+    $validatedData = $request->validate([
+        'name' => 'required|max:50',
+        'email' => 'required|email|unique:employees,email,' . $id . ',employee_id', 
+        'phone' => 'nullable|max:20',
+        'username' => 'required|min:6|unique:employees,username,' . $id . ',employee_id', 
+        'password' => 'nullable|min:6',
+        'hire_date' => 'nullable|date',
+        'job_title' => 'nullable|max:50',
+        'admin_id' => 'nullable|exists:admins,admin_id'
+    ]);
 
-        $employee = Employee::find($id);
-        $employee->name = $request->input('name');
-        $employee->email = $request->input('email');
-        $employee->phone = $request->input('phone');
-        $employee->username = $request->input('username');
-        if ($request->input('password')) {
-            $employee->password = Hash::make($request->input('password'));
-        }
-        $employee->hire_date = $request->input('hire_date');
-        $employee->job_title = $request->input('job_title');
-        $employee->admin_id = $request->input('admin_id');
-        $employee->update();
+    $employee = Employee::findOrFail($id); 
 
-        return redirect()->route('employees.index');
+    
+    if ($request->filled('password')) {
+        $validatedData['password'] = Hash::make($request->input('password'));
+    } else {
+        unset($validatedData['password']); 
     }
+
+    $employee->update($validatedData);
+
+    return redirect()->route('employees.index')->with('status', 'Employee updated successfully!');
+}
 
     // DELETE
     public function delete($id)
     {
-        $employee = Employee::find($id);
+        $employee = Employee::findOrFail($id);
         $employee->delete();
 
         return redirect()->back()->with('status', 'Employee deleted successfully');

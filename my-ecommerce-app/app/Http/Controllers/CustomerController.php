@@ -8,10 +8,12 @@ use Illuminate\Support\Facades\Hash;
 
 class CustomerController extends Controller
 {
-
-
-
-
+    // READ
+    public function index()
+    {
+        $customers = Customer::all();
+        return view('customers.index', compact('customers'));
+    }
 
     // CREATE
     public function create()
@@ -21,7 +23,7 @@ class CustomerController extends Controller
 
     public function store(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required|max:50',
             'email' => 'required|email|unique:customers,email',
             'phone' => 'nullable|max:20',
@@ -29,69 +31,75 @@ class CustomerController extends Controller
             'password' => 'required|min:6',
             'address' => 'nullable|max:255',
             'admin_id' => 'nullable|exists:admin,admin_id',
+        ], [
+            'name.required' => 'The name field is required.',
+            'email.required' => 'The email field is required.',
+            'email.email' => 'The email must be a valid email address.',
+            'email.unique' => 'The email has already been taken.',
+            'username.required' => 'The username field is required.',
+            'username.min' => 'The username must be at least 6 characters.',
+            'username.unique' => 'The username has already been taken.',
+            'password.required' => 'The password field is required.',
+            'password.min' => 'The password must be at least 6 characters.',
+            'admin_id.exists' => 'The selected admin ID is invalid.',
         ]);
 
-        $customer = new Customer;
-        $customer->name = $request->input('name');
-        $customer->email = $request->input('email');
-        $customer->phone = $request->input('phone');
-        $customer->username = $request->input('username');
-        $customer->password = Hash::make($request->input('password'));
-        $customer->address = $request->input('address');
-        $customer->admin_id = $request->input('admin_id');
-        $customer->save();
+        $validatedData['password'] = Hash::make($validatedData['password']);
 
-        return redirect()->back()->with('status', 'Customer created successfully');
-    }
+        Customer::create($validatedData);
 
-    // READ
-    public function index()
-    {
-        $customers = Customer::all();
-        return view('customers.index', compact('customers'));
+        return redirect()->route('customers.index')->with('status', 'Customer created successfully');
     }
 
     // UPDATE
     public function edit($id)
     {
-        $customer = Customer::find($id);
+        $customer = Customer::findOrFail($id);
         return view('customers.edit', compact('customer'));
     }
 
     public function update(Request $request, $id)
-    {
-        $request->validate([
-            'name' => 'required|max:50',
-            'email' => 'required|email|unique:customers,email,' . $id,
-            'phone' => 'nullable|max:20',
-            'username' => 'required|min:6|unique:customers,username,' . $id,
-            'password' => 'nullable|min:6',
-            'address' => 'nullable|max:255',
-            'admin_id' => 'nullable|exists:admin,admin_id',
-        ]);
+{
+    $validatedData = $request->validate([
+        'name' => 'required|max:50',
+        'email' => 'required|email|unique:customers,email,' . $id . ',customer_id',
+        'phone' => 'nullable|max:20',
+        'username' => 'required|min:6|unique:customers,username,' . $id . ',customer_id',
+        'password' => 'nullable|min:6',
+        'address' => 'nullable|max:255',
+        'admin_id' => 'nullable|exists:admin,admin_id',
+    ], [
+        'name.required' => 'The name field is required.',
+        'email.required' => 'The email field is required.',
+        'email.email' => 'The email must be a valid email address.',
+        'email.unique' => 'The email has already been taken.',
+        'username.required' => 'The username field is required.',
+        'username.min' => 'The username must be at least 6 characters.',
+        'username.unique' => 'The username has already been taken.',
+        'password.min' => 'The password must be at least 6 characters.',
+        'admin_id.exists' => 'The selected admin ID is invalid.',
+    ]);
 
-        $customer = Customer::find($id);
-        $customer->name = $request->input('name');
-        $customer->email = $request->input('email');
-        $customer->phone = $request->input('phone');
-        $customer->username = $request->input('username');
-        if ($request->input('password')) {
-            $customer->password = Hash::make($request->input('password'));
-        }
-        $customer->address = $request->input('address');
-        $customer->admin_id = $request->input('admin_id');
-        $customer->update();
+    $customer = Customer::findOrFail($id);
 
-        return redirect()->route('customers.index');
+    if ($request->filled('password')) {
+        $validatedData['password'] = Hash::make($request->input('password'));
+    } else {
+        unset($validatedData['password']); 
     }
+
+    $customer->update($validatedData);
+
+    return redirect()->route('customers.index')->with('status', 'Customer updated successfully!');
+}
+
 
     // DELETE
     public function delete($id)
     {
-        $customer = Customer::find($id);
+        $customer = Customer::findOrFail($id);
         $customer->delete();
 
         return redirect()->back()->with('status', 'Customer deleted successfully');
     }
 }
-

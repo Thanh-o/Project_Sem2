@@ -9,6 +9,7 @@
 <body>
     <div class="container mt-5">
         <h1>Edit Customer</h1>
+        <a href="{{ route('customers.index') }}" class="btn btn-primary">Back</a>
         <form action="{{ route('customers.update', $customer->customer_id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -41,16 +42,7 @@
                 <label for="address" class="form-label">Address:</label>
                 <textarea class="form-control" id="address" name="address">{{ $customer->address }}</textarea>
             </div>
-
-            <div class="mb-3">
-                <label for="admin_id" class="form-label">Admin ID:</label>
-                <input type="number" class="form-control" id="admin_id" name="admin_id" value="{{ $customer->admin_id }}">
-            </div>
-            <div class="mb-3">
-                <label for="">Image:</label>
-                <input type="file" name="image" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-danger">Update</button>
         </form>
     </div>
 

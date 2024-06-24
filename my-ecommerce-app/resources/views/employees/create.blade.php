@@ -6,7 +6,9 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Add Employee</h1>
+        <h1>Add Employee
+            <a href="{{ route('employees.index') }}" class="btn btn-primary float-end">Back</a>
+        </h1>
         <form action="{{ route('employees.store') }}" method="POST">
             @csrf
             <div class="mb-3">
@@ -43,13 +45,8 @@
                 <label for="job_title" class="form-label">Job Title:</label>
                 <input type="text" class="form-control" id="job_title" name="job_title">
             </div>
-            <div class="mb-3">
-                <label for="">Image:</label>
-                <input type="file" name="image" class="form-control">
-            </div>
-        
-
-            <button type="button" class="btn btn-primary" onclick="window.location.href='{{ route('employees.index') }}'">Create</button>
+           
+            <button type="submit" class="btn btn-danger">Create</button>
 
         </form>
     </div>

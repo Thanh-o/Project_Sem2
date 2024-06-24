@@ -4,11 +4,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edit Employee</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+    rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+    crossorigin="anonymous">
 </head>
 <body>
     <div class="container mt-5">
         <h1>Edit Employee</h1>
+        <a href="{{ route('employees.index') }}" class="btn btn-primary">Back</a>
         <form action="{{ route('employees.update', $employee->employee_id) }}" method="POST">
             @csrf
             @method('PUT')
@@ -47,16 +51,7 @@
                 <label for="job_title" class="form-label">Job Title:</label>
                 <input type="text" class="form-control" id="job_title" name="job_title" value="{{ $employee->job_title }}">
             </div>
-
-            <div class="mb-3">
-                <label for="admin_id" class="form-label">Admin ID:</label>
-                <input type="number" class="form-control" id="admin_id" name="admin_id" value="{{ $employee->admin_id }}">
-            </div>
-            <div class="mb-3">
-                <label for="">Image:</label>
-                <input type="file" name="image" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-danger">Update</button>
         </form>
     </div>
 

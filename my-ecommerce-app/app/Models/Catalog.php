@@ -11,6 +11,7 @@ class Catalog extends Model
 
     protected $table = 'catalog';
     protected $primaryKey = 'catalog_id';
+    public $timestamps = false;
 
     protected $fillable = [
         'catalog_name', 'description'
@@ -18,6 +19,6 @@ class Catalog extends Model
 
     public function products()
     {
-        return $this->hasMany(Product::class);
+        return $this->hasMany(Product::class, 'catalog_id', 'catalog_id');
     }
 }
