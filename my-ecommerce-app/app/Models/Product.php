@@ -11,17 +11,17 @@ class Product extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'product_name', 'description', 'price', 'quantity', 'catalog_id'
+        'product_name', 'description', 'price', 'quantity', 'cate_id'
     ];
 
-    public function catalog()
+    public function category()
     {
-        return $this->belongsTo(Catalog::class, 'catalog_id', 'catalog_id');
+        return $this->belongsTo(Category::class, 'cate_id', 'cate_id');
     }
 
-    public function multimedia()
+    public function images()
     {
-        return $this->hasMany(Multimedia::class, 'product_id', 'product_id');
+        return $this->hasMany(Image::class, 'product_id', 'product_id');
     }
 
     public function orderDetails()

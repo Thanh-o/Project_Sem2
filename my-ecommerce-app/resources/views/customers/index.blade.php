@@ -10,6 +10,7 @@
         crossorigin="anonymous">
 </head>
 <body>
+    <a href="{{ route('admin.dashboard') }}">DashBoard</a>
     <div class="container">
         <h1 class="mt-5 mb-4">Customer List</h1>
         <a class="btn btn-primary mb-3" href="{{ route('customers.create') }}">Add New Customer</a>

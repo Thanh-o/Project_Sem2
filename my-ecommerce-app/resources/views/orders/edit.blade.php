@@ -9,6 +9,7 @@
 </head>
 <body>
         <div class="container">
+            <a href="{{ route('orders.index') }}">Back</a>
         <h2>Edit Order</h2>
         <form method="POST" action="{{ route('orders.update', ['id' => $order->order_id]) }}">
             @csrf
@@ -39,7 +40,11 @@
 
             <div class="form-group">
                 <label for="status">Status:</label>
-                <input type="text" class="form-control" id="status" name="status" value="{{ $order->status }}" required>
+                <select class="form-select" id="status" name="status" required>
+                    @foreach ($statuses as $key => $label)
+                        <option value="{{ $key }}">{{ $label }}</option>
+                    @endforeach
+                </select>
             </div>
 
             <button type="submit" class="btn btn-primary">Update Order</button>

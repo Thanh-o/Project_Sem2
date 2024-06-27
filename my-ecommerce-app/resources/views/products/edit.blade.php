@@ -40,10 +40,10 @@
                         <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $product->quantity }}" required>
                     </div>
                     <div class="mb-3">
-                        <label for="catalog_id" class="form-label">Category</label>
-                        <select class="form-select" id="catalog_id" name="catalog_id" required>
-                            @foreach ($catalogs as $catalog)
-                            <option value="{{ $catalog->catalog_id }}" {{ $product->catalog_id == $catalog->catalog_id ? 'selected' : '' }}>{{ $catalog->catalog_name }}</option>
+                        <label for="cate_id" class="form-label">Category</label>
+                        <select class="form-select" id="cate_id" name="cate_id" required>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->cate_id }}" {{ $product->cate_id == $category->cate_id ? 'selected' : '' }}>{{ $category->cate_name }}</option>
                             @endforeach
                         </select>
                     </div>

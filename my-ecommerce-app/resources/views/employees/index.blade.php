@@ -8,6 +8,7 @@
     crossorigin="anonymous">
 </head>
 <body>
+    <a href="{{ route('admin.dashboard') }}">DashBoard</a>
     <div class="container">
         <h1 class="mt-4 mb-3">Employee List</h1>
         <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">Add New Employee</a>

@@ -5,12 +5,12 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Multimedia extends Model
+class Image extends Model
 {
     use HasFactory;
 
-    protected $table = 'multimedia';
-    protected $primaryKey = 'multimedia_id';
+    protected $table = 'images';
+    protected $primaryKey = 'image_id';
     public $timestamps = false;
 
     protected $fillable = [

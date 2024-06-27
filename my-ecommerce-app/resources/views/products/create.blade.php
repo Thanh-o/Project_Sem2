@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Product</title>
+    <title>Add Product</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
@@ -36,10 +36,10 @@
                         <input type="number" class="form-control" id="quantity" name="quantity" required>
                     </div>
                     <div class="mb-3">
-                        <label for="catalog_id" class="form-label">Category</label>
-                        <select class="form-select" id="catalog_id" name="catalog_id" required>
-                            @foreach ($catalogs as $catalog)
-                            <option value="{{ $catalog->catalog_id }}">{{ $catalog->catalog_name }}</option>
+                        <label for="cate_id" class="form-label">Category</label>
+                        <select class="form-select" id="cate_id" name="cate_id" required>
+                            @foreach ($categories as $category)
+                            <option value="{{ $category->cate_id }}">{{ $category->cate_name }}</option>
                             @endforeach
                         </select>
                     </div>

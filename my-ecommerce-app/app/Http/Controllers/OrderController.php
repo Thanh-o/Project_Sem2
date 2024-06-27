@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -11,77 +10,69 @@ class OrderController extends Controller
 {
     // CREATE
     public function create()
-    {
-        $customers = Customer::all(); 
-        $employees = Employee::all(); 
-        return view('orders.create', compact('customers', 'employees'));
-    }
+{
+    return view('orders.create', [
+        'customers' => Customer::all(),
+        'employees' => Employee::all(),
+        'statuses' => [
+            'cancelled' => 'Cancelled',
+            'processing' => 'Processing',
+            'completed' => 'Completed',
+        ],
+    ]);
+}
 
-    public function store(Request $request)
-    {
-        $request->validate([
-            'customer_id' => 'required|exists:customers,customer_id',
-            'employee_id' => 'required|exists:employees,employee_id',
-            'total_amount' => 'required|numeric|min:0',
-            'status' => 'required|max:50',
-        ]);
+public function store(Request $request)
+{
+    Order::create($request->only(['customer_id', 'employee_id', 'total_amount', 'status']));
 
-        // Create new order
-        $order = new Order;
-        $order->customer_id = $request->input('customer_id');
-        $order->employee_id = $request->input('employee_id');
-        $order->total_amount = $request->input('total_amount');
-        $order->status = $request->input('status');
-        $order->save();
+    return redirect()->route('orders.index')->with('status', 'Order created successfully');
+}
 
-        return redirect()->route('orders.index')->with('status', 'Product created successfully');
-    }
 
     // READ
     public function index()
-    {
-        $orders = Order::all();
-        return view('orders.index', compact('orders'));
-    }
+{
+    $orders = Order::with(['customer', 'employee'])->get();
+    return view('orders.index', compact('orders'));
+}
+
 
     public function show($id)
     {
-        $order = Order::findOrFail($id);
-        return view('orders.show', compact('order'));
+        return view('orders.show', ['order' => Order::findOrFail($id)]);
     }
 
     // UPDATE
     public function edit($id)
-    {
-        $order = Order::findOrFail($id);
-        return view('orders.edit', compact('order'));
-    }
+{
+    $order = Order::findOrFail($id);
+    
+    return view('orders.edit', [
+        'order' => $order,
+        'customers' => Customer::all(),
+        'employees' => Employee::all(),
+        'statuses' => [
+            'cancelled' => 'Cancelled',
+            'processing' => 'Processing',
+            'completed' => 'Completed',
+        ],
+    ]);
+}
 
-    public function update(Request $request, $id)
-    {
-        $request->validate([
-            'customer_id' => 'required|exists:customers,customer_id',
-            'employee_id' => 'required|exists:employees,employee_id',
-            'total_amount' => 'required|numeric|min:0',
-            'status' => 'required|max:50',
-        ]);
+public function update(Request $request, $id)
+{
+    $order = Order::findOrFail($id);
+    $order->update($request->only(['customer_id', 'employee_id', 'total_amount', 'status']));
 
-        // Update the order
-        $order = Order::findOrFail($id);
-        $order->customer_id = $request->input('customer_id');
-        $order->employee_id = $request->input('employee_id');
-        $order->total_amount = $request->input('total_amount');
-        $order->status = $request->input('status');
-        $order->save();
+    return redirect()->route('orders.index')->with('status', 'Order updated successfully');
+}
 
-        return redirect()->route('orders.index');
-    }
 
     // DELETE
     public function delete($id)
     {
-        $order = Order::findOrFail($id);
-        $order->delete();
+        Order::findOrFail($id)->delete();
 
         return redirect()->back()->with('status', 'Order deleted successfully');
     }
