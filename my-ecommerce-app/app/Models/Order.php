@@ -11,9 +11,10 @@ class Order extends Model
 
     protected $table = 'orders';
     protected $primaryKey = 'order_id';
+    public $timestamps = false;
 
     protected $fillable = [
-        'customer_id', 'employee_id', 'total_amount', 'status','created_at', 'updated_at'
+        'customer_id', 'employee_id', 'total_amount', 'status', 'payment', 'created_at', 'updated_at'
     ];
 
     public function customer()
@@ -31,8 +32,5 @@ class Order extends Model
         return $this->hasMany(OrderDetail::class);
     }
 
-    public function payment()
-    {
-        return $this->hasOne(Payment::class);
-    }
+ 
 }

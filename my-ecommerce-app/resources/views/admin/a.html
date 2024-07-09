@@ -3,41 +3,132 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Admin Login</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-    crossorigin="anonymous">
+    <title>T2M - Shop Bán Đồ Công Nghệ</title>
     <style>
-        body, html {
-            height: 100%;
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
         }
-        .container {
-            height: 100%;
+        header {
+            background-color: #333;
+            color: #fff;
+            padding: 1rem;
+            text-align: center;
+        }
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #444;
+            padding: 0.5rem;
+        }
+        nav a {
+            color: #fff;
+            margin: 0 1rem;
+            text-decoration: none;
+        }
+        main {
+            padding: 1rem;
+        }
+        section {
+            margin-bottom: 2rem;
+        }
+        h2 {
+            color: #333;
+        }
+        .product-list {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .product-item {
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            margin: 0.5rem;
+            padding: 1rem;
+            flex: 1 1 calc(33.333% - 2rem);
+            box-sizing: border-box;
+        }
+        footer {
+            background-color: #333;
+            color: #fff;
+            text-align: center;
+            padding: 1rem;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
         }
     </style>
 </head>
 <body>
-    <div class="container d-flex justify-content-center align-items-center">
-        <div class="card" style="width: 30rem;">
-            <div class="card-body">
-                <h2 class="card-title text-center">Admin Login</h2>
-               
-                <form method="POST" action="{{ route('admin.login.submit') }}">
-                    <div class="mb-3">
-                        <label for="username" class="form-label">Username</label>
-                        <input type="text" name="username" id="username" class="form-control" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="password" class="form-label">Password</label>
-                        <input type="password" name="password" id="password" class="form-control" required>
-                    </div>
-                    <button type="submit" class="btn btn-danger w-100">Login</button>
-                </form>
+    <header>
+        <h1>T2M - Shop Bán Đồ Công Nghệ</h1>
+    </header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#login">Login</a>
+        <a href="#cart">Giỏ hàng</a>
+        <a href="#support">Hỗ trợ</a>
+        <a href="#policy">Chính sách</a>
+    </nav>
+    <main>
+        <section id="home">
+            <h2>Về Chúng Tôi</h2>
+            <p>Chào mừng bạn đến với T2M, shop bán đồ công nghệ hiện đại và đáng tin cậy. Chúng tôi cung cấp các sản phẩm công nghệ cao cấp với chất lượng tốt nhất để đáp ứng nhu cầu của bạn.</p>
+        </section>
+        <section id="products">
+            <h2>Danh Mục Sản Phẩm</h2>
+            <div class="product-list">
+                <div class="product-item"><strong>Laptop</strong></div>
+                <div class="product-item"><strong>PC</strong></div>
+                <div class="product-item"><strong>Màn hình</strong></div>
+                <div class="product-item"><strong>Tai nghe</strong></div>
+                <div class="product-item"><strong>Điện thoại</strong></div>
+                <div class="product-item"><strong>Ghế</strong></div>
+                <div class="product-item"><strong>MacBook</strong></div>
+                <div class="product-item"><strong>Phím</strong></div>
+                <div class="product-item"><strong>Chuột</strong></div>
+                <div class="product-item"><strong>Loa</strong></div>
+                <div class="product-item"><strong>Mic</strong></div>
             </div>
-        </div>
-    </div>
-
+        </section>
+        <section id="contact">
+            <h2>Thông Tin Liên Hệ</h2>
+            <p>Địa chỉ: 123 Đường Công Nghệ, Quận 10, TP. HCM</p>
+            <p>Số điện thoại: 0123 456 789</p>
+            <p>Email: contact@t2mshop.com</p>
+            <p>Facebook: <a href="#">facebook.com/t2mshop</a></p>
+            <p>Instagram: <a href="#">instagram.com/t2mshop</a></p>
+        </section>
+        <section id="policy">
+            <h2>Chính Sách</h2>
+            <p><strong>Chính sách bảo hành:</strong> Tất cả các sản phẩm được bảo hành 12 tháng.</p>
+            <p><strong>Chính sách đổi trả:</strong> Đổi trả trong vòng 7 ngày nếu có lỗi từ nhà sản xuất.</p>
+            <p><strong>Chính sách vận chuyển:</strong> Miễn phí vận chuyển cho đơn hàng trên 500.000 VND.</p>
+        </section>
+        <section id="support">
+            <h2>Hỗ Trợ</h2>
+            <p>Nếu bạn có bất kỳ câu hỏi nào hoặc cần hỗ trợ, vui lòng liên hệ với chúng tôi qua các thông tin liên hệ ở trên hoặc qua email support@t2mshop.com.</p>
+        </section>
+        <section id="login">
+            <h2>Đăng Nhập</h2>
+            <p>Vui lòng đăng nhập để truy cập vào giỏ hàng và các dịch vụ của chúng tôi.</p>
+            <form>
+                <label for="username">Tên đăng nhập:</label><br>
+                <input type="text" id="username" name="username"><br>
+                <label for="password">Mật khẩu:</label><br>
+                <input type="password" id="password" name="password"><br><br>
+                <input type="submit" value="Đăng Nhập">
+            </form>
+        </section>
+        <section id="cart">
+            <h2>Giỏ Hàng</h2>
+            <p>Giỏ hàng của bạn hiện đang trống. Hãy thêm các sản phẩm vào giỏ hàng để mua sắm.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2024 T2M - Shop Bán Đồ Công Nghệ</p>
+    </footer>
 </body>
 </html>

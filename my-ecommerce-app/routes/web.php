@@ -13,18 +13,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
 use App\Http\Controllers\ProductController;
 
-// Route::get('/products', [ProductController::class, 'index'])->name('products.index');
-// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-// Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-// Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-// Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-// Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('products.delete');
-// Route::delete('/products/delete-media/{id}', [ProductController::class, 'deleteMedia'])->name('products.deleteMedia');
+Route::get('products', [ProductController::class, 'indexp'])->name('products');
 
 use App\Http\Controllers\CustomerController;
 
@@ -34,7 +28,30 @@ use App\Http\Controllers\CustomerController;
 // Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
 // Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
 // Route::delete('/customers/{id}', [CustomerController::class, 'delete'])->name('customers.delete');
+Route::prefix('customers')->group(function () {
+    Route::get('login', [CustomerController::class, 'showLoginForm'])->name('customers.login');
+    Route::post('login', [CustomerController::class, 'login'])->name('customers.login.submit');
+    Route::post('logout', [CustomerController::class, 'logout'])->name('customers.logout');
 
+    Route::get('signup', [CustomerController::class, 'showSignupForm'])->name('customers.signup');
+    Route::post('signup', [CustomerController::class, 'signup'])->name('customers.signup.submit');
+
+    Route::middleware('customers')->group(function () {
+        // Route::get('/', [CustomerController::class, 'dashboard'])->name('customers.dashboard');
+    });
+});
+
+Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('customers.dashboard');
+
+use App\Http\Controllers\HomeController;
+
+// Home route outside of the customer prefix
+Route::get('/', [HomeController::class, 'index'])->name('home');
+
+
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
 
 use App\Http\Controllers\EmployeeController;
 
@@ -64,15 +81,15 @@ Route::get('/orderdetails/{id}/edit', [OrderDetailController::class, 'edit'])->n
 Route::put('/orderdetails/{id}', [OrderDetailController::class, 'update'])->name('orderdetails.update');
 Route::delete('/orderdetails/{id}', [OrderDetailController::class, 'delete'])->name('orderdetails.delete');
 
-use App\Http\Controllers\AuthController;
+// use App\Http\Controllers\AuthController;
 
-Route::get('/auth', [AuthController::class, 'showForm'])->name('auth.form');
-Route::post('/signin', [AuthController::class, 'signIn'])->name('signin');
-Route::post('/signup', [AuthController::class, 'signUp'])->name('signup');
+// Route::get('/auth', [AuthController::class, 'showForm'])->name('auth.form');
+// Route::post('/signin', [AuthController::class, 'signIn'])->name('signin');
+// Route::post('/signup', [AuthController::class, 'signUp'])->name('signup');
 
-Route::get('dashboard', function () {
-    return view('dashboard');
-});
+// Route::get('home', function () {
+//     return view('home');
+// });
 
 //Category
 // Route::get('/categories', [ProductController::class, 'indexcate'])->name('categories.index');
@@ -87,7 +104,7 @@ Route::prefix('admin')->group(function () {
     // Admin Login
     Route::get('login', [AdminController::class, 'showLoginForm'])->name('admin.login');
     Route::post('login', [AdminController::class, 'login'])->name('admin.login.submit');
-    Route::post('logout', [AdminController::class, 'logout'])->name('admin.logout');
+    Route::get('logout', [AdminController::class, 'logout'])->name('admin.logout');
     Route::middleware('admin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
     });
@@ -124,5 +141,5 @@ Route::prefix('admin')->group(function () {
     Route::get('/categories', [ProductController::class, 'indexcate'])->name('products.category');
     Route::post('/categories', [ProductController::class, 'addcate'])->name('categories.add');
     Route::delete('/categories/{id}', [ProductController::class, 'deletecate'])->name('categories.delete');
-    
+    Route::put('categories/{id}', [ProductController::class, 'editcate'])->name('categories.edit');
 });

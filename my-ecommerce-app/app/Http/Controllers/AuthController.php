@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Admin;
+use App\Models\Customer;
 use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
@@ -43,15 +44,15 @@ class AuthController extends Controller
         ]);
 
         // Create a new admin
-        $admin = Admin::create([
+        $customer = Customer::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
         ]);
 
         // Log the admin in
-        Auth::guard('admin')->login($admin);
+        Auth::guard('customer')->login($customer);
 
         // Redirect to intended page
-        return redirect()->intended('dashboard');
+        return redirect()->intended('home');
     }
 }

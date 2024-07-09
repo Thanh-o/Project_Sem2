@@ -3,28 +3,25 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Notifications\Notifiable;
 
-class Customer extends Model
+class Customer extends Authenticatable
 {
-    use HasFactory;
+    use HasFactory, Notifiable;
 
     protected $table = 'customers';
     protected $primaryKey = 'customer_id';
     public $timestamps = false;
 
     protected $fillable = [
-        'name', 'email', 'phone', 'username', 'password', 'address', 'admin_id'
+        'name', 'email', 'phone', 'username', 'password', 'address', 'created_at'
     ];
 
     protected $hidden = [
         'password'
     ];
 
-    public function admin()
-    {
-        return $this->belongsTo(Admin::class);
-    }
 
     public function orders()
     {

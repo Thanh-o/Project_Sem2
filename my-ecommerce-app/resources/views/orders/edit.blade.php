@@ -47,6 +47,15 @@
                 </select>
             </div>
 
+            <div class="form-group">
+                <label for="payment">Payment</label>
+                <select class="form-select" id="payment" name="payment" required>
+                    @foreach ($payments as $key => $label)
+                        <option value="{{ $key }}">{{ $label }}</option>
+                    @endforeach
+                </select>
+            </div>
+
             <button type="submit" class="btn btn-primary">Update Order</button>
         </form>
     </div>

@@ -30,13 +30,21 @@
                     @foreach ($categories as $category)
                         <tr>
                             <td>{{ $category->cate_id }}</td>
-                            <td>{{ $category->cate_name }}</td>
+                            <td><form action="{{ route('categories.edit', $category->cate_id) }}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @method('PUT')
+                                <input type="text" name="cate_name" value="{{ $category->cate_name }}">
+                                <button type="submit" onclick="return confirm('Are you sure you want to edit this category?')">Edit</button>
+                            </form>
+                            </td>
                             <td>
+                                
                                 <form action="{{ route('categories.delete', $category->cate_id) }}" method="POST" style="display: inline;">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" onclick="return confirm('Are you sure you want to delete this category?')">Delete</button>
                                 </form>
+                                
                             </td>
                         </tr>
                     @endforeach

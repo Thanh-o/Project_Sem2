@@ -4,29 +4,26 @@ const container = document.querySelector(".container");
 
 sign_up_btn.addEventListener("click", () => {
     container.classList.add("sign-up-mode");
+    history.pushState({}, '', signupRoute);
 });
 
 sign_in_btn.addEventListener("click", () => {
     container.classList.remove("sign-up-mode");
+    history.pushState({}, '', loginRoute);
 });
-    //show password
-        function myFunction() {
-            var x = document.getElementById("myInput");
-            if (x.type === "password") {
-                x.type = "text";
-            } else {
-                x.type = "password";
-            }
-        }
-        
-        $(".click-eye").click(function () {
-            $(this).toggleClass("bx-show bx-hide");
-            
-            var input = $($(this).attr("toggle"));
-            
-            if (input.attr("type") == "password") {
-                input.attr("type", "text");
-            } else {
-                input.attr("type", "password");
-            }
+
+
+
+sign_in_btn.addEventListener("click", () => {
+    container.classList.remove("sign-up-mode");
+});
+    // show password
+    $(document).ready(function() {
+        $('.click-eye').click(function() {
+            $($(this).attr('toggle')).attr('type', function(index, attr) {
+                return attr == 'password' ? 'text' : 'password';
+            });
+            $(this).toggleClass('bx-hide bx-show');
         });
+    });
+        

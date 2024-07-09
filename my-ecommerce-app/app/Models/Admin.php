@@ -21,14 +21,4 @@ class Admin extends Authenticatable
     protected $hidden = [
         'password'
     ];
-
-    public function employees()
-    {
-        return $this->hasMany(Employee::class);
-    }
-
-    public function customers()
-    {
-        return $this->hasMany(Customer::class);
-    }
 }

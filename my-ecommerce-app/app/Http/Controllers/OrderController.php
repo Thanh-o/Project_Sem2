@@ -19,12 +19,17 @@ class OrderController extends Controller
             'processing' => 'Processing',
             'completed' => 'Completed',
         ],
+        'payments' => [
+            'paycash' => 'Pay Cash',
+            'deposit' => 'Deposit',
+            'installment' => 'Installment',
+        ],
     ]);
 }
 
 public function store(Request $request)
 {
-    Order::create($request->only(['customer_id', 'employee_id', 'total_amount', 'status']));
+    Order::create($request->only(['customer_id', 'employee_id', 'total_amount', 'status', 'payment']));
 
     return redirect()->route('orders.index')->with('status', 'Order created successfully');
 }
@@ -57,13 +62,18 @@ public function store(Request $request)
             'processing' => 'Processing',
             'completed' => 'Completed',
         ],
+        'payments' => [
+            'paycash' => 'Pay Cash',
+            'deposit' => 'Deposit',
+            'installment' => 'Installment',
+        ],
     ]);
 }
 
 public function update(Request $request, $id)
 {
     $order = Order::findOrFail($id);
-    $order->update($request->only(['customer_id', 'employee_id', 'total_amount', 'status']));
+    $order->update($request->only(['customer_id', 'employee_id', 'total_amount', 'status', 'payment']));
 
     return redirect()->route('orders.index')->with('status', 'Order updated successfully');
 }

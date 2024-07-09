@@ -79,7 +79,7 @@ class ProductController extends Controller
         if (!$product) {
             return redirect()->route('products.index')->with('error', 'Product not found.');
         }
-        $product->image()->delete();
+        $product->images()->delete();
         $product->delete();
         return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
     }
@@ -110,6 +110,12 @@ class ProductController extends Controller
         Category::create($request->all());
         return redirect()->route('products.category')->with('success', "Added category successfully!");
      }
+     //Edit
+     public function editcate(Request $request,$id){
+        $category = Category::findOrFail($id);
+        $category->update($request->only(['cate_name'])) ;
+        return redirect()->route('products.category')->with('success', "Edited category successfully!");
+     }
 
       //Delete
     public function deletecate($id){
@@ -117,5 +123,9 @@ class ProductController extends Controller
         return redirect()->route('products.category')->with('success', "Deleted category successfully!");
     }  
 
-   
+    public function indexp()
+    {
+        $products = Product::with(['category', 'images'])->get();
+        return view('products', compact('products'));
+    }
 }

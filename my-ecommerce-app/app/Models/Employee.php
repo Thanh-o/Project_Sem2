@@ -15,17 +15,13 @@ class Employee extends Model
     public $incrementing = false;
     
     protected $fillable = [
-        'name', 'email', 'phone', 'username', 'password', 'hire_date', 'job_title', 'admin_id'
+        'name', 'email', 'phone', 'username', 'password', 'hire_date', 'job_title'
     ];
 
     protected $hidden = [
         'password'
     ];
 
-    public function admin()
-    {
-        return $this->belongsTo(Admin::class);
-    }
 
     public function orders()
     {

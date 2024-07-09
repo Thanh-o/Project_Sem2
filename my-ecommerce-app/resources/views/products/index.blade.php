@@ -30,8 +30,11 @@
                 <table class="table table-striped">
                     <thead>
                         <th>ID</th>
+                        <th>Created At</th>
+                        <th>Updated At</th>
                         <th>Name</th>
                         <th>Price</th>
+                        <th>Quantity</th>
                         <th>Category</th>
                         <th>Media</th>
                         <th>Action</th>
@@ -40,8 +43,11 @@
                         @foreach ($products as $index => $product)
                         <tr>
                             <td>{{ $index + 1 }}</td>
+                            <td>{{ $product->created_at }}</td>
+                            <td>{{ $product->updated_at }}</td>
                             <td>{{ $product->product_name }}</td>
                             <td>{{ $product->price }}</td>
+                            <td>{{ $product->quantity }}</td>
                             <td>{{ $product->category->cate_name ?? 'N/A' }}</td>
                             <td>
                                 @php $firstMedia = $product->images->first(); @endphp

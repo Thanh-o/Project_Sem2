@@ -25,12 +25,11 @@
         <thead>
             <tr>
                 <th>ID</th>
-                <th>Order Date</th>
-                <th>Update Date</th>
                 <th>Customer Name</th>
                 <th>Employee Name</th>
                 <th>Total Amount</th>
                 <th>Status</th>
+                <th>Payment</th>
                 <th>Action</th>
             </tr>
         </thead>
@@ -38,8 +37,6 @@
             @foreach ($orders as $index => $order)
                 <tr>
                     <td>{{ $index + 1 }}</td> 
-                    <td>{{ $order->created_at }}</td>
-                    <td>{{ $order->updated_at }}</td>
                     <td>{{ optional($order->customer)->name ?? 'N/A' }}</td>
                     <td>{{ optional($order->employee)->name ?? 'N/A' }}</td>
                     <td>{{ $order->total_amount }}</td>
@@ -52,6 +49,16 @@
                             ];
                         @endphp
                         {{ $statusLabels[$order->status] ?? 'N/A' }}
+                    </td>
+                    <td>
+                        @php
+                            $paymentLabels = [
+                                'paycash' => 'Pay Cash',
+                                'deposit' => 'Deposit',
+                                'installment' => 'Installment',
+                            ];
+                        @endphp
+                        {{ $paymentLabels[$order->payment] ?? 'N/A' }}
                     </td>
                     <td>
                         <a href="{{ route('orders.index', $order->order_id) }}" class="btn btn-info btn-sm">View</a>
