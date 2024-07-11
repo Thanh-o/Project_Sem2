@@ -65,12 +65,12 @@ use App\Http\Controllers\EmployeeController;
 
 use App\Http\Controllers\OrderController;
 
-// Route::get('/orders', [OrderController::class, 'index'])->name('orders.index');
-// Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
-// Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
-// Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
-// Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
-// Route::delete('/orders/{id}', [OrderController::class, 'delete'])->name('orders.delete');
+// Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+//     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
+//     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
+//     Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
+//     Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
+//     Route::delete('/orders/{id}', [OrderController::class, 'delete'])->name('orders.delete');
 
 use App\Http\Controllers\OrderDetailController;
 
@@ -142,4 +142,20 @@ Route::prefix('admin')->group(function () {
     Route::post('/categories', [ProductController::class, 'addcate'])->name('categories.add');
     Route::delete('/categories/{id}', [ProductController::class, 'deletecate'])->name('categories.delete');
     Route::put('categories/{id}', [ProductController::class, 'editcate'])->name('categories.edit');
+    //Orderdetail Management
+    Route::get('/orderdetails', [OrderDetailController::class, 'index'])->name('orderdetails.index');
+    Route::get('/orderdetails/create', [OrderDetailController::class, 'create'])->name('orderdetails.create');
+    Route::post('/orderdetails', [OrderDetailController::class, 'store'])->name('orderdetails.store');
+    Route::get('/orderdetails/{id}/edit', [OrderDetailController::class, 'edit'])->name('orderdetails.edit');
+    Route::put('/orderdetails/{id}', [OrderDetailController::class, 'update'])->name('orderdetails.update');
+    Route::delete('/orderdetails/{id}', [OrderDetailController::class, 'delete'])->name('orderdetails.delete');
 });
+
+//Cart
+use App\Http\Controllers\CartController;
+
+Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
+Route::post('/cart/add/{product_id}', [CartController::class, 'add'])->name('cart.add');
+Route::patch('/cart/update/{cart_item_id}', [CartController::class, 'update'])->name('cart.update');
+Route::delete('/cart/remove/{cart_item_id}', [CartController::class, 'remove'])->name('cart.remove');
+Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');

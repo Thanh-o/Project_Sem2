@@ -13,7 +13,7 @@ class OrderController extends Controller
 {
     return view('orders.create', [
         'customers' => Customer::all(),
-        'employees' => Employee::all(),
+        // 'employees' => Employee::all(),
         'statuses' => [
             'cancelled' => 'Cancelled',
             'processing' => 'Processing',
@@ -29,7 +29,7 @@ class OrderController extends Controller
 
 public function store(Request $request)
 {
-    Order::create($request->only(['customer_id', 'employee_id', 'total_amount', 'status', 'payment']));
+    Order::create($request->only(['customer_id','employee', 'total_amount', 'status', 'payment']));
 
     return redirect()->route('orders.index')->with('status', 'Order created successfully');
 }
@@ -38,7 +38,7 @@ public function store(Request $request)
     // READ
     public function index()
 {
-    $orders = Order::with(['customer', 'employee'])->get();
+    $orders = Order::with(['customer'])->get();
     return view('orders.index', compact('orders'));
 }
 
@@ -56,7 +56,7 @@ public function store(Request $request)
     return view('orders.edit', [
         'order' => $order,
         'customers' => Customer::all(),
-        'employees' => Employee::all(),
+        // 'employees' => Employee::all(),
         'statuses' => [
             'cancelled' => 'Cancelled',
             'processing' => 'Processing',
@@ -73,7 +73,7 @@ public function store(Request $request)
 public function update(Request $request, $id)
 {
     $order = Order::findOrFail($id);
-    $order->update($request->only(['customer_id', 'employee_id', 'total_amount', 'status', 'payment']));
+    $order->update($request->only(['customer_id','employee', 'total_amount', 'status', 'payment']));
 
     return redirect()->route('orders.index')->with('status', 'Order updated successfully');
 }

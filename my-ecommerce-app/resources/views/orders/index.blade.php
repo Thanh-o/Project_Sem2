@@ -38,7 +38,7 @@
                 <tr>
                     <td>{{ $index + 1 }}</td> 
                     <td>{{ optional($order->customer)->name ?? 'N/A' }}</td>
-                    <td>{{ optional($order->employee)->name ?? 'N/A' }}</td>
+                    {{-- <td>{{ optional($order->employee)->name ?? 'N/A' }}</td> --}}
                     <td>{{ $order->total_amount }}</td>
                     <td>
                         @php

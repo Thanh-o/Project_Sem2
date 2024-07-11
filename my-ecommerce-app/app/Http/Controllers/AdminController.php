@@ -68,17 +68,4 @@ class AdminController extends Controller
         return Order::latest('updated_at')->take(7)->get();
     }
 
-
-    // public function dashboard()
-    // {
-    //     $indexData = $this->index();
-    //     $customersData = $this->newcus();
-    //     $ordersData = $this->neworder();
-
-    //     return view('admin.dashboard', [
-    //         'indexData' => $indexData,
-    //         'customersData' => $customersData,
-    //         'ordersData' => $ordersData,
-    //     ]);
-    // }
 }

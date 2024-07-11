@@ -2,39 +2,53 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Order;
-use App\Models\OrderDetail;
 use Illuminate\Http\Request;
+use App\Models\OrderDetail;
 
 class OrderDetailController extends Controller
 {
-    //Read
-    public function index(){
-        $orderdetails = OrderDetail::all();
-        return view('orderdetails.index', compact('orderdetails'));
+    public function index()
+    {
+        $orderDetails = OrderDetail::all();
+        return view('orderdetails.index', compact('orderDetails'));
     }
 
-    //Create
-    public function create(){
+    public function create()
+    {
         return view('orderdetails.create');
     }
-    public function store(Request $request){
-        Orderdetail::create($request->all());
-        return redirect()->route('orderdetails.index')->with('status', 'OrderDetail created successfully');
+
+    public function store(Request $request)
+    {
+        $orderDetail = OrderDetail::create($request->all());
+        return redirect()->route('orderdetails.index');
     }
 
-    //Edit
-    public function edit(){
-        return view('orderdetails.edit');
-    }
-    public function update(Request $request,$id){
-        $orderdetail = OrderDetail::find($id);
-        $orderdetail->update($request->all());
+    public function show($id)
+    {
+        $orderDetail = OrderDetail::find($id);
+        return view('orderdetails.show', compact('orderDetail'));
     }
 
-    //Delete
-    public function delete($id){
-        $orderdetail = OrderDetail::find($id);
-        $orderdetail->delete();
+    public function edit($id)
+    {
+        $orderDetail = OrderDetail::find($id);
+        return view('orderdetails.edit', compact('orderDetail'));
+    }
+
+    public function update(Request $request, $id)
+    {
+        $orderDetail = OrderDetail::find($id);
+        $orderDetail->update($request->all());
+        return redirect()->route('orderdetails.index');
+    }
+
+    public function destroy($id)
+    {
+        $orderDetail = OrderDetail::find($id);
+        $orderDetail->delete();
+        return redirect()->route('orderdetails.index');
     }
 }
+
+

@@ -26,11 +26,11 @@
 
             <div class="form-group">
                 <label for="employee_id">Employee:</label>
-                <select class="form-control" id="employee_id" name="employee_id" required>
+                {{-- <select class="form-control" id="customer_id" name="employee_id" required>
                     @foreach($employees as $employee)
                         <option value="{{ $employee->employee_id }}" {{ $order->employee_id == $employee->employee_id ? 'selected' : '' }}>{{ $employee->name }}</option>
                     @endforeach
-                </select>
+                </select> --}}
             </div>
 
             <div class="form-group">

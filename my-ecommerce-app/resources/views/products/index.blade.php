@@ -30,11 +30,11 @@
                 <table class="table table-striped">
                     <thead>
                         <th>ID</th>
+                        <th>Name</th>
+                        <th>Quantity</th>
                         <th>Created At</th>
                         <th>Updated At</th>
-                        <th>Name</th>
                         <th>Price</th>
-                        <th>Quantity</th>
                         <th>Category</th>
                         <th>Media</th>
                         <th>Action</th>
@@ -43,11 +43,13 @@
                         @foreach ($products as $index => $product)
                         <tr>
                             <td>{{ $index + 1 }}</td>
+                            <td>{{ $product->product_name }}</td>
+                            <td>{{ $product->quantity }}</td>
                             <td>{{ $product->created_at }}</td>
                             <td>{{ $product->updated_at }}</td>
-                            <td>{{ $product->product_name }}</td>
+                            
                             <td>{{ $product->price }}</td>
-                            <td>{{ $product->quantity }}</td>
+                            
                             <td>{{ $product->category->cate_name ?? 'N/A' }}</td>
                             <td>
                                 @php $firstMedia = $product->images->first(); @endphp
@@ -64,7 +66,7 @@
                                     <p>No media available.</p>
                                 @endif
                                 @if ($product->images->count() > 1)
-                                    <button id="view-all-button-{{ $index }}" class="btn btn-sm btn-secondary mt-2" onclick="toggleMedia({{ $index }})">More</button>
+                                    <button id="view-all-button-{{ $index }}" class="btn btn-sm btn-danger" onclick="toggleMedia({{ $index }})">More</button>
                                 @endif
                                 <div id="all-media-{{ $index }}" class="additional-media">
                                     @foreach ($product->images->slice(1) as $media)

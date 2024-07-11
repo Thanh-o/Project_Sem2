@@ -128,4 +128,11 @@ class ProductController extends Controller
         $products = Product::with(['category', 'images'])->get();
         return view('products', compact('products'));
     }
+
+    //Show
+    public function show($id)
+    {
+    $product = Product::find($id);
+    return view('products.show', compact('product'));
+    }
 }

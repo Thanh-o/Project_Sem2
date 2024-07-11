@@ -4,14 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Order Detail:{{ $orderdetail->product->product_name }}</title>
+    <title>Order Detail</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
         rel="stylesheet" 
         integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
         crossorigin="anonymous">
 </head>
 <body>
-
+<a href="{{ route('admin.dashboard') }}">Dashboard</a>
     <div class="container">
         <h1 class="mt-5 mb-4">Orders</h1>
 
@@ -32,18 +32,13 @@
                 </tr>
             </thead>
             <tbody>
-                @php $count = 1;@endphp
-                @foreach ($orderdetails as $orderdetail)
+                @foreach ($orderDetails as $orderdetail)
                     <tr>
-                        <td>{{ $orderdetail->orderdetail_id }}</td>
+                        <td>{{ $orderdetail->id }}</td>
                         <td>{{ $orderdetail->order_id }}</td>
-                        <td>
-                            @foreach ($ordertails->products as $product)
-                                {{ $product->product_name }}
-                            @endforeach
-                        </td>
+                        <td>{{ $orderdetail->product->product_name }}</td>
                         <td>{{ $orderdetail->quantity }}</td>
-                        <td>{{ $orderdetail->price }}</td>
+                        <td>{{ $orderdetail->total }}</td>
                         <td>
                             <a href="{{ route('orderdetails.index', $orderdetail->order_id) }}" class="btn btn-info btn-sm">View</a>
                             <a href="{{ route('orderdetails.edit', $orderdetail->order_id) }}" class="btn btn-primary btn-sm">Edit</a>
@@ -54,7 +49,6 @@
                             </form>
                         </td>
                     </tr>
-                    @php $counter++; @endphp
                 @endforeach
             </tbody>
         </table>
