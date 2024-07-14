@@ -7,11 +7,12 @@
       content="width=device-width, initial-scale=1.0, shrink-to-fit=no"
       name="viewport"
     />
-    {{-- <link
+    <link
   rel="icon"
-  href="{{ asset('assets/img/kaiadmin/favicon.ico') }}"
+  href="{{ asset('images/Tan-ty.png') }}"
   type="image/x-icon"
-/> --}}
+  style="border-radius: 50%"
+/>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 <!-- Fonts and icons -->
 {{-- <script src="{{ asset('assets/js/plugin/webfont/webfont.min.js') }}"></script>
@@ -55,7 +56,7 @@
           <div class="logo-header" data-background-color="dark">
             <a href="#" class="logo">
               <img
-                src="{{ asset('images/thiep-bia-2024.jpg') }}"
+                src="{{ asset('images/Tan-ty.png') }}"
                 alt="navbar brand"
                 class="navbar-brand"
                 height="60"
@@ -542,7 +543,7 @@
                   >
                     <div class="avatar-sm">
                       <img
-                        src="{{ asset('images/1.jpg') }}"
+                        src="{{ asset('images/5729521e7786aeff31bbc85e33ce470b.jpg') }}"
                         alt="..."
                         class="avatar-img rounded-circle"
                       />
@@ -817,7 +818,7 @@
                         <div class="item-list">
                             <div class="avatar">
                               <img
-                                src="{{ asset('assets/img/jm_denis.jpg') }}"
+                                src="{{ asset('images/2911751d962f3c69643707eed585ad04.jpg') }}"
                                 alt="..."
                                 class="avatar-img rounded-circle"
                               />
