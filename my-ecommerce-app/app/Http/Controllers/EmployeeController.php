@@ -2,7 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Customer;
+use App\Models\Order;
 use App\Models\Employee;
+use App\Models\OrderDetail;
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
@@ -29,10 +34,16 @@ class EmployeeController extends Controller
     }
 
     // READ
-    public function index()
+    public function index($id)
     {
         $employees = Employee::all();
-        return view('employees.index', compact('employees'));
+        $newem = Employee::latest()->take(5)->get();
+        $totalOrders = Order::count();
+        $totalCus = Customer::count();
+        $totalEm = Employee::count();
+        $totalPro = Product::count();
+        $store = $this->store();
+        return view('employees.index', compact('employees', 'newem', 'totalOrders', 'totalCus', 'totalEm', 'totalPro', 'store'));
     }
 
     // UPDATE

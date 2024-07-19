@@ -19,6 +19,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
 Route::get('products', [ProductController::class, 'indexp'])->name('products');
+// Route::get('products', [ProductController::class, 'index'])->name('products.index');
+// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
+//     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
+//     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
+//     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
+//     Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('products.delete');
+//     Route::delete('/products/delete-image/{id}', [ProductController::class, 'deleteImage'])->name('products.deleteImage');
 
 use App\Http\Controllers\CustomerController;
 
@@ -74,12 +81,12 @@ use App\Http\Controllers\OrderController;
 
 use App\Http\Controllers\OrderDetailController;
 
-Route::get('/orderdetails', [OrderDetailController::class, 'index'])->name('orderdetails.index');
-Route::get('/orderdetails/create', [OrderDetailController::class, 'create'])->name('orderdetails.create');
-Route::post('/orderdetails', [OrderDetailController::class, 'store'])->name('orderdetails.store');
-Route::get('/orderdetails/{id}/edit', [OrderDetailController::class, 'edit'])->name('orderdetails.edit');
-Route::put('/orderdetails/{id}', [OrderDetailController::class, 'update'])->name('orderdetails.update');
-Route::delete('/orderdetails/{id}', [OrderDetailController::class, 'delete'])->name('orderdetails.delete');
+// Route::get('/orderdetails', [OrderDetailController::class, 'index'])->name('orderdetails.index');
+// Route::get('/orderdetails/create', [OrderDetailController::class, 'create'])->name('orderdetails.create');
+// Route::post('/orderdetails', [OrderDetailController::class, 'store'])->name('orderdetails.store');
+// Route::get('/orderdetails/{id}/edit', [OrderDetailController::class, 'edit'])->name('orderdetails.edit');
+// Route::put('/orderdetails/{id}', [OrderDetailController::class, 'update'])->name('orderdetails.update');
+// Route::delete('/orderdetails/{id}', [OrderDetailController::class, 'delete'])->name('orderdetails.delete');
 
 // use App\Http\Controllers\AuthController;
 
@@ -123,13 +130,15 @@ Route::prefix('admin')->group(function () {
     Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
     Route::delete('/customers/{id}', [CustomerController::class, 'delete'])->name('customers.delete');
     // Product Management
-    Route::get('products', [ProductController::class, 'index'])->name('products.index');
-    Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-    Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-    Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-    Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-    Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('products.delete');
-    Route::delete('/products/delete-image/{id}', [ProductController::class, 'deleteImage'])->name('products.deleteImage');
+    Route::get('product', [ProductController::class, 'aindex'])->name('admin.product.index');
+    Route::get('/product/create', [ProductController::class, 'acreate'])->name('admin.product.create');
+    Route::post('/product', [ProductController::class, 'astore'])->name('admin.product.store');
+    Route::get('/product/{id}/edit', [ProductController::class, 'aedit'])->name('admin.product.edit');
+    Route::put('/product/{id}', [ProductController::class, 'aupdate'])->name('admin.product.update');
+    Route::delete('/products/{id}', [ProductController::class, 'adelete'])->name('admin.product.delete');
+    Route::delete('/products/delete-image/{id}', [ProductController::class, 'adeleteImage'])->name('admin.product.deleteImage');
+    Route::get('/{cate_id}/products', [ProductController::class, 'getProductsByCategory'])->name('admin.category');
+
     //Employee Managent    
     Route::get('employees', [EmployeeController::class, 'index'])->name('employees.index');
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
@@ -138,10 +147,10 @@ Route::prefix('admin')->group(function () {
     Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('employees.update');
     Route::delete('/employees/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
     //Category
-    Route::get('/categories', [ProductController::class, 'indexcate'])->name('products.category');
-    Route::post('/categories', [ProductController::class, 'addcate'])->name('categories.add');
-    Route::delete('/categories/{id}', [ProductController::class, 'deletecate'])->name('categories.delete');
-    Route::put('categories/{id}', [ProductController::class, 'editcate'])->name('categories.edit');
+    Route::get('/categories', [ProductController::class, 'aindexcate'])->name('admin.product.category');
+    Route::post('/categories', [ProductController::class, 'aaddcate'])->name('categories.add');
+    Route::delete('/categories/{id}', [ProductController::class, 'adeletecate'])->name('categories.delete');
+    Route::put('categories/{id}', [ProductController::class, 'aeditcate'])->name('categories.edit');
     //Orderdetail Management
     Route::get('/orderdetails', [OrderDetailController::class, 'index'])->name('orderdetails.index');
     Route::get('/orderdetails/create', [OrderDetailController::class, 'create'])->name('orderdetails.create');
@@ -159,3 +168,4 @@ Route::post('/cart/add/{product_id}', [CartController::class, 'add'])->name('car
 Route::patch('/cart/update/{cart_item_id}', [CartController::class, 'update'])->name('cart.update');
 Route::delete('/cart/remove/{cart_item_id}', [CartController::class, 'remove'])->name('cart.remove');
 Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+

@@ -79,7 +79,7 @@
                     <p>Welcome to our platform! Please enter your username and password to access your account. If you don't have an account, you can sign up for free.</p>
                     <button class="btn transparent" id="sign-up-btn">Sign Up</button>
                 </div>
-                <img src="./images/img_1.jpg" alt="" class="img">
+                <img src="{{ asset('images/img_1.jpg') }}" alt="" class="img">
             </div>
             <div class="panel right-panel">
                 <div class="content">
@@ -87,7 +87,7 @@
                     <p>If you already have an account, please sign in. We remember you!</p>
                     <button class="btn transparent" id="sign-in-btn">Sign In</button>
                 </div>
-                <img src="./images/img_2.jpg" alt="" class="img">
+                <img src="{{ asset('images/img_2.jpg') }}" alt="" class="img">
             </div>
         </div>
     </div>

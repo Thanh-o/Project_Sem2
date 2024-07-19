@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Session;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Employee;
+use App\Models\Product;
 
 class AdminController extends Controller
 {
@@ -48,6 +49,8 @@ class AdminController extends Controller
         $totalOrders = Order::count();
         $totalCus = Customer::count();
         $totalEm = Employee::count();
+        $totalPro = Product::count();
+        // $products = $this->pindex();
 
         return view('admin.dashboard', [
             'customers' => $customers,
@@ -55,6 +58,8 @@ class AdminController extends Controller
             'totalOrders' => $totalOrders,
             'totalCus' => $totalCus,
             'totalEm' => $totalEm,
+            'totalPro' => $totalPro,
+            // 'products' => $products,
         ]);
     }
 
@@ -67,5 +72,7 @@ class AdminController extends Controller
     {
         return Order::latest('updated_at')->take(7)->get();
     }
+
+    
 
 }

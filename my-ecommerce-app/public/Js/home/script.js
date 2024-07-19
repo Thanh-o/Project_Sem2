@@ -166,3 +166,50 @@ document.addEventListener('DOMContentLoaded', () => {
     startCountdown(1, 15, 17, 55);
   });
   
+  document.addEventListener('DOMContentLoaded', function() {
+    const leftBtn = document.querySelector('.left5');
+    const rightBtn = document.querySelector('.right5');
+    const images = document.querySelectorAll('.group-6 img');
+
+    let currentIndex = 0;
+
+    leftBtn.addEventListener('click', function() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      changeImage(currentIndex);
+    });
+
+    rightBtn.addEventListener('click', function() {
+      currentIndex = (currentIndex + 1) % images.length;
+      changeImage(currentIndex);
+    });
+
+    function changeImage(index) {
+      images.forEach((image, i) => {
+        if (i === index) {
+          image.style.display = 'block';
+        } else {
+          image.style.display = 'none';
+        }
+      });
+    }
+  });
+  document.addEventListener('DOMContentLoaded', function() {
+    const images = document.querySelectorAll('.group-6 img');
+    const totalImages = images.length;
+    let currentIndex = 0;
+  
+    function changeImage() {
+      images.forEach((image, index) => {
+        if (index === currentIndex) {
+          image.style.display = 'block';
+        } else {
+          image.style.display = 'none';
+        }
+      });
+  
+      currentIndex = (currentIndex + 1) % totalImages;
+    }
+  
+    setInterval(changeImage, 5000);
+  });
+  

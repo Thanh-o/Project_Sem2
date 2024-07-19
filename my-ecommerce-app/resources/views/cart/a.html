@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <style>
+    .contain {
+      top: 300px;
+      position: absolute;
+      width: 100%;
+      padding: 20px;
+      background-color: #f9f9f9;
+      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+    }
+
+    .cart-header, .cart-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 20px;
+      padding: 10px 20px;
+      gap: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
+    }
+
+    .cart-header {
+      font-weight: bold;
+      background-color: #eee;
+    }
+
+    .cart-item img {
+      width: 100px;
+      height: auto;
+      border-radius: 5px;
+      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .product-name {
+      flex-grow: 1;
+      margin-left: 10px;
+    }
+
+    .price, .qty, .unit-price {
+      display: inline-block;
+      text-align: center;
+      min-width: 80px;
+    }
+
+    .qty {
+      display: flex;
+      align-items: center;
+    }
+
+    input, button {
+      height: 36px;
+      text-align: center;
+      border: 1px solid #ddd;
+      padding: 5px;
+      background-color: #f0f0f0;
+      color: #333;
+      font-size: 14px;
+      transition: background-color 0.3s ease, border-color 0.3s ease;
+      margin: 0;
+    }
+
+    input {
+      width: 50px;
+      border-right: none;
+      border-radius: 3px 0 0 3px;
+    }
+
+    button {
+      width: 36px;
+      border-left: none;
+      border-radius: 0 3px 3px 0;
+      cursor: pointer;
+    }
+
+    input:focus, button:focus {
+      outline: none;
+      border-color: #aaa;
+    }
+
+    button:hover {
+      background-color: #e0e0e0;
+    }
+
+    .remove-btn {
+      background: none;
+      border: none;
+      color: red;
+      font-size: 20px;
+      cursor: pointer;
+    }
+
+    .remove-btn:hover {
+      color: darkred;
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="contain">
+  <div class="cart-header">
+    <span>PRODUCT</span>
+    <span>PRICE</span>
+    <span>QTY</span>
+    <span>UNIT PRICE</span>
+  </div>
+
+  <div class="cart-item">
+    <button class="remove-btn"><i class="fas fa-times"></i></button>
+    <img src="https://via.placeholder.com/100" alt="Product Image">
+    <span class="product-name">Nike Airmax 270 react</span>
+    <span class="price">$998</span>
+    <div class="qty">
+      <button>-</button>
+      <input type="number" value="2">
+      <button>+</button>
+    </div>
+    <span class="unit-price">$499</span>
+  </div>
+
+  <div class="cart-item">
+    <button class="remove-btn"><i class="fas fa-times"></i></button>
+    <img src="https://via.placeholder.com/100" alt="Product Image">
+    <span class="product-name">Nike Airmax 270 react</span>
+    <span class="price">$998</span>
+    <div class="qty">
+      <button>-</button>
+      <input type="number" value="2" min="0">
+      <button>+</button>
+    </div>
+    <span class="unit-price">$499</span>
+  </div>
+</div>
+
+</body>
+</html>
