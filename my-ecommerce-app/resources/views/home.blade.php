@@ -51,12 +51,7 @@
   </head>
   <body>
     <div class="frame">
-      {{-- <div class="div">
-        <div class="lap">
-          <p class="text-wrapper">Summer Sale And Free Express Delivery - OFF 50%!</p>
-        </div> --}}
-
-        
+       
         <div class="overlap-group">
           <div class="header">
             <div class="header-1">
@@ -71,7 +66,7 @@
                   <div class="text-wrapper-3"><a href="{{ route('home') }}">Home</a></div> 
                 </div>
                 <div class="div-wrapper">
-                  <div class="text-wrapper-3"><a href="#">Contact</a></div>
+                  <div class="text-wrapper-3"><a href="{{ route('contact') }}">Contact</a></div>
                 </div>
                 <div class="div-wrapper">
                   <div class="text-wrapper-3"><a href="#">About</a></div>
@@ -83,8 +78,8 @@
             </div>
             <div class="div-2">
               <div class="div-3">
-                <input type="search" name="search" id="search" placeholder=" ">
-                <label for="search" class="p">What are you looking for?</label>                                 
+                <input type="search" name="search" id="search" placeholder="What are you looking for?">
+                {{-- <label for="search" class="p">What are you looking for?</label>                                  --}}
                   <button type="submit" class="fa-solid fa-magnifying-glass" ></button>                  
               </div>
               <div class="div-4">
@@ -379,10 +374,12 @@
       
         </div>
 
-        <div class="div-wrapper-3">
-          <div class="text-wrapper-38"><a href="{{ route('products') }}" style="color: white;">View All Products</a>
+        <a href="{{ route('products') }}" style="color: white;">
+          <div class="div-wrapper-3">
+          <div class="text-wrapper-38">View All Products
           </div>
-        </div>
+          </div>
+        </a>
         <div class="group-8"></div>
           <div class="overlap-2">
             <div class="component">
@@ -1211,80 +1208,77 @@
 
 
         <div class="overlap-8">
-          <footer class="footer">
-            <div class="div-47">
-              <div class="under-line-3"></div>
-              <div class="frame-wrapper-14">
-                <div class="div-48">
-                  <img class="img-7" src="{{ asset('images/img/icon-copyright-2.svg') }}" />
-                  <p class="copyright-rimel">Copyright Aptech 2024. All right reserved</p>
+          <div class="footer-wrapper">
+            <footer class="footer">
+          
+                <div class="footer-sections">
+                    <div class="footer-subscribe">
+                        <div class="subscribe-content">
+                            <div class="subscribe-header">
+                                <div class="subscribe-logo">Exclusive</div>
+                                <div class="subscribe-text">Subscribe</div>
+                            </div>
+                            <p class="subscribe-offer">Get 10% off your first order</p>
+                        </div>
+                        <div class="subscribe-input">
+                            <input type="email" placeholder="Enter your email" />
+                            <img class="send-icon" src="{{ asset('images/img/icon-send-3.svg') }}" />
+                        </div>
+                    </div>
+                    <div class="footer-support">
+                        <div class="section-title">Support</div>
+                        <div class="support-content">
+                            <p class="address">Số 8A, Tôn Thất Thuyết, Mỹ Đình, Nam Từ Liêm, Hà Nội</p>
+                            <p class="email">fptaptech@gmail.com</p>
+                            <p class="phone">+1234-5678-9874</p>
+                        </div>
+                    </div>
+                    <div class="footer-account">
+                        <div class="section-title">Account</div>
+                        <div class="account-content">
+                            <p>My Account</p>
+                            <p><a href="{{ route('customers.login') }}">Login</a> / <a href="{{ route('customers.signup') }}">Register</a></p>
+                            <p><a href="{{ route('cart.index') }}">Cart</a></p>
+                            <p>Wishlist</p>
+                            <p>Shop</p>
+                        </div>
+                    </div>
+                    <div class="footer-links">
+                        <div class="section-title">Quick Link</div>
+                        <div class="links-content">
+                            <p>Privacy Policy</p>
+                            <p>Terms Of Use</p>
+                            <p>FAQ</p>
+                            <p><a href="{{ route('contact') }}">Contact</a></p>
+                        </div>
+                    </div>
+                    <div class="footer-about">
+                        <div class="about-content">
+                            <div class="section-title">T2M</div>
+                            <p class="about-text">For a community of gamers and all technology lovers in Vietnam.</p>
+                        </div>
+                        <div class="social-links">
+                          <div class="section-title">Social</div>
+                          <div class="social-section">
+                            <img class="social-icon" src="{{ asset('images/img/instagram-svgrepo-com-1.svg') }}" />
+                            <img class="social-icon" src="{{ asset('images/img/facebook-svgrepo-com-1.svg') }}" />
+                            <img class="social-icon" src="{{ asset('images/img/vector-18.svg') }}" />
+                            <img class="social-icon" src="{{ asset('images/img/logo-twitter-svgrepo-com-1.svg') }}" />
+                          </div>
+                        </div>
+                    </div>
                 </div>
-              </div>
-            </div>
-            <div class="div-49">
-              <div class="div-19">
-                <div class="div-50">
-                  <div class="div-50">
-                    <div class="logo-2"><div class="text-wrapper-40">Exclusive</div></div>
-                    <div class="text-wrapper-41">Subscribe</div>
+                <div class="footer-bottom">
+                  <div class="footer-line"></div>
+                  <div class="footer-content-wrapper">
+                      <div class="footer-copyright">
+                          <img class="copyright-icon" src="{{ asset('images/img/icon-copyright-2.svg') }}" />
+                          <p class="copyright-text">Copyright Aptech 2024. All rights reserved</p>
+                      </div>
                   </div>
-                  <p class="text-wrapper-42">Get 10% off your first order</p>
                 </div>
-                <div class="send-mail">
-                  <div class="text-wrapper-43"><input type="email" placeholder="Enter your email" /></div>
-                  <img class="img" src="{{ asset('images/img/icon-send-3.svg') }}" />
-                </div>
-              </div>
-              <div class="div-50">
-                <div class="text-wrapper-44">Support</div>
-                <div class="div-19">
-                  <p class="element-bijoy-sarani">Số 8A, Tôn Thất Thuyết,Mỹ Đình,Nam Từ Liêm,Hà Nội</p>
-                  <div class="text-wrapper-42">fptaptech@gmail.com</div>
-                  <div class="text-wrapper-42">+1234-5678-9874</div>
-                </div>
-              </div>
-              <div class="div-50">
-                <div class="text-wrapper-44">Account</div>
-                <div class="div-19">
-                  <div class="text-wrapper-45">My Account</div>
-                  <div class="text-wrapper-42"><a href="{{ route('customers.login') }}" style="color: white;">Login</a> / <a href="{{ route('customers.signup') }}" style="color: white;">Register</a></div>
-                  <div class="text-wrapper-42"><a href="{{ route('cart.index') }}" style="color: white;">Cart</a></div>
-                  <div class="text-wrapper-42">Wishlist</div>
-                  <div class="text-wrapper-42">Shop</div>
-                </div>
-              </div>
-              <div class="div-50">
-                <div class="text-wrapper-44">Quick Link</div>
-                <div class="div-19">
-                  <div class="text-wrapper-45">Privacy Policy</div>
-                  <div class="text-wrapper-42">Terms Of Use</div>
-                  <div class="text-wrapper-42">FAQ</div>
-                  <div class="text-wrapper-42">Contact</div>
-                </div>
-              </div>
-              <div class="div-50">
-                <div class="div-51">
-                  <div class="text-wrapper-44">T2M</div>
-                  <div class="div-40">
-                    <p class="save-with-app-new">
-                      For a community of gamers <br />and all technology lovers
-                      <br />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;in Vietnam.
-                    </p>
-                  </div>
-                </div>
-                <div class="social">
-                  <div class="text-wrapper-46">Social</div>
-                  <img class="instagram-svgrepo" src="{{ asset('images/img/instagram-svgrepo-com-1.svg') }}" />
-                  <img class="facebook-svgrepo-com" src="{{ asset('images/img/facebook-svgrepo-com-1.svg') }}" />
-                  <div class="pinterest-svgrepo">
-                    <div class="element-ec-c-cee"><img class="vector" src="{{ asset('images/img/vector-18.svg') }}" /></div>
-                  </div>
-                  <img class="logo-twitter-svgrepo" src="{{ asset('images/img/logo-twitter-svgrepo-com-1.svg') }}" />
-                </div>
-              </div>
-            </div>
-            {{-- <div class="Rectangle1Copy35" style="width: 100%; height: 100%; background: #F6F7F8"></div> --}}
-          </footer>
+            </footer>
+          </div>
 
         </div>
         

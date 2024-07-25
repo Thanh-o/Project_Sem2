@@ -140,14 +140,14 @@
                 
               </li>
               <li class="nav-item">
-                <a href="{{ route('customers.index') }}">
+                <a href="{{ route('admin.customers.index') }}">
                   <i class="fas fa-user"></i>
                   <p>Customer Management</p>
                 </a>
                 
               </li>
               <li class="nav-item">
-                <a href="{{ route('orders.index') }}">
+                <a href="{{ route('admin.orders.index') }}">
                   <i class="fas fa-list-alt"></i>
                   <p>Order Management</p>
                   

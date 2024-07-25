@@ -97,21 +97,21 @@
                 <h4 class="text-section">Components</h4>
               </li>
               <li class="nav-item">
-                <a href="{{ route('employees.index') }}">
+                <a href="{{ route('admin.employees.index') }}">
                     <i class="fa-regular fa-user"></i>
                   <p>Employee Management</p>
                 </a>
                 
               </li>
               <li class="nav-item">
-                <a href="{{ route('customers.index') }}">
+                <a href="{{ route('admin.customers.index') }}">
                   <i class="fas fa-user"></i>
                   <p>Customer Management</p>
                 </a>
                 
               </li>
               <li class="nav-item">
-                <a href="{{ route('orders.index') }}">
+                <a href="{{ route('admin.orders.index') }}">
                   <i class="fas fa-list-alt"></i>
                   <p>Order Management</p>
                   
@@ -621,7 +621,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('customers.index') }}" style="color: #8d9498">Customers</a></p>
+                          <p class="card-category"><a href="{{ route('admin.customers.index') }}" style="color: #8d9498">Customers</a></p>
                           <h4 class="card-title">{{ $totalCus }}</h4>
                         </div>
                       </div>
@@ -684,7 +684,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('orders.index') }}" style="color: #8d9498">Order</a></p>
+                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order</a></p>
                           <h4 class="card-title">{{ $totalOrders }}</h4>
                         </div>
                       </div>

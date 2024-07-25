@@ -7,7 +7,7 @@
 <body>
     <div class="container mt-5">
         <h1>Add Employee
-            <a href="{{ route('employees.index') }}" class="btn btn-primary float-end">Back</a>
+            <a href="{{ route('admin.employees.index') }}" class="btn btn-primary float-end">Back</a>
         </h1>
         <form action="{{ route('employees.store') }}" method="POST">
             @csrf

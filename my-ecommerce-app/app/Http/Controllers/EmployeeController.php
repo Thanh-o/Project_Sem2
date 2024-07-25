@@ -5,11 +5,10 @@ namespace App\Http\Controllers;
 use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Employee;
-use App\Models\OrderDetail;
-use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Session;
 
 class EmployeeController extends Controller
 {
@@ -24,26 +23,42 @@ class EmployeeController extends Controller
         $data = $request->only([
             'name', 'email', 'phone', 'username', 'password', 'hire_date', 'job_title'
         ]);
-
+    
         $data['password'] = Hash::make($data['password']);
-
+    
         $employee = new Employee($data);
         $employee->save();
-
-        return redirect()->route('employees.index')->with('status', 'Employee created successfully');
+    
+        
+        if (Session::has('admin_logged_in') && Session::get('admin_logged_in') === true) {
+            
+            return redirect()->route('admin.employees.index')->with('status', 'Employee added successfully');
+        } else {
+            
+            return redirect()->route('employees.index')->with('status', 'Employee added successfully');
+        }
     }
-
+    
+    
+    
     // READ
-    public function index($id)
+    // Admin
+    public function index()
     {
         $employees = Employee::all();
-        $newem = Employee::latest()->take(5)->get();
         $totalOrders = Order::count();
         $totalCus = Customer::count();
         $totalEm = Employee::count();
         $totalPro = Product::count();
-        $store = $this->store();
-        return view('employees.index', compact('employees', 'newem', 'totalOrders', 'totalCus', 'totalEm', 'totalPro', 'store'));
+        
+        return view('admin.employees.index', compact('employees', 'totalOrders', 'totalCus', 'totalEm', 'totalPro'));
+    }
+    
+    // Employee
+    public function eindex()
+    {
+        $employees = Employee::all();      
+        return view('employees.index', compact('employees'));
     }
 
     // UPDATE
@@ -56,20 +71,29 @@ class EmployeeController extends Controller
     public function update(Request $request, $id)
     {
         $employee = Employee::findOrFail($id);
-
+    
         $data = $request->only([
             'name', 'email', 'phone', 'username', 'password', 'hire_date', 'job_title'
         ]);
-
+    
         if ($request->filled('password')) {
             $data['password'] = Hash::make($request->input('password'));
         }
-
+    
         $employee->update($data);
-
-        return redirect()->route('employees.index')->with('status', 'Employee updated successfully!');
+    
+        
+        if (Session::has('admin_logged_in') && Session::get('admin_logged_in') === true) {
+            
+            return redirect()->route('admin.employees.index')->with('status', 'Employee updated successfully');
+        } else {
+            
+            return redirect()->route('employees.index')->with('status', 'Employee updated successfully');
+        }
     }
-
+    
+    
+    
     // DELETE
     public function delete($id)
     {

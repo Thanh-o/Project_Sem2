@@ -1,0 +1,152 @@
+.footer-wrapper {  
+  background-color: #000; 
+  
+  color: #fff; 
+  padding: 40px 20px;
+  margin-top: 100px; 
+}  
+
+.footer {  
+  max-width: 1200px; 
+  margin: 0 auto;   
+}  
+
+.footer a{
+  color: #fff;
+  text-decoration: none;
+}
+
+.footer-sections {  
+  display: flex;
+  justify-content: space-between; 
+  flex-wrap: wrap;   
+}  
+
+.footer-subscribe,  
+.footer-support,  
+.footer-account,  
+.footer-links,  
+.footer-about {  
+  flex: 1; 
+  min-width: 200px;  
+  margin: 10px;  
+}  
+
+.subscribe-header {  
+  
+  align-items: center; 
+}  
+
+.subscribe-logo {  
+  font-size: 24px; 
+  font-weight: bold;   
+  margin-right: 10px;   
+}  
+
+.subscribe-text {  
+  font-size: 20px; 
+}  
+
+.subscribe-offer {  
+  margin: 10px 0;  
+}  
+
+.subscribe-input {  
+  display: flex;   
+  align-items: center; 
+}  
+
+.subscribe-input input {  
+  padding: 6px;  
+  border: none; 
+  border-radius: 5px;   
+  width: 150px;
+  text-align: center; 
+  line-height: 1.5; 
+}
+
+.send-icon {  
+  width: 30px; 
+  margin-left: 10px;   
+  cursor: pointer;  
+}  
+
+.section-title {  
+  font-size: 18px;  
+  font-weight: bold;  
+  margin-bottom: 10px;   
+}  
+
+.footer-content-wrapper {  
+  text-align: center;  
+  margin-top: 20px;   
+}  
+
+.footer-line {  
+  border-top: 1px solid #fff;  
+  margin: 20px 0;   
+}  
+
+.copyright-icon {  
+  width: 20px;
+  vertical-align: middle; 
+}  
+
+.copyright-text {  
+  display: inline; 
+  margin-left: 5px;   
+}  
+
+.social-links {  
+  
+  justify-content: flex-start; 
+  margin-top: 10px;   
+}  
+
+.social-section{
+  display: flex;
+}
+.social-icon {  
+  width: 24px; 
+  margin-right: 10px; 
+  cursor: pointer;  
+}
+
+@media (max-width: 768px) {
+  .footer-sections {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .footer-subscribe,  
+  .footer-support,  
+  .footer-account,  
+  .footer-links,  
+  .footer-about {  
+    min-width: 100%;
+    text-align: center;
+  }
+  
+  .subscribe-input input {
+    width: 100%; 
+    padding: 10px;
+    text-align: center;
+    line-height: 1.5; 
+  }
+
+  .subscribe-header {
+    flex-direction: column;
+  }
+
+  .subscribe-logo,
+  .subscribe-text {
+    margin-bottom: 10px;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+  .social-section{
+    justify-content: center;
+  }
+}

@@ -1,0 +1,173 @@
+<!DOCTYPE html>  
+<html lang="en">  
+<head>  
+    <meta charset="UTF-8">  
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">  
+    <title>Your Website Title</title>  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />  
+    <style>  
+        body {  
+            font-family: Arial, sans-serif;  
+            margin: 0;  
+            padding: 0;  
+            background-color: #f4f4f4;  
+        }  
+
+        .header {  
+            display: flex;  
+            justify-content: space-between;  
+            align-items: center;  
+            padding: 20px;  
+            background-color: #fff;  
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);  
+        }  
+
+        .logo img {  
+            width: 150px; /* Kích thước logo */  
+        }  
+
+        .div-5 {  
+            display: flex;  
+            gap: 20px; /* Khoảng cách giữa các mục điều hướng */  
+        }  
+
+        .text-wrapper-3 a {  
+            text-decoration: none;  
+            color: #333; /* Màu chữ */  
+            position: relative;  
+        }  
+
+        .text-wrapper-3 a::after {  
+            content: '';  
+            display: block;  
+            height: 2px;  
+            background: #007BFF; /* Màu đường gạch dưới */  
+            width: 0;  
+            transition: width 0.3s;  
+            position: absolute;  
+            bottom: -3px;  
+            left: 50%;  
+            transform: translateX(-50%);  
+        }  
+
+        .text-wrapper-3 a:hover::after {  
+            width: 100%; /* Mở rộng khi hover */  
+        }  
+
+        .div-2 {  
+            display: flex;  
+            align-items: center;  
+        }  
+
+        input[type="search"] {  
+            padding: 10px;  
+            border: 1px solid #ddd;  
+            border-radius: 20px;  
+            width: 250px; /* Độ rộng input */  
+            transition: border-color 0.3s;  
+        }  
+
+        input[type="search"]:focus {  
+            border-color: #007BFF;  
+            outline: none;  
+        }  
+
+        input[type="search"]::placeholder {  
+            color: #aaa;  
+        }  
+
+        button {  
+            background-color: transparent;  
+            border: none;  
+            cursor: pointer;  
+            margin-left: 10px;  
+            color: #007BFF;  
+            font-size: 20px;  
+            transition: color 0.3s;  
+        }  
+
+        button:hover {  
+            color: #0056b3; /* Màu khi hover */  
+        }  
+
+        .div-4 {  
+            display: flex;  
+            align-items: center;  
+            margin-left: 20px;  
+        }  
+
+        .img-2 {  
+            margin-right: 20px;  
+        }  
+
+        /* Media Queries */  
+        @media (max-width: 768px) {  
+            .logo img {  
+                width: 120px; /* Kích thước nhỏ hơn cho thiết bị nhỏ */  
+            }  
+
+            input[type="search"] {  
+                width: 200px; /* Độ rộng input cho thiết bị nhỏ */  
+            }  
+        }  
+
+        @media (max-width: 480px) {  
+            .header {  
+                flex-direction: column;  
+                align-items: flex-start;  
+            }  
+
+            .div-2 {  
+                width: 100%;  
+                justify-content: space-between; /* Căn chỉnh đồng đều */  
+            }  
+
+            .div-4 {  
+                margin-top: 10px;  
+            }  
+        }  
+    </style>  
+</head>  
+<body>  
+    <div class="overlap-group">
+        <div class="header">
+          <div class="header-1">
+            <div class="logo">
+              <a href="{{ route('home') }}">
+                <img src="{{ asset('images/logo.png') }}" class="img-logo">
+              </a>
+              
+            </div>
+            <div class="div-5">
+              <div class="div-wrapper">
+                <div class="text-wrapper-3"><a href="{{ route('home') }}">Home</a></div> 
+              </div>
+              <div class="div-wrapper">
+                <div class="text-wrapper-3"><a href="{{ route('contact') }}">Contact</a></div>
+              </div>
+              <div class="div-wrapper">
+                <div class="text-wrapper-3"><a href="#">About</a></div>
+              </div>
+              <div class="div-wrapper">
+                <div class="text-wrapper-3"><a href="{{ route('customers.signup') }}">Sign Up</a></div>
+              </div>
+            </div>
+          </div>
+          <div class="div-2">
+            <div class="div-3">
+              <input type="search" name="search" id="search" placeholder="What are you looking for? ">                           
+                <button type="submit" class="fa-solid fa-magnifying-glass" ></button>                  
+            </div>
+            <div class="div-4">
+              <div class="img-2">
+                <a href="{{ route('cart.index') }}">
+                  <i class="fa-solid fa-cart-shopping"></i>
+                </a>
+              </div>
+              <a href="{{ route('customers.login') }}"><i class="fa-solid fa-user"></i></a>
+            </div>
+          </div>
+        </div>
+    </div> 
+</body>  
+</html>

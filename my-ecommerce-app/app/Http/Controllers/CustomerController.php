@@ -4,6 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Customer;
+use App\Models\Order;
+use App\Models\Employee;
+use App\Models\OrderDetail;
+use App\Models\Cart;
+use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
 
@@ -13,9 +18,19 @@ class CustomerController extends Controller
         public function index()
         {
             $customers = Customer::all();
+            $totalOrders = Order::count();
+            $totalCus = Customer::count();
+            $totalEm = Employee::count();
+            $totalPro = Product::count();
+            return view('admin.customers.index', compact('customers', 'totalOrders', 'totalCus', 'totalEm', 'totalPro'));
+        }
+        
+        public function cindex()
+        {
+            $customers = Customer::all();
             return view('customers.index', compact('customers'));
         }
-    
+        
         // CREATE
         public function create()
         {
@@ -30,7 +45,13 @@ class CustomerController extends Controller
     
             Customer::create($data);
     
-            return redirect()->route('customers.index')->with('status', 'Customer created successfully');
+            if (Session::has('admin_logged_in') && Session::get('admin_logged_in') === true) {
+            
+                return redirect()->route('admin.customers.index')->with('status', 'Customer added successfully');
+            } else {
+                
+                return redirect()->route('customers.index')->with('status', 'Customer added successfully');
+            }
         }
     
         // UPDATE
@@ -52,7 +73,13 @@ class CustomerController extends Controller
     
             $customer->update($data);
     
-            return redirect()->route('customers.index')->with('status', 'Customer updated successfully!');
+            if (Session::has('admin_logged_in') && Session::get('admin_logged_in') === true) {
+            
+                return redirect()->route('admin.customers.index')->with('status', 'Customer updated successfully');
+            } else {
+                
+                return redirect()->route('customers.index')->with('status', 'Customer updated successfully');
+            }
         }
     
         // DELETE

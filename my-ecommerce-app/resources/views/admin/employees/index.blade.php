@@ -1,57 +1,3 @@
-{{-- <!DOCTYPE html>
-<html>
-<head>
-    <title>Employee List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-    rel="stylesheet" 
-    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-    crossorigin="anonymous">
-</head>
-<body>
-    <a href="{{ route('admin.dashboard') }}">DashBoard</a>
-    <div class="container">
-        <h1 class="mt-4 mb-3">Employee List</h1>
-        <a href="{{ route('employees.create') }}" class="btn btn-primary mb-3">Add New Employee</a>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Username</th>
-                    <th>Hire Date</th>
-                    <th>Job Title</th>
-                </thead>
-                <tbody>
-                    @php $counter = 1; @endphp
-                    @foreach ($employees as $employee)
-                        <tr>
-                        <td>{{ $counter }}</td>
-                        <td>{{ $employee->name }}</td>
-                        <td>{{ $employee->email }}</td>
-                        <td>{{ $employee->phone }}</td>
-                        <td>{{ $employee->username }}</td>
-                        <td>{{ $employee->hire_date }}</td>
-                        <td>{{ $employee->job_title }}</td>
-                        <td>
-                            <a href="{{ route('employees.edit', $employee->employee_id) }}" class="btn btn-sm btn-warning me-2">Edit</a>
-                    <form action="{{ route('employees.delete', $employee->employee_id) }}" method="POST" style="display:inline;">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this employee?')">Delete</button>
-                    </form>
-                        </td>
-                        </tr>
-                        @php $counter++; @endphp
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>  
-</body>
-</html> --}}
-
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -126,21 +72,21 @@
                 <h4 class="text-section">Components</h4>
               </li>
               <li class="nav-item">
-                <a href="{{ route('employees.index') }}">
+                <a href="{{ route('admin.employees.index') }}">
                     <i class="fa-regular fa-user"></i>
                   <p>Employee Management</p>
                 </a>
                 
               </li>
               <li class="nav-item">
-                <a href="{{ route('customers.index') }}">
+                <a href="{{ route('admin.customers.index') }}">
                   <i class="fas fa-user"></i>
                   <p>Customer Management</p>
                 </a>
                 
               </li>
               <li class="nav-item">
-                <a href="{{ route('orders.index') }}">
+                <a href="{{ route('admin.orders.index') }}">
                   <i class="fas fa-list-alt"></i>
                   <p>Order Management</p>
                   
@@ -469,7 +415,7 @@
               </div>
               <div class="ms-md-auto py-2 py-md-0">
                 <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
-                <a href="{{ route('admin.product.create') }}" class="btn btn-primary btn-round">Add Employee</a>
+                <a href="{{ route('employees.create') }}" class="btn btn-primary btn-round">Add Employee</a>
               </div>
             </div>
             <div class="row">
@@ -486,7 +432,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Customers</p>
+                          <p class="card-category"><a href="{{ route('admin.customers.index') }}" style="color: #8d9498">Customers</a></p>
                           <h4 class="card-title">{{ $totalCus }}</h4>
                         </div>
                       </div>
@@ -528,7 +474,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Product</p>
+                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Product</a></p>
                           <h4 class="card-title">{{ $totalPro }}</h4>
                         </div>
                       </div>
@@ -549,7 +495,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Order</p>
+                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order</a></p>
                           <h4 class="card-title">{{ $totalOrders }}</h4>
                         </div>
                       </div>
@@ -562,122 +508,12 @@
             <div class="row">
             </div>
             <div class="row2" style="--bs-gutter-x:1.5rem;--bs-gutter-y:0;flex-wrap:wrap;margin-top:calc(-1 * var(--bs-gutter-y));margin-right:calc(-.5 * var(--bs-gutter-x));margin-left:calc(-.5 * var(--bs-gutter-x))">
-              <div class="col-md-5" style="flex:0 0 auto;width:100%;display: flex; gap: 40px;">
-                  <div class="card card-round" style="width: 40%;height: 400px;">
-                      <div class="card-body">
-                          <div class="card-head-row card-tools-still-right">
-                              <div class="card-title">New Employees</div>
-                              <div class="card-tools">
-                                  <div class="dropdown">
-                                      <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          <i class="fas fa-ellipsis-h"></i>
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Action</a>
-                                          <a class="dropdown-item" href="#">Another action</a>
-                                          <a class="dropdown-item" href="#">Something else here</a>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="card-list py-4">
-                              @if (isset($newem))
-                                  @foreach ($newem as $index => $em)
-                                      <div class="item-list d-flex align-items-center">
-                                          <div class="item-id">{{ $em->employee_id }}</div>
-                                          {{-- <div class="avatar" style="margin-left: 50px">
-                                              @php
-                                                  $firstImage = $product->images->firstWhere('file_type', 'image');
-                                              @endphp
-                                              @if ($firstImage)
-                                                  <img id="main-media-{{ $index }}" src="{{ asset('storage/' . $firstImage->file_path) }}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                                              @else
-                                                  <b>N/A</b>
-                                              @endif
-                                          </div> --}}
-                                          <div class="info-user ms-5">
-                                              <div class="username"><a href="{{ route('employees.edit', $em->employee_id) }}" style="color: #000">{{ $em->name }}</a></div>
-                                              <div class="status">{{ $em->email 'N/A' }}</div>
-                                          </div>
-                                          <div class="created-at">{{ $em->phone }}</div>
-                                      </div>
-                                  @endforeach
-                              @endif
-                          </div>
-                      </div>
-                  </div>
-                  <div class="card card-round" style="width: 60%;">
-                    <div class="card card-round">
-                        <div class="card-header">
-                            <div class="card-head-row card-tools-still-right">
-                                <div class="card-title">Add</div>
-
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <form action="{{ route('employees.store') }}" method="POST">
-                                @csrf
-                                <div class="mb-3">
-                                    <label for="name" class="form-label">Name:</label>
-                                    <input type="text" class="form-control" id="name" name="name" required>
-                                </div>
-                    
-                                <div class="mb-3">
-                                    <label for="email" class="form-label">Email:</label>
-                                    <input type="email" class="form-control" id="email" name="email" required>
-                                </div>
-                    
-                                <div class="mb-3">
-                                    <label for="phone" class="form-label">Phone:</label>
-                                    <input type="text" class="form-control" id="phone" name="phone">
-                                </div>
-                    
-                                <div class="mb-3">
-                                    <label for="username" class="form-label">Username:</label>
-                                    <input type="text" class="form-control" id="username" name="username" required>
-                                </div>
-                    
-                                <div class="mb-3">
-                                    <label for="password" class="form-label">Password:</label>
-                                    <input type="password" class="form-control" id="password" name="password" required>
-                                </div>
-                    
-                                <div class="mb-3">
-                                    <label for="hire_date" class="form-label">Hire Date:</label>
-                                    <input type="date" class="form-control" id="hire_date" name="hire_date">
-                                </div>
-                    
-                                <div class="mb-3">
-                                    <label for="job_title" class="form-label">Job Title:</label>
-                                    <input type="text" class="form-control" id="job_title" name="job_title">
-                                </div>
-                               
-                                <button type="submit" class="btn btn-danger">Create</button>
-                    
-                            </form>
-                        </div>
-                    </div>
-                  </div>
-              </div>
               <div style="flex:0 0 auto;width:100%">
                   <div class="card card-round">
                       <div class="card-header">
                           <div class="card-head-row card-tools-still-right">
                               <div class="card-title">Employee List</div>
-                              <div class="card-tools">
-                                  <div class="dropdown">
-                                      <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          <i class="fas fa-ellipsis-h"></i>
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          @foreach ($categories as $product)
-                                              <a class="dropdown-item" href="#">{{ $product->cate_name ?? 'N/A' }}</a>
-                                          @endforeach
-                                          {{-- <a class="dropdown-item" href="#">Another action</a>
-                                          <a class="dropdown-item" href="#">Something else here</a> --}}
-                                      </div>
-                                  </div>
-                              </div>
+                      
                           </div>
                       </div>
                       <div class="card-body p-0">
@@ -686,10 +522,11 @@
                                   <thead class="thead-light">
                                       <tr>
                                           <th scope="col">ID</th>
-                                          <th scope="col">Product</th>
-                                          <th scope="col" class="text-end">Date & Time</th>
-                                          <th scope="col" class="text-end">Price</th>
-                                          <th scope="col" class="text-end">Quantity</th>
+                                          <th scope="col">Name</th>
+                                          <th scope="col" class="text-end">Email</th>
+                                          <th scope="col" class="text-end">Phone</th>
+                                          <th scope="col" class="text-end">Hire Date</th>
+                                          <th scope="col" class="text-end">Job Title</th>
                                           <th scope="col" class="text-end">Delete</th>
                                       </tr>
                                   </thead>
@@ -697,31 +534,25 @@
                                       @php
                                           use Carbon\Carbon;
                                       @endphp
-                                      @if (isset($products))
-                                          @foreach ($products as $index => $product)
+                                      @if (isset($employees))
+                                          @foreach ($employees as $employee)
                                               <tr>
-                                                  <th scope="row">{{ $product->product_id }}</th>
+                                                  <th scope="row">{{ $employee->employee_id }}</th>
                                                   <td>
-                                                      @php
-                                                          $firstImage = $product->images->firstWhere('file_type', 'image');
-                                                      @endphp
-                                                      @if ($firstImage)
-                                                          <img src="{{ asset('storage/' . $firstImage->file_path) }}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                                                      @else
-                                                          <span>N/A</span>
-                                                      @endif
-                                                      <a href="{{ route('admin.product.edit', $product->product_id) }}" style="color: #000; margin-left: 10px">{{ $product->product_name }}</a>
+                                                      <a href="{{ route('employees.edit', $employee->employee_id) }}" style="color: #000;"><b>{{ $employee->name }}</b></a>
                                                   </td>
+                                                  
+                                                  <td class="text-end">{{ $employee->email }}</td>
+                                                  <td class="text-end">{{ $employee->phone }}</td>
                                                   <td class="text-end">
-                                                      {{ \Carbon\Carbon::parse($product->updated_at)->format('M d, Y, g.i A') }}
+                                                    {{ \Carbon\Carbon::parse($employee->hire_date)->format('M d, Y, g.i A') }}
                                                   </td>
-                                                  <td class="text-end">${{ $product->price }}</td>
-                                                  <td class="text-end">{{ $product->quantity }}</td>
+                                                  <td class="text-end">{{ $employee->job_title }}</td>
                                                   <td class="text-end">
-                                                      <form action="{{ route('admin.product.delete', $product->product_id)}}" method="POST" style="display:inline;">
+                                                      <form action="{{ route('employees.delete', $employee->employee_id)}}" method="POST" style="display:inline;">
                                                           @csrf
                                                           @method('DELETE')
-                                                          <button type="submit" class="btn btn-sm delete-button" onclick="return confirm('Are you sure you want to delete this product?')" style="padding: 0; font-size: 16px; width: 30px; height: 30px; background: none; border: none; color: red;"><i class="fa-solid fa-xmark"></i></button>
+                                                          <button type="submit" class="btn btn-sm delete-button" onclick="return confirm('Are you sure you want to delete this employee?')" style="padding: 0; font-size: 16px; width: 30px; height: 30px; background: none; border: none; color: red;"><i class="fa-solid fa-xmark"></i></button>
                                                       </form>
                                                   </td>
                                               </tr>
@@ -778,3 +609,4 @@
 
   </body>
 </html>
+

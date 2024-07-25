@@ -9,7 +9,7 @@
 </head>
 <body>
         <div class="container">
-            <a href="{{ route('orders.index') }}">Back</a>
+            <a href="{{ route('admin.orders.index') }}">Back</a>
         <h2>Edit Order</h2>
         <form method="POST" action="{{ route('orders.update', ['id' => $order->order_id]) }}">
             @csrf

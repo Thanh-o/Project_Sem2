@@ -1,63 +1,41 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Edit Product</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-        crossorigin="anonymous">
-</head>
-
-<body>
-    <div class="container mt-5">
-        <div class="card">
-            <div class="card-header">
-                <h3>Edit Product
-                    <a href="{{ route('admin.product.index') }}" class="btn btn-primary float-end">Back</a>
-                </h3>
-            </div>
-            <div class="card-body">
-                <form action="{{ route('admin.product.update', $product->product_id) }}" method="POST" enctype="multipart/form-data">
-                    @csrf
-                    @method('PUT')
-                    <div class="mb-3">
-                        <label for="product_name" class="form-label">Product Name</label>
-                        <input type="text" class="form-control" id="product_name" name="product_name" value="{{ $product->product_name }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="description" class="form-label">Description</label>
-                        <textarea class="form-control" id="description" name="description" rows="3">{{ $product->description }}</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="number" class="form-control" id="price" name="price" step="0.01" value="{{ $product->price }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="quantity" class="form-label">Quantity</label>
-                        <input type="number" class="form-control" id="quantity" name="quantity" value="{{ $product->quantity }}" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cate_id" class="form-label">Category</label>
-                        <select class="form-select" id="cate_id" name="cate_id" required>
-                            @foreach ($categories as $category)
-                            <option value="{{ $category->cate_id }}" {{ $product->cate_id == $category->cate_id ? 'selected' : '' }}>{{ $category->cate_name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
-                    <div class="mb-3">
-                        <label for="file_path" class="form-label">Product Images</label>
-                        <input type="file" class="form-control" id="file_path" name="file_path[]" multiple>
-                    </div>
-                    <button type="submit" class="btn btn-danger">Update</button>
-                </form>
-            </div>
+<div class="container">
+    <div class="content">  
+        <div class="nav">
+          <div class="nav-item">Home ></div>
+          <div class="nav-item">Contact</div>
         </div>
+        <div class="title">Contact</div>
+      
+      <div class="form">
+        <div class="form-group">Full Name*</div>
+        <div class="form-group">Email*</div>
+        <div class="form-group">Phone Number*</div>
+        <div class="form-group">Your message...</div>
+        <div class="form-group">Send Message</div>
+      </div>
     </div>
-</body>
+    <div class="sidebar">
+      <div class="image-group">
+        <img loading="lazy" srcset="https://cdn.builder.io/api/v1/image/assets/TEMP/a3d66dd371cc9d8487efa4f49e6d410e151677d1cb213f8dd5523ec91592d04a?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/a3d66dd371cc9d8487efa4f49e6d410e151677d1cb213f8dd5523ec91592d04a?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/a3d66dd371cc9d8487efa4f49e6d410e151677d1cb213f8dd5523ec91592d04a?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/a3d66dd371cc9d8487efa4f49e6d410e151677d1cb213f8dd5523ec91592d04a?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/a3d66dd371cc9d8487efa4f49e6d410e151677d1cb213f8dd5523ec91592d04a?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/a3d66dd371cc9d8487efa4f49e6d410e151677d1cb213f8dd5523ec91592d04a?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/a3d66dd371cc9d8487efa4f49e6d410e151677d1cb213f8dd5523ec91592d04a?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/a3d66dd371cc9d8487efa4f49e6d410e151677d1cb213f8dd5523ec91592d04a?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&" class="img" />
+        <img loading="lazy" srcset="https://cdn.builder.io/api/v1/image/assets/TEMP/8e3fdcf606d587d3d7737736fd835333087e73f124831283b694864e9dd015cb?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=100 100w, https://cdn.builder.io/api/v1/image/assets/TEMP/8e3fdcf606d587d3d7737736fd835333087e73f124831283b694864e9dd015cb?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=200 200w, https://cdn.builder.io/api/v1/image/assets/TEMP/8e3fdcf606d587d3d7737736fd835333087e73f124831283b694864e9dd015cb?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=400 400w, https://cdn.builder.io/api/v1/image/assets/TEMP/8e3fdcf606d587d3d7737736fd835333087e73f124831283b694864e9dd015cb?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=800 800w, https://cdn.builder.io/api/v1/image/assets/TEMP/8e3fdcf606d587d3d7737736fd835333087e73f124831283b694864e9dd015cb?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=1200 1200w, https://cdn.builder.io/api/v1/image/assets/TEMP/8e3fdcf606d587d3d7737736fd835333087e73f124831283b694864e9dd015cb?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=1600 1600w, https://cdn.builder.io/api/v1/image/assets/TEMP/8e3fdcf606d587d3d7737736fd835333087e73f124831283b694864e9dd015cb?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&width=2000 2000w, https://cdn.builder.io/api/v1/image/assets/TEMP/8e3fdcf606d587d3d7737736fd835333087e73f124831283b694864e9dd015cb?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&" class="img" />
+        <div class="subtitle">Let's talk with us</div>
+        <div class="description">Questions, comments, or suggestions? Simply fill in the form and we’ll be in touch shortly.</div>
+        <div class="address-group">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/aa35a85b421792e40a612d1c4d8ea4cc7e55f4d46c24e60fef69557365980dda?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&" class="img" />
+          <div class="address">8a Ton That Thuyet Street, Tu Liem District, Hanoi City</div>
+        </div>
+        <div class="phone-group">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/e3e6d2efaaf05da442cdb64cd5cca37608c62e7bae00d459430f4a045fe2ac19?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&" class="img" />
+          <div class="phone">0966140901</div>
+        </div>
+        <div class="email-group">
+          <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/af76e9f850fcf3360ccbae79c7622948e9494878a097203afe69e735654d750b?apiKey=64aa3cae170b4ef3aa6e5828ccea4ef8&" class="img" />
+          <div class="email">t2mtechnology@.com</div>
+        </div>
+      </div>
+    </div>
+</div> 
 
-</html>
-
-
+<style>
+  
+</style>

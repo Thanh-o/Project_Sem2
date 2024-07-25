@@ -29,7 +29,7 @@ Route::get('products', [ProductController::class, 'indexp'])->name('products');
 
 use App\Http\Controllers\CustomerController;
 
-// Route::get('/customers', [CustomerController::class, 'index'])->name('customers.index');
+Route::get('/customers', [CustomerController::class, 'cindex'])->name('customers.index');
 // Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
 // Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
 // Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
@@ -54,6 +54,7 @@ use App\Http\Controllers\HomeController;
 
 // Home route outside of the customer prefix
 Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 
 
 // Route::get('/', function () {
@@ -62,7 +63,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 
 use App\Http\Controllers\EmployeeController;
 
-// Route::get('/employees', [EmployeeController::class, 'index'])->name('employees.index');
+Route::get('employees', [EmployeeController::class, 'eindex'])->name('employees.index');
 // Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
 // Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
 // Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
@@ -116,14 +117,15 @@ Route::prefix('admin')->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('admin.dashboard');
     });
     // Order Management
-    Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
+    Route::get('orders', [OrderController::class, 'index'])->name('admin.orders.index');
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
     Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
     Route::delete('/orders/{id}', [OrderController::class, 'delete'])->name('orders.delete');
     // Customer Management
-    Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
+    Route::get('customer', [CustomerController::class, 'index'])->name('admin.customers.index');
+    // Route::get('customers', [CustomerController::class, 'index'])->name('customers.index');
     Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
     Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
     Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
@@ -138,9 +140,11 @@ Route::prefix('admin')->group(function () {
     Route::delete('/products/{id}', [ProductController::class, 'adelete'])->name('admin.product.delete');
     Route::delete('/products/delete-image/{id}', [ProductController::class, 'adeleteImage'])->name('admin.product.deleteImage');
     Route::get('/{cate_id}/products', [ProductController::class, 'getProductsByCategory'])->name('admin.category');
+    
 
     //Employee Managent    
-    Route::get('employees', [EmployeeController::class, 'index'])->name('employees.index');
+    Route::get('employee', [EmployeeController::class, 'index'])->name('admin.employees.index');
+    
     Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
     Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
     Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
@@ -165,7 +169,11 @@ use App\Http\Controllers\CartController;
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
 Route::post('/cart/add/{product_id}', [CartController::class, 'add'])->name('cart.add');
-Route::patch('/cart/update/{cart_item_id}', [CartController::class, 'update'])->name('cart.update');
-Route::delete('/cart/remove/{cart_item_id}', [CartController::class, 'remove'])->name('cart.remove');
+
+// Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+
+Route::delete('/cart/remove/{id}', [CartController::class, 'delete'])->name('cart.remove');
+
 Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
+Route::post('/update-cart', 'CartController@update')->name('update.cart');

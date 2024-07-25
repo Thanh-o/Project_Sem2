@@ -3,8 +3,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Order;
+use App\Models\OrderDetail;
 use App\Models\Customer;
 use App\Models\Employee;
+use App\Models\Product;
 
 class OrderController extends Controller
 {
@@ -39,7 +41,11 @@ public function store(Request $request)
     public function index()
 {
     $orders = Order::with(['customer'])->get();
-    return view('orders.index', compact('orders'));
+    $totalOrders = Order::count();
+    $totalCus = Customer::count();
+    $totalEm = Employee::count();
+    $totalPro = Product::count();
+    return view('admin.orders.index', compact('orders', 'totalOrders', 'totalCus', 'totalEm', 'totalPro'));
 }
 
 
@@ -75,15 +81,19 @@ public function update(Request $request, $id)
     $order = Order::findOrFail($id);
     $order->update($request->only(['customer_id','employee', 'total_amount', 'status', 'payment']));
 
-    return redirect()->route('orders.index')->with('status', 'Order updated successfully');
+    return redirect()->route('admin.orders.index')->with('status', 'Order updated successfully');
 }
 
 
     // DELETE
     public function delete($id)
     {
-        Order::findOrFail($id)->delete();
-
+        $order = Order::findOrFail($id);
+        
+        $order->orderDetails()->delete();
+        
+        $order->delete();
+        
         return redirect()->back()->with('status', 'Order deleted successfully');
     }
 }

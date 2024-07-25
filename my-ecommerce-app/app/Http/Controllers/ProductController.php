@@ -146,13 +146,15 @@ class ProductController extends Controller
         //ADMIN
         public function aindex()
         {
-            $products = Product::with(['category', 'images'])->get();
+            $products = Product::with(['category', 'images'])->paginate(10);
             $newproducts = Product::latest()->take(5)->get();
             $totalOrders = Order::count();
             $totalCus = Customer::count();
             $totalEm = Employee::count();
             $categories = Category::all();
             $totalPro = Product::count();
+            
+            
             $maxCateId = Category::max('cate_id') + 1;
             return view('admin.product.index', compact('products', 'newproducts', 'totalOrders', 'totalCus', 'totalEm', 'categories', 'totalPro', 'maxCateId'));
         }

@@ -27,6 +27,50 @@
   .logo-header .logo img {
     border-radius: 50%;
   }
+  .pagination-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+}
+
+.pagination li {
+    margin: 0 0.25rem;
+}
+
+.pagination li a,
+.pagination li span {
+    display: block;
+    padding: 0.5rem 0.75rem;
+    color: #007bff;
+    text-decoration: none;
+    border: 1px solid #dee2e6;
+    border-radius: 0.25rem;
+}
+
+.pagination li a:hover {
+    background-color: #e9ecef;
+    border-color: #dee2e6;
+}
+
+.pagination li.active span {
+    background-color: #007bff;
+    color: white;
+    border-color: #007bff;
+}
+
+.pagination li.disabled span {
+    color: #6c757d;
+    pointer-events: none;
+    background-color: #ffffff;
+    border-color: #dee2e6;
+}
+
 </style>
   </head>
   <body>
@@ -72,21 +116,21 @@
                 <h4 class="text-section">Components</h4>
               </li>
               <li class="nav-item">
-                <a href="{{ route('employees.index') }}">
+                <a href="{{ route('admin.employees.index') }}">
                     <i class="fa-regular fa-user"></i>
                   <p>Employee Management</p>
                 </a>
                 
               </li>
               <li class="nav-item">
-                <a href="{{ route('customers.index') }}">
+                <a href="{{ route('admin.customers.index') }}">
                   <i class="fas fa-user"></i>
                   <p>Customer Management</p>
                 </a>
                 
               </li>
               <li class="nav-item">
-                <a href="{{ route('orders.index') }}">
+                <a href="{{ route('admin.orders.index') }}">
                   <i class="fas fa-list-alt"></i>
                   <p>Order Management</p>
                   
@@ -432,7 +476,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Customers</p>
+                          <p class="card-category"><a href="{{ route('admin.customers.index') }}" style="color: #8d9498">Customers</a></p>
                           <h4 class="card-title">{{ $totalCus }}</h4>
                         </div>
                       </div>
@@ -474,7 +518,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Product</p>
+                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Product</a></p>
                           <h4 class="card-title">{{ $totalPro }}</h4>
                         </div>
                       </div>
@@ -495,7 +539,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Order</p>
+                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order</a></p>
                           <h4 class="card-title">{{ $totalOrders }}</h4>
                         </div>
                       </div>
@@ -624,80 +668,82 @@
                   </div>
               </div>
               <div style="flex:0 0 auto;width:100%">
-                  <div class="card card-round">
-                      <div class="card-header">
-                          <div class="card-head-row card-tools-still-right">
-                              <div class="card-title">Product List</div>
-                              <div class="card-tools">
-                                  <div class="dropdown">
-                                      <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          <i class="fas fa-ellipsis-h"></i>
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          @foreach ($categories as $product)
-                                              <a class="dropdown-item" href="#">{{ $product->cate_name ?? 'N/A' }}</a>
-                                          @endforeach
-                                          {{-- <a class="dropdown-item" href="#">Another action</a>
-                                          <a class="dropdown-item" href="#">Something else here</a> --}}
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                      </div>
-                      <div class="card-body p-0">
-                          <div class="table-responsive">
-                              <table class="table align-items-center mb-0">
-                                  <thead class="thead-light">
-                                      <tr>
-                                          <th scope="col">ID</th>
-                                          <th scope="col">Product</th>
-                                          <th scope="col" class="text-end">Date & Time</th>
-                                          <th scope="col" class="text-end">Price</th>
-                                          <th scope="col" class="text-end">Quantity</th>
-                                          <th scope="col" class="text-end">Delete</th>
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                      @php
-                                          use Carbon\Carbon;
-                                      @endphp
-                                      @if (isset($products))
-                                          @foreach ($products as $index => $product)
-                                              <tr>
-                                                  <th scope="row">{{ $product->product_id }}</th>
-                                                  <td>
-                                                      @php
-                                                          $firstImage = $product->images->firstWhere('file_type', 'image');
-                                                      @endphp
-                                                      @if ($firstImage)
-                                                          <img src="{{ asset('storage/' . $firstImage->file_path) }}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                                                      @else
-                                                          <span>N/A</span>
-                                                      @endif
-                                                      <a href="{{ route('admin.product.edit', $product->product_id) }}" style="color: #000; margin-left: 10px">{{ $product->product_name }}</a>
-                                                  </td>
-                                                  <td class="text-end">
-                                                      {{ \Carbon\Carbon::parse($product->updated_at)->format('M d, Y, g.i A') }}
-                                                  </td>
-                                                  <td class="text-end">${{ $product->price }}</td>
-                                                  <td class="text-end">{{ $product->quantity }}</td>
-                                                  <td class="text-end">
-                                                      <form action="{{ route('admin.product.delete', $product->product_id)}}" method="POST" style="display:inline;">
-                                                          @csrf
-                                                          @method('DELETE')
-                                                          <button type="submit" class="btn btn-sm delete-button" onclick="return confirm('Are you sure you want to delete this product?')" style="padding: 0; font-size: 16px; width: 30px; height: 30px; background: none; border: none; color: red;"><i class="fa-solid fa-xmark"></i></button>
-                                                      </form>
-                                                  </td>
-                                              </tr>
-                                          @endforeach
-                                      @endif
-                     
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                  </div>
+                <div class="card card-round">
+                    <div class="card-header">
+                        <div class="card-head-row card-tools-still-right">
+                            <div class="card-title">Product List</div>
+                            <div class="card-tools">
+                                <div class="dropdown">
+                                    <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                        <i class="fas fa-ellipsis-h"></i>
+                                    </button>
+                                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                        @foreach ($categories as $product)
+                                            <a class="dropdown-item" href="#">{{ $product->cate_name ?? 'N/A' }}</a>
+                                        @endforeach
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body p-0">
+                        <div class="table-responsive">
+                            <table class="table align-items-center mb-0">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">ID</th>
+                                        <th scope="col">Product</th>
+                                        <th scope="col" class="text-end">Date & Time</th>
+                                        <th scope="col" class="text-end">Price</th>
+                                        <th scope="col" class="text-end">Quantity</th>
+                                        <th scope="col" class="text-end">Delete</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @php
+                                        use Carbon\Carbon;
+                                    @endphp
+                                    @if (isset($products))
+                                        @foreach ($products as $index => $product)
+                                            <tr>
+                                                <th scope="row">{{ $product->product_id }}</th>
+                                                <td>
+                                                    @php
+                                                        $firstImage = $product->images->firstWhere('file_type', 'image');
+                                                    @endphp
+                                                    @if ($firstImage)
+                                                        <img src="{{ asset('storage/' . $firstImage->file_path) }}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
+                                                    @else
+                                                        <span>N/A</span>
+                                                    @endif
+                                                    <a href="{{ route('admin.product.edit', $product->product_id) }}" style="color: #000; margin-left: 10px">{{ $product->product_name }}</a>
+                                                </td>
+                                                <td class="text-end">
+                                                    {{ \Carbon\Carbon::parse($product->updated_at)->format('M d, Y, g.i A') }}
+                                                </td>
+                                                <td class="text-end">${{ $product->price }}</td>
+                                                <td class="text-end">{{ $product->quantity }}</td>
+                                                <td class="text-end">
+                                                    <form action="{{ route('admin.product.delete', $product->product_id)}}" method="POST" style="display:inline;">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-sm delete-button" onclick="return confirm('Are you sure you want to delete this product?')" style="padding: 0; font-size: 16px; width: 30px; height: 30px; background: none; border: none; color: red;"><i class="fa-solid fa-xmark"></i></button>
+                                                    </form>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="card-footer pagination-wrapper">
+                            {{ $products->links('pagination::bootstrap-4') }}
+                        </div>
+                    </div>
+                </div>
               </div>
+            
+            
             </div>
           
           </div>

@@ -39,6 +39,7 @@ class CartController extends Controller
         return redirect()->route('cart.index')->with('success', 'Product added to cart!!!');
     }
 
+
 // Checkout
 public function checkout(Request $request)
 {
@@ -68,10 +69,34 @@ public function checkout(Request $request)
         // Clear the cart
         Cart::truncate();
 
-        return redirect()->route('orders.index')->with('status', 'Order paid successfully!!!');
+        return redirect()->route('admin.orders.index')->with('status', 'Order paid successfully!!!');
     } catch (\Exception $e) {
-        return redirect()->route('orders.index')->with('error', 'An error occurred while processing your order.');
+        return redirect()->route('admin.orders.index')->with('error', 'An error occurred while processing your order.');
     }
 }
+
+//Delete
+public function delete($id)
+{
+    $cart = Cart::findOrFail($id);
+    $cart->delete();
+
+    return redirect()->back()->with('status', 'Cart deleted successfully');
+}
+
+//Update
+public function update(Request $request)
+    {
+        $validated = $request->validate([
+            'id' => 'required|exists:carts,id',
+            'quantity' => 'required|integer|min:1',
+        ]);
+
+        $cart = Cart::findOrFail($validated['id']);
+        $cart->quantity = $validated['quantity'];
+        $cart->save();
+
+        return response()->json(['success' => true, 'quantity' => $cart->quantity]);
+    }
 
 }

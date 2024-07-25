@@ -1,144 +1,180 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-  <style>
-    .contain {
-      top: 300px;
-      position: absolute;
-      width: 100%;
-      padding: 20px;
-      background-color: #f9f9f9;
-      box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-      border-radius: 8px;
-    }
-
-    .cart-header, .cart-item {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 20px;
-      padding: 10px 20px;
-      gap: 20px;
-      background-color: #fff;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.05);
-    }
-
-    .cart-header {
-      font-weight: bold;
-      background-color: #eee;
-    }
-
-    .cart-item img {
-      width: 100px;
-      height: auto;
-      border-radius: 5px;
-      box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
-    }
-
-    .product-name {
-      flex-grow: 1;
-      margin-left: 10px;
-    }
-
-    .price, .qty, .unit-price {
-      display: inline-block;
-      text-align: center;
-      min-width: 80px;
-    }
-
-    .qty {
-      display: flex;
-      align-items: center;
-    }
-
-    input, button {
-      height: 36px;
-      text-align: center;
-      border: 1px solid #ddd;
-      padding: 5px;
-      background-color: #f0f0f0;
-      color: #333;
-      font-size: 14px;
-      transition: background-color 0.3s ease, border-color 0.3s ease;
-      margin: 0;
-    }
-
-    input {
-      width: 50px;
-      border-right: none;
-      border-radius: 3px 0 0 3px;
-    }
-
-    button {
-      width: 36px;
-      border-left: none;
-      border-radius: 0 3px 3px 0;
-      cursor: pointer;
-    }
-
-    input:focus, button:focus {
-      outline: none;
-      border-color: #aaa;
-    }
-
-    button:hover {
-      background-color: #e0e0e0;
-    }
-
-    .remove-btn {
-      background: none;
-      border: none;
-      color: red;
-      font-size: 20px;
-      cursor: pointer;
-    }
-
-    .remove-btn:hover {
-      color: darkred;
-    }
-
-  </style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Payment Page</title>
+    <link rel="stylesheet" href="./checkout.css">
 </head>
+
 <body>
 
-<div class="contain">
-  <div class="cart-header">
-    <span>PRODUCT</span>
-    <span>PRICE</span>
-    <span>QTY</span>
-    <span>UNIT PRICE</span>
-  </div>
-
-  <div class="cart-item">
-    <button class="remove-btn"><i class="fas fa-times"></i></button>
-    <img src="https://via.placeholder.com/100" alt="Product Image">
-    <span class="product-name">Nike Airmax 270 react</span>
-    <span class="price">$998</span>
-    <div class="qty">
-      <button>-</button>
-      <input type="number" value="2">
-      <button>+</button>
+    <div class="header">
+        <h1>Trang Thanh Toán</h1>
     </div>
-    <span class="unit-price">$499</span>
-  </div>
 
-  <div class="cart-item">
-    <button class="remove-btn"><i class="fas fa-times"></i></button>
-    <img src="https://via.placeholder.com/100" alt="Product Image">
-    <span class="product-name">Nike Airmax 270 react</span>
-    <span class="price">$998</span>
-    <div class="qty">
-      <button>-</button>
-      <input type="number" value="2" min="0">
-      <button>+</button>
+    <div class="container">
+        <div class="content">
+            <div class="product-info">
+                <h2>Thông Tin Sản Phẩm</h2>
+                <div class="product-item">
+                    <img src="./quạttannhiet.jpg" alt="Product Image">
+                    <div class="product-details">
+                        <div class="product-name">Quạt tản nhiệt</div>
+                        <div class="product-price">$100</div>
+                    </div>
+                    <div class="product-quantity">x1</div>
+                </div>
+                <div class="total-price">Tổng Cộng: $100</div>
+            </div>
+
+            <div class="billing-info">
+                <h2>Thông Tin Người Mua Hàng</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="fullname">Họ và Tên</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Địa Chỉ</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Thành Phố</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Quốc Gia</label>
+                        <select id="country" name="country" required>
+                            <option value="vietnam">Việt Nam</option>
+                            <option value="usa">USA</option>
+                            <option value="canada">Canada</option>
+                            <option value="australia">Australia</option>
+                        </select>
+                    </div>
+                </form>
+            </div>
+
+            <div class="payment-info">
+                <h2>Thông Tin Thanh Toán</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="cardname">Tên Trên Thẻ</label>
+                        <input type="text" id="cardname" name="cardname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cardnumber">Số Thẻ</label>
+                        <input type="text" id="cardnumber" name="cardnumber" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="expdate">Ngày Hết Hạn</label>
+                        <input type="text" id="expdate" name="expdate" placeholder="MM/YY" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" required>
+                    </div>
+                    <div class="form-group">
+                        <input type="submit" value="Thanh Toán">
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <span class="unit-price">$499</span>
-  </div>
-</div>
-
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+.container {
+    width: 90%;
+    max-width: 1200px;
+    margin: auto;
+    padding: 10px;
+}
+.header {
+    background-color: #dd3c3c;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+}
+.content {
+    background-color: white;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+.product-info, .billing-info, .payment-info {
+    margin-bottom: 20px;
+}
+.product-info h2, .billing-info h2, .payment-info h2 {
+    margin-bottom: 10px;
+}
+.product-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0;
+    border-bottom: 1px solid #ddd;
+}
+.product-item:last-child {
+    border-bottom: none;
+}
+.product-item img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    margin-right: 20px;
+}
+.product-details {
+    flex-grow: 1;
+}
+.product-name {
+    font-size: 16px;
+    font-weight: bold;
+}
+.product-price {
+    font-size: 16px;
+    color: #28a745;
+}
+.total-price {
+    text-align: right;
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+}
+.form-group {
+    margin-bottom: 15px;
+}
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+}
+.form-group input, .form-group select {
+    width: 100%;
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.form-group input[type="submit"] {
+    background-color: #dd3c3c;
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+.form-group input[type="submit"]:hover {
+    background-color: #dd3c3c;
+}
+</style>
 </body>
+
 </html>
