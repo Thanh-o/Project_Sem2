@@ -1,5 +1,5 @@
-<div class="footer-wrapper">
-  <footer class="footer">
+<footer >
+  <div class="footer">
 
       <div class="footer-sections">
           <div class="footer-subscribe">
@@ -18,26 +18,17 @@
           <div class="footer-support">
               <div class="section-title">Support</div>
               <div class="support-content">
-                  <p class="address">Số 8A, Tôn Thất Thuyết, Mỹ Đình, Nam Từ Liêm, Hà Nội</p>
+                  <p class="address">No. 8A, Ton That Thuyet, <br> My Dinh, Nam Tu Liem, Hanoi</p>
                   <p class="email">fptaptech@gmail.com</p>
-                  <p class="phone">+1234-5678-9874</p>
+                  <p class="phone">+1234-5678-9824</p>
               </div>
           </div>
-          <div class="footer-account">
-              <div class="section-title">Account</div>
-              <div class="account-content">
-                  <p>My Account</p>
-                  <p><a href="{{ route('customers.login') }}">Login</a> / <a href="{{ route('customers.signup') }}">Register</a></p>
-                  <p><a href="{{ route('cart.index') }}">Cart</a></p>
-                  <p>Wishlist</p>
-                  <p>Shop</p>
-              </div>
-          </div>
+       
           <div class="footer-links">
               <div class="section-title">Quick Link</div>
               <div class="links-content">
-                  <p>Privacy Policy</p>
-                  <p>Terms Of Use</p>
+                  <p>Warranty Policy</p>
+                  <p><a href="{{ route('about_us') }}">About us</a></p>
                   <p>FAQ</p>
                   <p><a href="{{ route('contact') }}">Contact</a></p>
               </div>
@@ -50,10 +41,10 @@
               <div class="social-links">
                   <div class="section-title">Social</div>
                   <div class="social-section">
-                    <img class="social-icon" src="{{ asset('images/img/instagram-svgrepo-com-1.svg') }}" />
-                    <img class="social-icon" src="{{ asset('images/img/facebook-svgrepo-com-1.svg') }}" />
-                    <img class="social-icon" src="{{ asset('images/img/vector-18.svg') }}" />
-                    <img class="social-icon" src="{{ asset('images/img/logo-twitter-svgrepo-com-1.svg') }}" />
+                    <i class="fab fa-instagram"></i>
+                    <i class="fab fa-facebook"></i>
+                    <i class="fab fa-tiktok"></i>
+                    <i class="fab fa-twitter"></i>
                   </div>
               </div>
           </div>
@@ -62,12 +53,13 @@
         <div class="footer-line"></div>
         <div class="footer-content-wrapper">
             <div class="footer-copyright">
-                <img class="copyright-icon" src="{{ asset('images/img/icon-copyright-2.svg') }}" />
-                <p class="copyright-text">Copyright Aptech 2024. All rights reserved</p>
+                <p class="copyright-text"><i class="far fa-copyright"></i> Copyright Aptech
+                    <script>document.write(new Date().getFullYear());</script> . All rights reserved
+                </p>
             </div>
         </div>
       </div>
-  </footer>
-</div>
+  </div>
 
+</footer>
 <link rel="stylesheet" href="{{ asset('Css/footer.css') }}">

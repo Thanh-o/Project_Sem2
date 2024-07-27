@@ -7,13 +7,17 @@
     <title>Home</title>
     <link
     rel="icon"
-    href="{{ asset('images/Tan-ty.png') }}"
+    href="{{ asset('images/logo_2.png') }}"
     type="image/x-icon"
     />
     <link rel="stylesheet" href="{{ asset('Css/home/globals.css') }}" />
     <link rel="stylesheet" href="{{ asset('Css/home/styleguide.css') }}" />
     <link rel="stylesheet" href="{{ asset('Css/home/style.css') }}" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" 
+          href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+          integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+          crossorigin="anonymous" 
+          referrerpolicy="no-referrer" />
     <style>
       .frame .under-line-3 {
           width: 1440px;
@@ -46,53 +50,14 @@
 
 
 
-  </style>
+    </style>
   
   </head>
   <body>
     <div class="frame">
-       
-        <div class="overlap-group">
-          <div class="header">
-            <div class="header-1">
-              <div class="logo">
-                <a href="{{ route('home') }}">
-                  <img src="{{ asset('images/logo.png') }}" width="200" class="img-logo">
-                </a>
-                
-              </div>
-              <div class="div-5">
-                <div class="div-wrapper">
-                  <div class="text-wrapper-3"><a href="{{ route('home') }}">Home</a></div> 
-                </div>
-                <div class="div-wrapper">
-                  <div class="text-wrapper-3"><a href="{{ route('contact') }}">Contact</a></div>
-                </div>
-                <div class="div-wrapper">
-                  <div class="text-wrapper-3"><a href="#">About</a></div>
-                </div>
-                <div class="div-wrapper">
-                  <div class="text-wrapper-3"><a href="{{ route('customers.signup') }}">Sign Up</a></div>
-                </div>
-              </div>
-            </div>
-            <div class="div-2">
-              <div class="div-3">
-                <input type="search" name="search" id="search" placeholder="What are you looking for?">
-                {{-- <label for="search" class="p">What are you looking for?</label>                                  --}}
-                  <button type="submit" class="fa-solid fa-magnifying-glass" ></button>                  
-              </div>
-              <div class="div-4">
-                <div class="img-2">
-                  <a href="{{ route('cart.index') }}">
-                    <i class="fa-solid fa-cart-shopping"></i>
-                  </a>
-                </div>
-                <a href="{{ route('customers.login') }}"><i class="fa-solid fa-user"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
+       @include('header')
+
+       <main>
         <div class="group-7">
           <div class="group-6">
             <img src="{{ asset('images/img/nh-giga-1.png') }}" alt="Image 1">
@@ -369,7 +334,7 @@
             </div>
 
           </div>
-          <div class="left"><i class="fa-solid fa-chevron-left"></i></div>
+          {{-- <div class="left"><i class="fa-solid fa-chevron-left"></i></div> --}}
           <div class="right"><i class="fa-solid fa-chevron-right"></i></div>
       
         </div>
@@ -381,7 +346,7 @@
           </div>
         </a>
         <div class="group-8"></div>
-          <div class="overlap-2">
+        <div class="overlap-2">
             <div class="component">
               <div class="overlap-3">
                 <img class="image-2" src="{{ asset('images/img/image-30-2.png') }}" />
@@ -567,9 +532,9 @@
             </div>
               
   
-          </div>
+        </div>
             
-          <div class="overlap-9">
+        <div class="overlap-9">
             <div class="component">
               <div class="overlap-3">
                 <img class="image-2" src="{{ asset('images/img/image-30-4.png') }}" />
@@ -753,9 +718,9 @@
                 <div class="left2"><i class="fa-solid fa-chevron-left"></i></div>
                 <div class="right2"><i class="fa-solid fa-chevron-right"></i></div>
               </div>
-          </div>
+        </div>
 
-          <div class="overlap-10">
+        <div class="overlap-10">
             <div class="component">
               <div class="overlap-3">
                 <img class="image-2" src="{{ asset('images/img/image-30-5.png') }}" />
@@ -939,9 +904,9 @@
                 <div class="left3"><i class="fa-solid fa-chevron-left"></i></div>
                 <div class="right3"><i class="fa-solid fa-chevron-right"></i></div>
             </div>  
-          </div>
+        </div>
 
-          <div class="overlap-11">
+        <div class="overlap-11">
             <div class="component">
               <div class="overlap-3">
                 <img class="image-2" src="{{ asset('images/img/image-30-7.png') }}" />
@@ -1125,8 +1090,8 @@
                 <div class="left4"><i class="fa-solid fa-chevron-left"></i></div>
                 <div class="right4"><i class="fa-solid fa-chevron-right"></i></div>
             </div>
-          </div>
-          <div class="div-15">
+        </div>
+        <div class="div-15">
             <div class="div-11">
               <div class="div-12">
                 <div class="rectangle"></div>
@@ -1161,8 +1126,8 @@
                 </div>
               </div>
             </div>
-          </div>
-          <div class="group">
+        </div>
+        <div class="group">
             <div class="group-wrapper">
               <div class="group-2">
                 <p class="customer">
@@ -1178,7 +1143,7 @@
                 </div>
               </div>
             </div>
-          </div>
+        </div>
         <div class="div-60">
           <div class="div-62">
             <img
@@ -1205,82 +1170,13 @@
             <div class="div-63">SUPPORT 24/7</div>
           </div>
         </div>
+       </main>
 
 
-        <div class="overlap-8">
-          <div class="footer-wrapper">
-            <footer class="footer">
-          
-                <div class="footer-sections">
-                    <div class="footer-subscribe">
-                        <div class="subscribe-content">
-                            <div class="subscribe-header">
-                                <div class="subscribe-logo">Exclusive</div>
-                                <div class="subscribe-text">Subscribe</div>
-                            </div>
-                            <p class="subscribe-offer">Get 10% off your first order</p>
-                        </div>
-                        <div class="subscribe-input">
-                            <input type="email" placeholder="Enter your email" />
-                            <img class="send-icon" src="{{ asset('images/img/icon-send-3.svg') }}" />
-                        </div>
-                    </div>
-                    <div class="footer-support">
-                        <div class="section-title">Support</div>
-                        <div class="support-content">
-                            <p class="address">Số 8A, Tôn Thất Thuyết, Mỹ Đình, Nam Từ Liêm, Hà Nội</p>
-                            <p class="email">fptaptech@gmail.com</p>
-                            <p class="phone">+1234-5678-9874</p>
-                        </div>
-                    </div>
-                    <div class="footer-account">
-                        <div class="section-title">Account</div>
-                        <div class="account-content">
-                            <p>My Account</p>
-                            <p><a href="{{ route('customers.login') }}">Login</a> / <a href="{{ route('customers.signup') }}">Register</a></p>
-                            <p><a href="{{ route('cart.index') }}">Cart</a></p>
-                            <p>Wishlist</p>
-                            <p>Shop</p>
-                        </div>
-                    </div>
-                    <div class="footer-links">
-                        <div class="section-title">Quick Link</div>
-                        <div class="links-content">
-                            <p>Privacy Policy</p>
-                            <p>Terms Of Use</p>
-                            <p>FAQ</p>
-                            <p><a href="{{ route('contact') }}">Contact</a></p>
-                        </div>
-                    </div>
-                    <div class="footer-about">
-                        <div class="about-content">
-                            <div class="section-title">T2M</div>
-                            <p class="about-text">For a community of gamers and all technology lovers in Vietnam.</p>
-                        </div>
-                        <div class="social-links">
-                          <div class="section-title">Social</div>
-                          <div class="social-section">
-                            <img class="social-icon" src="{{ asset('images/img/instagram-svgrepo-com-1.svg') }}" />
-                            <img class="social-icon" src="{{ asset('images/img/facebook-svgrepo-com-1.svg') }}" />
-                            <img class="social-icon" src="{{ asset('images/img/vector-18.svg') }}" />
-                            <img class="social-icon" src="{{ asset('images/img/logo-twitter-svgrepo-com-1.svg') }}" />
-                          </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="footer-bottom">
-                  <div class="footer-line"></div>
-                  <div class="footer-content-wrapper">
-                      <div class="footer-copyright">
-                          <img class="copyright-icon" src="{{ asset('images/img/icon-copyright-2.svg') }}" />
-                          <p class="copyright-text">Copyright Aptech 2024. All rights reserved</p>
-                      </div>
-                  </div>
-                </div>
-            </footer>
-          </div>
 
-        </div>
+        <footer>
+          @include('footer')
+        </footer>
         
       </div>
     </div>

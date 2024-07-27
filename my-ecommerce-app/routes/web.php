@@ -55,6 +55,7 @@ use App\Http\Controllers\HomeController;
 // Home route outside of the customer prefix
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
+Route::get('/about_us', [HomeController::class, 'about_us'])->name('about_us');
 
 
 // Route::get('/', function () {

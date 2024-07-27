@@ -8,6 +8,7 @@ body {
     
     background: #fff;  
     color: #333;  
+    
 }  
 main .about {
     max-width: 1200px;
@@ -16,6 +17,11 @@ main .about {
     background-color: rgb(244, 244, 244);
     border-radius: 10px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    display: flex;
+}
+
+main .about-text{
+    padding: 20px;
 }
 
 main h1 {
@@ -38,7 +44,7 @@ main p {
 
 main .founder {
     margin-top: 30px;
-    padding: 20px;
+    padding: 30px;
     background-color: #f9f9f9;
     border-left: 5px solid #ff6f61;
     font-style: italic;
@@ -47,26 +53,29 @@ main .founder {
 }
 
 main .author {
-    display: flex;
+    
     align-items: center;
     margin-top: 30px;
+    width: 50%;
+    
 }
 
 main .author img {
     border-radius: 50%;
-    width: 100px;
-    height: 100px;
+    width: 450px;
+    margin-bottom: 40px;
     margin-right: 25px;
     transition: transform 0.2s;
+    
 }
 
 main .author img:hover {
-    transform: scale(1.05);
+    transform: scale(1.55);
 }
 
 main .info {
     font-size: 18px;
-    color: #333;
+    text-align: center;
 }
 
 main .info h3 {
@@ -74,6 +83,7 @@ main .info h3 {
     font-size: 20px;
     color: #ff6f61;
     margin-bottom: 5px;
+    
 }
 
 main .info p {
@@ -81,3 +91,9 @@ main .info p {
     font-size: 16px;
     color: #7f8c8d;
 }
+
+@media (max-width: 1000px) { 
+    main .author img {
+        width: 100%;
+    }
+ }

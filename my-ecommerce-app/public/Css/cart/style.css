@@ -12,9 +12,9 @@
   }
 
 .link-bre{
-    top: 240px;
-    position: absolute;
-    left: 100px;
+    margin-top: 40px;
+    /* position: absolute; */
+    margin-left: 100px;
 }
 
 .link-bre a{
@@ -27,7 +27,7 @@
 .main {  
  
   background-color: #ffffff;  
-  margin-top: 250px; 
+  margin-top: 50px; 
   
 }  
 

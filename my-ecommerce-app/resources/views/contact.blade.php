@@ -7,9 +7,9 @@
     <title>Contact</title>
     <link
     rel="icon"
-    href="{{ asset('images/Tan-ty.png') }}"
+    href="{{ asset('images/logo_2.png') }}"
     type="image/x-icon"
-    />   
+    />  
     <link rel="stylesheet" href="{{ asset('Css/contact.css') }}" />
     <link rel="stylesheet" href="{{ asset('Css/home/globals.css') }}" />
     <link rel="stylesheet" href="{{ asset('Css/home/styleguide.css') }}" />

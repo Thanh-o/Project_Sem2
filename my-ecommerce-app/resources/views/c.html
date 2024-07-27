@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+    <title>Flash Sales Countdown</title>
+</head>
+<body>
+    <main>
+
+        <!-- Category -->
+        <div class="categories">
+            <div class="header">
+                <div class="icon"></div>
+                <span class="title">Categories</span>
+            </div>
+            <div class="list">
+                <div class="top">
+                    <h1>Browse By Category</h1>
+                    <div class="arrow">
+                        <i class="fa-solid fa-arrow-left"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                
+                <div class="countdown">
+                    <div class="cate-unit">
+                        <img src="{{ asset('images/img/category-cellphone-3.svg') }}" />
+                        <span class="label">Phone</span>
+                        
+                    </div>
+                    
+                    <div class="cate-unit">
+                        <img class="category-computer" src="{{ asset('images/img/category-computer-3.svg') }}" />
+                        <span class="label">Computer</span>
+                        
+                    </div>
+                    
+                    <div class="cate-unit">
+                        <img  src="{{ asset('images/img/category-smartwatch-3.svg') }}" />
+                        <span class="label">SmartWatch</span>
+                        
+                    </div>
+                    
+                    <div class="cate-unit">
+                        <img  src="{{ asset('images/img/category-camera-3.svg') }}" />
+                        <span class="label">Camera</span>
+                        
+                    </div>
+
+                    <div class="cate-unit">
+                        <img src="{{ asset('images/img/category-headphone-3.svg') }}" />
+                        <span class="label">HeadPhone</span>
+                        
+                    </div>
+
+                    <div class="cate-unit">
+                        <img  src="{{ asset('images/img/category-gamepad-3.svg') }}" />
+                        <span class="label">Gaming</span>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Flash Sale -->
+        <div class="flash-sales">
+            <div class="header">
+                <div class="icon"></div>
+                <span class="title">Today's</span>
+            </div>
+            <div class="sales-container">
+                <h1>Flash Sales</h1>
+                <div class="countdown">
+                    <div class="time-unit">
+                        <span class="label">Days</span>
+                        <span class="number" id="days">01</span> 
+                    </div>
+                    <span class="separator">:</span>
+                    <div class="time-unit">
+                        <span class="label">Hours</span>
+                        <span class="number" id="hours">15</span>
+                    </div>
+                    <span class="separator">:</span>
+                    <div class="time-unit">
+                        <span class="label">Minutes</span>
+                        <span class="number" id="minutes">17</span>
+                    </div>
+                    <span class="separator">:</span>
+                    <div class="time-unit">
+                        <span class="label">Seconds</span>
+                        <span class="number" id="seconds">55</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Product Sale -->
+        <div class="sale">
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box">
+                <div class="top">
+                    <div class="percent">
+                        <b>- 40%</b>
+                    </div>
+                    <div class="icon">
+                        <i class="fa-regular fa-heart"></i>
+                        <i class="fa-regular fa-eye"></i>
+                    </div>
+                </div>
+                <div class="product-img">
+                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                </div>
+                <div class="bottom">
+                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="price">
+                        <p>$120</p>
+                        <p class="cost">$160</p>
+                    </div>
+                    <div class="stars">
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <i class="fa-solid fa-star"></i>
+                        <p class="number">(88)</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <style>
+            .sale{
+                height: 375px;
+                display: flex;
+                transition: transform 1s ease;
+                margin-left: 20px;
+                gap: 20px;
+                width: 2000px;
+                align-self: stretch;
+                position: relative;
+            }
+
+            .sale .box{
+                  border: 1px solid #e0e0e0;
+  border-radius: 10px;
+  padding: 10px;
+  width: 280px;
+  height: 400px; 
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: rgb(255, 255, 255,0,9);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+            }
+            
+            .sale .box .top {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.sale .box .top .percent {
+    background-color: red;
+    color: white;
+    padding: 3px 6px;
+    border-radius: 4px;
+    font-size: 12px;
+    height: 20px;
+    margin-left: 15px;
+    align-items: center;
+    display: flex;
+}
+
+.sale .box .top .icon{
+    margin-right: 10px;
+}
+
+.sale .box .top .icon i {
+    display: block; 
+    margin-bottom: 15px; 
+    font-size: 18px;
+       cursor: pointer;
+}
+
+
+
+.sale .box .product-img {
+    height: 100%; 
+    width: 100%;
+    overflow: hidden;
+    border-radius: 5px;
+    justify-content: center;
+    display: flex;
+    margin-top: -50px;
+    margin-bottom: 30px;
+    
+}
+
+.sale .box .product-img img {
+    width: 90%;
+    height: 100%;
+    object-fit: contain; 
+}
+            .sale .box .bottom{
+                width: 90%;
+                
+            }
+                    .sale .box .bottom .name{
+                        font-size: 18px;
+  font-weight: bold;
+  
+                    }
+                    .sale .box .bottom .price{
+                        display: flex;
+  gap: 20px;
+  height: 40px;
+                    }
+                    .sale .box .bottom .price p{font-size: 18px;}
+                    .sale .box .bottom .price .cost{
+                        
+  color: #999;
+  text-decoration: line-through;
+                    }
+                    .sale .box .bottom .stars{
+                        display: flex;
+  align-items: center;
+  
+                    }
+                    .sale .box .bottom .stars i{
+                        color: #FFAD33;
+                           cursor: pointer;
+                    }
+                    .sale .box .bottom .stars .number{
+                        margin-left: 15px;
+                        font-size: 18px;
+                        color: #666;
+                    }
+
+        </style>
+
+        <!-- View All -->
+        <div class="view">
+            <a href="{{ route('products') }}">
+                <div class="box">
+                    <p>View All Products</p>
+                </div>
+            </a>
+        </div>        
+
+
+    </main>
+    <script>
+          document.addEventListener('DOMContentLoaded', () => {
+    let countdown;
+    
+    const startCountdown = (days, hours, minutes, seconds) => {
+      const now = new Date().getTime();
+      const countdownEnd = now + (days * 86400 + hours * 3600 + minutes * 60 + seconds) * 1000;
+  
+      if (countdown) {
+        clearInterval(countdown);
+      }
+  
+      countdown = setInterval(() => {
+        const now = new Date().getTime();
+        const distance = countdownEnd - now;
+  
+        const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+  
+        document.getElementById('days').textContent = String(days).padStart(2, '0');
+        document.getElementById('hours').textContent = String(hours).padStart(2, '0');
+        document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
+        document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+  
+        if (distance < 0) {
+          clearInterval(countdown);
+          document.getElementById('days').textContent = '00';
+          document.getElementById('hours').textContent = '00';
+          document.getElementById('minutes').textContent = '00';
+          document.getElementById('seconds').textContent = '00';
+        }
+      }, 1000);
+    };
+  
+    startCountdown(1, 15, 17, 55);
+  });
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #eee;
+            box-sizing: border-box;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+        }
+        main{
+            width: 100%;
+            background-color: #fff;
+            
+        }
+        
+        /* Category */
+        .categories{
+            margin-top: 30px;
+            padding: 50px;
+        }
+        .categories .header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.categories .icon {
+    position: relative;
+    width: 20px;
+    height: 40px;
+    background-color: #1400ff;
+    border-radius: 4px;
+}
+
+.categories .title {
+    color: #1400ff;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Poppins", Helvetica;
+}
+
+.categories .list .top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.categories .list .top h1{
+    font-size: 36px;
+    margin: 13px 0 0 0;
+}
+
+.categories .list .top .arrow{
+    display: flex;
+    gap: 20px;
+}
+
+.categories .list .top .arrow .fa-solid{
+    font-size: 24px;
+    background-color: rgba(245, 245, 245, 1);
+    border-radius: 50%; 
+    padding: 15px;
+}
+
+.categories .list .countdown{
+    display: flex;
+    gap: 30px;
+}
+
+.categories .list .countdown .cate-unit {
+    border-radius: 4px;
+    border: 1px solid;
+    border-color: #0000004c;
+    width: 170px;
+    height: 145px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    gap: 20px;
+}
+
+.categories .list .countdown .cate-unit label {
+    margin-top: 8px;
+    font-size: 14px;
+    color: #333;
+}
+
+
+        /* Flash Sale */
+        .flash-sales {
+            /* margin-top: 30px; */
+            padding: 50px ;
+        }
+
+.flash-sales .header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 10px;
+}
+
+.flash-sales .icon {
+    position: relative;
+    width: 20px;
+    height: 40px;
+    background-color: rgba(219, 68, 68, 1);
+    border-radius: 4px;
+}
+
+.flash-sales .title {
+    color: rgba(219, 68, 68, 1);
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    font-family: "Poppins", Helvetica;
+}
+
+.flash-sales .sales-container {
+    display: flex;
+    align-items: center;
+    gap: 87px;
+}
+
+.flash-sales .sales-container h1 {
+    font-size: 36px;
+    margin: 13px 0 0 0;
+}
+
+.flash-sales .countdown {
+    display: flex;
+    align-items: center;
+}
+
+.flash-sales .time-unit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 10px;
+}
+
+.flash-sales .number {
+    font-size: 32px;
+    font-weight: bold;
+    color: #000;
+}
+
+.flash-sales .label {
+    font-size: 12px;
+    color: #000;
+}
+
+.flash-sales .separator {
+    font-size: 30px;
+    font-weight: bold;
+    color: red;
+    margin: 0 10px;
+    margin-top: 10px;
+}
+                    .view{
+                        width: 100%;
+                        box-sizing: border-box;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        padding: 50px;
+                        margin-top: 40px;
+                    }
+                    .view a{
+                        text-decoration: none;
+                        color: #fff;
+                        text-align: center;
+                    }
+                    .view .box{
+                        padding: 5px;
+                        background-color: rgba(219, 68, 68, 1);
+                        border-radius: 4px;
+                        width: 200%;
+                        max-width: 300px;
+                        box-sizing: border-box;
+                    }
+                    .view .box:hover{
+                        background-color: rgb(166, 37, 37);
+                    } 
+
+    </style>
+</body>
+</html>
