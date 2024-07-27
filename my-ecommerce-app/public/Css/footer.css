@@ -32,7 +32,6 @@ footer .footer-about {
 }  
 
 footer .subscribe-header {  
-  display: flex;
   align-items: center; 
 }  
 
@@ -97,7 +96,7 @@ footer .copyright-text {
 }  
 
 footer .social-links {  
-  display: flex;
+  
   justify-content: flex-start; 
   margin-top: 10px;   
 }  
