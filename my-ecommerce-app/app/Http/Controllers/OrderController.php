@@ -48,12 +48,6 @@ public function store(Request $request)
     return view('admin.orders.index', compact('orders', 'totalOrders', 'totalCus', 'totalEm', 'totalPro'));
 }
 
-
-    public function show($id)
-    {
-        return view('orders.show', ['order' => Order::findOrFail($id)]);
-    }
-
     // UPDATE
     public function edit($id)
 {
@@ -95,5 +89,14 @@ public function update(Request $request, $id)
         $order->delete();
         
         return redirect()->back()->with('status', 'Order deleted successfully');
+    }
+
+    //Show
+    public function show($orderId)
+    {
+        $order = Order::with('orderDetails.product')
+                        ->findOrFail($orderId);
+
+        return view('orders.show', compact('order'));
     }
 }

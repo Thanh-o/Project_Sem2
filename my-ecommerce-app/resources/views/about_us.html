@@ -1,45 +1,122 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <title>About Us</title>
-        <meta charset="utf-8">
-        <meta charset="viewport" content="with=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="/public/Css/about.css">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
-    </head>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Page</title>
+    <link rel="stylesheet" href="./b.css">
+</head>
+
 <body>
 
-    <div class="link-bre">
-        <a href="{{ route('home') }}">Home</a>
-        <i class="fa fa-angle-right" aria-hidden="true"></i>
-        <a href="#">About</a>
+    <div class="header">
+        <h1>Payment</h1>
     </div>
 
-    <div clas="main">
-        <div class="container">
-            <div class="content-section">
-                <div class="tittle">
-                    <h1>About Us</h1>
-                </div>
-                <div class="content">
-                    <h3>Introducing T2M</h3>
-                    <p>T2M is a brand born from a gamer's dream, developed by a collective of gamers to serve the Vietnamese gaming community.
-
-                        T2M's consulting team is not simply a sales staff, we are also game lovers with the desire to help people with similar interests get the right rig and gear.</p>
-                    <div class="button">
-                        <a href="">Read More</a>
+    <div class="container">
+        <div class="content">
+            <div class="product-info">
+                <h2>Product Information</h2>
+                <div class="product-item">
+                    <img src="./quạt_tản_nhiệt.jpg" alt="Product Image">
+                    <div class="product-details">
+                        <div class="product-name">Cooling Fan</div>
+                        <div class="product-price">$100</div>
                     </div>
+                    <div class="product-quantity">x1</div>
                 </div>
-                <div class="social">
-                    <a href=""><i class="fab fa-facebook"></i></a>
-                    <a href=""><i class="fab fa-twitter"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
-                </div>
+                <div class="total-price">Total: $100</div>
             </div>
-            <div class="image-section">
-                <img src="/public/images/manh.jpg">
+
+            <div class="billing-info">
+                <h2>Buyer Information</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="fullname">Full Name</label>
+                        <input type="text" id="fullname" name="fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="address">Address</label>
+                        <input type="text" id="address" name="address" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="city">Shipping Address</label>
+                        <input type="text" id="city" name="city" required>
+                    </div>
+                </form>
+            </div>
+
+            <div class="payment-info">
+                <h2>Payment Information</h2>
+                <form>
+                    <div class="form-group">
+                        <label for="method">Payment Method</label>
+                        <select name="method" id="method" required>
+                            <option value="paycash">Pay Cash</option>
+                            <option value="deposit">Deposit</option>
+                            <option value="installment">Installment</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="installment-options" style="display: none;">
+                        <label for="installment-period">Choose Installment Period</label>
+                        <select name="installment-period" id="installment-period">
+                            <option value="1-month">3 Months</option>
+                            <option value="3-months">6 Months</option>
+                            <option value="6-months">12 Months</option>
+                        </select>
+                        <label for="deposit-amount">Choose Deposit Amount</label>
+                        <select name="deposit-amount" id="deposit-amount">
+                            <option value="10%">10%</option>
+                            <option value="20%">20%</option>
+                            <option value="30%">30%</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group" id="deposit-options" style="display: none;">
+                        <div class="form-group">
+                            <button type="button" id="bank-button">Select Bank</button>
+                            <button type="button" id="change-bank-button" style="display: none;">Change Bank</button>
+                            <input type="hidden" id="selected-bank" name="selected-bank">
+                            <div id="selected-bank-name" class="selected-bank-name">No bank selected</div>
+                        </div>
+                        <label for="cardnumber">Card Number</label>
+                        <input type="text" id="cardnumber" name="cardnumber" placeholder="Enter card number" required>
+                        <label for="cardexpiry">Expiry Date</label>
+                        <input type="text" id="cardexpiry" name="cardexpiry" placeholder="MM/YY" required>
+                        <label for="cardcvc">CVC</label>
+                        <input type="text" id="cardcvc" name="cardcvc" placeholder="CVC" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <input type="submit" value="Order">
+                    </div>
+                </form>
             </div>
         </div>
     </div>
+
+    <div id="bank-modal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h2>Select Bank</h2>
+            <ul id="bank-list">
+                <li data-bank="vietcombank">Vietcombank</li>
+                <li data-bank="techcombank">Techcombank</li>
+                <li data-bank="bidv">BIDV</li>
+                <li data-bank="vietinbank">Vietinbank</li>
+                <li data-bank="sacombank">Sacombank</li>
+                <li data-bank="acb">ACB</li>
+            </ul>
+        </div>
+    </div>
+
+<script src="./c.js"></script>
 </body>
+
 </html>

@@ -10,21 +10,29 @@ body {
     color: #333;  
     
 }  
+main{
+    overflow: hidden;
+    padding: 20px;
+}
 main .about {
     max-width: 1200px;
     margin: 40px auto;
     padding: 30px;
-    background-color: rgb(244, 244, 244);
+    background-color: rgb(239, 239, 239);
     border-radius: 10px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     display: flex;
+
 }
+
+
+
 
 main .about-text{
     padding: 20px;
 }
 
-main h1 {
+main .about h1 {
     font-size: 28px;
     color: #000;
     display: flex;
@@ -35,7 +43,7 @@ main h1 {
     margin-bottom: 20px;
 }
 
-main p {
+main .about p {
     font-size: 18px;
     line-height: 1.8;
     color: #000;
@@ -97,3 +105,109 @@ main .info p {
         width: 100%;
     }
  }
+
+/* Slider */
+.chevron {
+    position: absolute;
+    top: 50%;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.chevron .fa-solid {
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0);
+    color: #d1cdcd;
+    padding: 10px 20px;
+    cursor: pointer;
+    z-index: 1;
+    font-size: 40px;
+    border-radius: 50%;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.chevron .fa-solid:hover {
+    color: red;
+}
+
+.about-img {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.about-img .div-1, .about-img .bottom {
+    position: relative;  
+}
+
+@keyframes slideIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+.about-img .div-1 img {
+    animation: slideIn 2s ease;
+}
+
+.about-img-2 {
+    margin-bottom: 50px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    background-color: rgb(244, 244, 244);
+    padding: 60px;
+}
+
+.about-img-2 .bottom {
+    justify-content: center;
+    display: flex;
+    gap: 20px;
+    width: 100%;
+}
+
+.about-img-2 .bottom img {
+    width: 30%;
+    height: 30%;
+    border-radius: 20px;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 768px) {
+    .chevron .fa-solid {
+        font-size: 30px;
+        padding: 5px 10px;
+    }
+
+    .about-img {
+        width: 100%;
+        padding: 0 20px;
+        overflow: hidden;
+    }
+
+    .about-img .div-1, .about-img .bottom {
+        width: 100%;
+        padding: 0;
+        overflow: hidden;
+    }
+
+    .about-img .div-1 .slider-img{
+        width: 100%;
+    }
+
+    .about-img .div-1 .slider-img img,     .about-img .bottom img{
+        width: 100%;
+    }
+
+}
+
+
+

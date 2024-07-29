@@ -10,30 +10,24 @@
   href="{{ asset('images/logo_2.png') }}"
   type="image/x-icon"
   />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
   <link rel="stylesheet" href="{{ asset('Css/home.css') }}">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
+  rel="stylesheet" 
+  integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
+  crossorigin="anonymous">
+  <link rel="stylesheet" 
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+  integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+  crossorigin="anonymous" 
+  referrerpolicy="no-referrer" />
 </head>
 <body>
   @include('header')
   <main>
 
     <!-- Slider-top -->
-     <div class="top">
-        <div class="featured">
-            <div class="fea-1">
-                <img src="{{ asset('images/img/jbl-boombox-2-hero-020-x1-1-1.png') }}" />
-                <h4>Loudspeaker JBL Go 4</h4>
-                <h6>Enhance Your Music Experience.</h6>
-                <h5>Shop Now</h5>
-            </div>
-            <div class="fea-2">
-                <img src="{{ asset('images/img/ps5-slim-goedkope-playstation-large-1.png') }}" alt="">
-                <h4>PlayStation 5</h4>
-                <h6>Black and White version of the PS5 coming out on sale.</h6>
-                <h5>Shop Now</h5>
-            </div>
-            
-        </div>
+     <div class="top-web">
+
         <div class="div-1">
             <div class="slider-top">
                 <img src="{{ asset('images/img/nh-giga-1.png') }}" alt="Image 1">
@@ -150,7 +144,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -180,7 +174,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -210,7 +204,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -240,7 +234,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -270,7 +264,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -300,7 +294,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -330,7 +324,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -360,7 +354,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -390,7 +384,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -420,7 +414,7 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="/public/images/img/g92-2-500x500-1.png" />
+                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
                 </div>
                 <div class="bottom">
                     <div class="name">HAVIT HV-G92 Gamepad</div>
@@ -457,10 +451,10 @@
     </div>        
 
     <!-- Product Prominent -->
-     <div class="list">
+     <div class="pro-list">
         <div class="cate">
             <div class="component">
-                <img src="/public/images/img/image-30-2.png" />
+                <img src="{{ asset('images/img/image-30-2.png') }}" />
                 <b>Custom Build</b>
                 <a href="#">See All Products</a>
             </div>
@@ -588,7 +582,7 @@
 
         <div class="cate">
             <div class="component">
-                <img src="/public/images/img/image-30-2.png" />
+                <img src="{{ asset('images/img/image-30-2.png') }}" />
                 <b>Custom Build</b>
                 <a href="#">See All Products</a>
             </div>
@@ -714,6 +708,29 @@
             </div>
         </div>
      </div>
+
+     {{-- New Arrive --}}
+     <div class="new-arrive">
+        <div class="header">
+            <div class="icon"></div>
+            <span class="title">New Arrive</span>
+        </div>
+        <div class="featured">
+            <div class="fea-1">
+                <img src="{{ asset('images/img/jbl-boombox-2-hero-020-x1-1-1.png') }}" />
+                <h4>Loudspeaker JBL Go 4</h4>
+                <h6>Enhance Your Music Experience.</h6>
+                <h5>Shop Now</h5>
+            </div>
+            <div class="fea-2">
+                <img src="{{ asset('images/img/ps5-slim-goedkope-playstation-large-1.png') }}" alt="">
+                <h4>PlayStation 5</h4>
+                <h6>Black and White version of the PS5 coming out on sale.</h6>
+                <h5>Shop Now</h5>
+            </div> 
+        </div>
+     </div>
+
 
      <!-- Text -->
       <div class="text">

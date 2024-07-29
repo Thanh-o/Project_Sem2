@@ -169,12 +169,12 @@ Route::prefix('admin')->group(function () {
 use App\Http\Controllers\CartController;
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-Route::post('/cart/add/{product_id}', [CartController::class, 'add'])->name('cart.add');
 
-// Route::put('/cart/{cart}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
 
-Route::delete('/cart/remove/{id}', [CartController::class, 'delete'])->name('cart.remove');
+Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
 
-Route::get('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
+Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
 
-Route::post('/update-cart', 'CartController@update')->name('update.cart');
+Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
+Route::post('/cart/total', [CartController::class, 'calculateTotals'])->name('cart.calculateTotals');
