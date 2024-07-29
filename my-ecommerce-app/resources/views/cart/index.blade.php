@@ -98,12 +98,8 @@
                         @csrf
                         <div class="form">
                             <div class="group">
-                                <label for="fullName">Full Name</label>
-                                <input type="text" name="full_name" id="fullName">
-                            </div>
-                            <div class="group">
                                 <label for="phoneNumber">Phone Number</label>
-                                <input type="text" name="phone_number" id="phoneNumber" required>
+                                <input type="text" name="phone" id="phoneNumber" required>
                             </div>
                             <div class="group">
                                 <label for="deliveryAddress">Delivery Address</label>
@@ -145,8 +141,8 @@
 
                             <div class="group"  id="deposit-options" style="display: none">
                                 <div class="group">
-                                    <input type="button" id="bank-button" placeholder="Select Bank">
-                                    <input type="button" id="change-bank-button" style="display: none;" placeholder="Change Bank">
+                                    <button type="button" id="bank-button">Select Bank</button>
+                                    <input type="hidden" id="selected-bank" name="selected-bank">
                                     <div id="selected-bank-name" class="selected-bank-name">No bank selected</div>
                                 </div>
                                 <div class="group" style="margin-top: 10px">
@@ -181,7 +177,7 @@
 
             
         </div>
-        {{-- <div id="bank-modal" class="modal">
+        <div id="bank-modal" class="modal">
             <div class="modal-content">
                 <span class="close">&times;</span>
                 <h2>Select Bank</h2>
@@ -194,8 +190,8 @@
                     <li data-bank="acb">ACB</li>
                 </ul>
             </div>
-        </div> --}}
-       
+        </div>
+
         <h2 class="mt-5 mb-4" >Product List:</h2>
 
         <ul>

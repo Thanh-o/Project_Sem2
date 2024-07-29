@@ -113,10 +113,10 @@ public function checkout(Request $request)
         $order->customer_id = $request->input('customer_id', 1);
         $order->employee = 'Default Employee'; 
         $order->total_amount = $totalAmount;
-        $order->status = 'processing'; 
+        $order->status = 'Processing'; 
         $order->payment = $request->input('payment_method');
         $order->address = $request->input('delivery_address');
-        $order->delivery = $request->input('delivery_method', 'standard');
+        $order->delivery = $request->input('delivery_method');
         $order->phone = $request->input('phone_number');
         $order->save();
     

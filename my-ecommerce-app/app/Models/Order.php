@@ -14,7 +14,7 @@ class Order extends Model
     public $timestamps = false;
 
     protected $fillable = [
-        'customer_id','employee', 'total_amount', 'status', 'payment', 'created_at', 'updated_at'
+        'customer_id','employee', 'total_amount', 'status', 'payment', 'created_at', 'updated_at', 'address', 'delivery', 'phone', 'name'
     ];
 
     public function customer()
@@ -22,10 +22,6 @@ class Order extends Model
         return $this->belongsTo(Customer::class, 'customer_id', 'customer_id');
     }
 
-    // public function employee()
-    // {
-    //     return $this->belongsTo(Employee::class, 'employee_id', 'employee_id');
-    // }
     public function orderDetails()
     {
         return $this->hasMany(OrderDetail::class,'order_id','order_id');

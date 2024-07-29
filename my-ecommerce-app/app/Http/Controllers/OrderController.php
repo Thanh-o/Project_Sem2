@@ -99,4 +99,32 @@ public function update(Request $request, $id)
 
         return view('orders.show', compact('order'));
     }
+
+    //Cancel 
+    public function cancel(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 'Cancelled';
+        $order->save();
+
+        return redirect()->route('order.show', $id)->with('success', 'Order has been cancelled.');
+    }
+    //Processing
+    public function processing(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 'Processing';
+        $order->save();
+
+        return redirect()->route('order.show', $id)->with('success', 'Order has been processed.');
+    }
+    //Complete
+    public function complete(Request $request, $id)
+    {
+        $order = Order::findOrFail($id);
+        $order->status = 'Completed';
+        $order->save();
+
+        return redirect()->route('order.show', $id)->with('success', 'Successful delivery.');
+    }
 }

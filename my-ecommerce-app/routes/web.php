@@ -74,12 +74,10 @@ Route::get('employees', [EmployeeController::class, 'eindex'])->name('employees.
 
 use App\Http\Controllers\OrderController;
 
-// Route::get('orders', [OrderController::class, 'index'])->name('orders.index');
-//     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
-//     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
-//     Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
-//     Route::put('/orders/{id}', [OrderController::class, 'update'])->name('orders.update');
-//     Route::delete('/orders/{id}', [OrderController::class, 'delete'])->name('orders.delete');
+Route::put('/order/{order}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+Route::put('/order/{order}/processing', [OrderController::class, 'processing'])->name('order.process');
+Route::put('/order/{order}/complete', [OrderController::class, 'complete'])->name('order.complete');
+
 
 use App\Http\Controllers\OrderDetailController;
 
@@ -178,3 +176,6 @@ Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.c
 
 Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/total', [CartController::class, 'calculateTotals'])->name('cart.calculateTotals');
+
+
+Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
