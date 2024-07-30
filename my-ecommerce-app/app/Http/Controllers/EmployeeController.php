@@ -46,12 +46,19 @@ class EmployeeController extends Controller
     public function index()
     {
         $employees = Employee::all();
-        $totalOrders = Order::count();
         $totalCus = Customer::count();
         $totalEm = Employee::count();
         $totalPro = Product::count();
-        
-        return view('admin.employees.index', compact('employees', 'totalOrders', 'totalCus', 'totalEm', 'totalPro'));
+        $complete = Order::where('status', 'Completed')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+
+        $cancel = Order::where('status', 'Cancelled')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+        return view('admin.employees.index', compact('employees', 'complete','cancel', 'totalCus', 'totalEm', 'totalPro'));
     }
     
     // Employee

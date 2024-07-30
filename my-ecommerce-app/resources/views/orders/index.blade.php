@@ -41,28 +41,10 @@
                     <td>N/A</td>
                     {{-- <td>{{ optional($order->employee)->name ?? 'N/A' }}</td> --}}
                     <td>{{ $order->total_amount }}</td>
+                    <td>{{ $order->status }}</td>
+                    <td>{{ $order->payment }}</td>
                     <td>
-                        @php
-                            $statusLabels = [
-                                'cancelled' => 'Cancelled',
-                                'processing' => 'Processing',
-                                'completed' => 'Completed'
-                            ];
-                        @endphp
-                        {{ $statusLabels[$order->status] ?? 'N/A' }}
-                    </td>
-                    <td>
-                        @php
-                            $paymentLabels = [
-                                'paycash' => 'Pay Cash',
-                                'deposit' => 'Deposit',
-                                'installment' => 'Installment',
-                            ];
-                        @endphp
-                        {{ $paymentLabels[$order->payment] ?? 'N/A' }}
-                    </td>
-                    <td>
-                        <a href="{{ route('orders.index', $order->order_id) }}" class="btn btn-info btn-sm">View</a>
+                        <a href="{{ route('order.show', $order->order_id) }}" class="btn btn-info btn-sm">View</a>
                         <a href="{{ route('orders.edit', $order->order_id) }}" class="btn btn-primary btn-sm">Edit</a>
                         <form action="{{ route('orders.delete', $order->order_id) }}" method="POST" style="display: inline;">
                             @csrf

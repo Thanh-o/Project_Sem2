@@ -596,15 +596,33 @@
 
         <div class="container">
           <div class="page-inner">
-            <div
-              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
-            >
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
                 <h3 class="fw-bold mb-3">Dashboard</h3>
               </div>
               <div class="ms-md-auto py-2 py-md-0">
-                <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
-                <a href="#" class="btn btn-primary btn-round">Add Admin</a>
+                <a href="#" id="dateDisplay" class="btn btn-label-info btn-round me-2"></a>
+                <script>
+                  
+                  const now = new Date();
+                  
+                  
+                  const day = now.getDate();
+                  const month = now.getMonth() + 1;
+                  const year = now.getFullYear();
+                  
+                  
+                  const formattedDay = String(day).padStart(2, '0');
+                  const formattedMonth = String(month).padStart(2, '0');
+                  
+                  
+                  const dateString = `${formattedDay}-${formattedMonth}-${year}`;
+                  
+                  
+                  document.getElementById('dateDisplay').innerHTML = dateString;
+              </script>
+              
+                <a href="{{ route('orders.create') }}" class="btn btn-primary btn-round">Add Order</a>
               </div>
             </div>
             <div class="row">
@@ -658,13 +676,13 @@
                         <div
                           class="icon-big text-center icon-success bubble-shadow-small"
                         >
-                          <i class="fas fa-luggage-cart"></i>
+                        <i class="fa-solid fa-xmark"></i>
                         </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Product</a></p>
-                          <h4 class="card-title">{{ $totalPro }}</h4>
+                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Order Cancelled</a></p>
+                          <h4 class="card-title">{{ $cancel }}</h4>
                         </div>
                       </div>
                     </div>
@@ -684,8 +702,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order</a></p>
-                          <h4 class="card-title">{{ $totalOrders }}</h4>
+                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order Completed</a></p>
+                          <h4 class="card-title">{{ $complete }}</h4>
                         </div>
                       </div>
                     </div>
@@ -805,7 +823,16 @@
                                   @foreach ($customers as $customer)
                                       <div class="item-list">
                                           <div class="avatar">
-                                              <img src="{{ asset('images/2911751d962f3c69643707eed585ad04.jpg') }}" alt="..." class="avatar-img rounded-circle">
+                                              
+                                            @if($customer->image && file_exists(public_path('images/' . $customer->image)))
+                                            
+                                            <img src="{{ asset('images/' . $customer->image) }}" alt="{{ $customer->name }}" class="avatar-img rounded-circle">
+
+                                        @else
+                                            
+                                            <i class="fa-solid fa-circle-user fa-3x" style="color: #148dea"></i>
+                                        @endif
+
                                           </div>
                                           <div class="info-user ms-3">
                                               <div class="username">{{ $customer->username }}</div>
@@ -867,14 +894,7 @@
                                                   <td class="text-end">${{ $order->total_amount }}</td>
                                                   <td class="text-end">
                                                       <span class="badge badge-success">
-                                                          @php
-                                                              $statusLabels = [
-                                                                  'cancelled' => 'Cancelled',
-                                                                  'processing' => 'Processing',
-                                                                  'completed' => 'Completed'
-                                                              ];
-                                                          @endphp
-                                                          {{ $statusLabels[$order->status] ?? 'N/A' }}
+                                                          {{ $order->status }}
                                                       </span>
                                                   </td>
                                               </tr>

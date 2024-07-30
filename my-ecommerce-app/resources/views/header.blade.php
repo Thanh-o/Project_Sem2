@@ -57,7 +57,7 @@
                         <a href="#">Game</a>
                     </div>
                 </li>
-                <li><a href="#">Promotions</a></li>
+                <li><a href="{{ route('about_us') }}">About Us</a></li>
                 <li><a href="{{ route('contact') }}">Contact</a></li>
             </ul>
         </nav> 
@@ -67,10 +67,10 @@
         </div>  
         <div class="user-options">  
             <div class="cart">  
-                <a href="{{ route('cart.index') }}">  
+                {{-- <a href="{{ route('cart.index') }}">   --}}
                     <i class="fa-solid fa-cart-shopping"></i>  
                     <span class="cart-count"></span>   
-                </a>  
+                {{-- </a>   --}}
             </div> 
             <div class="user-menu">  
                 <a href="#" class="login"><i class="fa-solid fa-circle-user"></i></a>  
@@ -94,3 +94,84 @@
 </header>  
 <link rel="stylesheet" href="{{ asset('Css/header.css') }}">
 <script src="{{ asset('Js/header.js') }}"></script>
+<div class="left-cart">
+    {{-- <button class="esc-cart"><i class="fas fa-times"></i></button> --}}
+    <div class="cart-header">
+        
+        <b><i class="fa-solid fa-cart-shopping"></i> Cart</b>
+    </div>
+
+  @if ($carts->isEmpty())
+    <div class="empty-cart">
+        <p>There are no products in your cart.</p>
+        <a href="{{ route('home') }}"><b>Buy now</b></a>
+    </div>
+   @else
+
+   <div id="cart-items" class="scroll">
+    @foreach ($carts as $cart)
+        <div class="cart-item" data-cart-id="{{ $cart->id }}">
+            <div class="header-product">
+                <form action="{{ route('cart.remove', $cart->id) }}" method="POST" class="form-remove">
+                    @csrf
+                    @method('DELETE')
+                    <button class="remove-btn"><i class="fas fa-times"></i></button>
+                </form>
+                <!-- Product Image and Details -->
+                <div class="pro-img">
+                    @php
+                        $firstImage = $cart->product->images->first();
+                    @endphp
+                    @if ($firstImage)
+                        <img src="{{ asset('storage/' . $firstImage->file_path) }}" alt="Product Image" class="product-image">
+                    @else
+                        <span class="product-image-placeholder">N/A</span>
+                    @endif
+                </div>
+                <div class="item">
+                    <span class="product-name">{{ $cart->product->product_name }}</span><br>
+                    <span class="price" data-price="{{ $cart->product->price }}">
+                        ${{ (int)$cart->product->price }}
+                    </span>
+                </div>
+            </div>
+
+            <div class="header-qty">
+                <div class="qty">
+                    <button class="qty-left" data-action="decrease" data-product-id="{{ $cart->product_id }}">-</button>
+                    <input type="number" class="quantity-input" name="quantity" value="{{ $cart->quantity }}" min="1" data-product-id="{{ $cart->product_id }}">
+                    <button class="qty-right" data-action="increase" data-product-id="{{ $cart->product_id }}">+</button>
+                </div>
+            </div>
+
+            <div class="header-item">
+                <span class="unit-price">
+                    ${{ (int)($cart->product->price * $cart->quantity) }}
+                </span>
+            </div>
+        </div>
+    @endforeach
+   </div>
+
+  @endif
+   
+    <div class="payment"><a href="{{ route('cart.index') }}">Checkout</a></div>
+
+</div>
+<script>
+        let cart = document.querySelector('.left-cart');
+let iconCart = document.querySelector('.user-options .cart');
+let container = document.querySelector('body');
+let close = document.querySelector('.esc-cart');
+iconCart.addEventListener('click', () => {
+    if (cart.style.display == 'none') {
+        cart.style.display = 'block';
+    } else {
+        cart.style.display = 'none';
+    }
+});
+close.addEventListener('click', () => {
+    cart.style.right = '-45%';
+    container.style.transform = 'translateX(0)';
+});
+</script>

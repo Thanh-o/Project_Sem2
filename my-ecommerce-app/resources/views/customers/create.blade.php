@@ -14,7 +14,7 @@
         <h1>Add Customer
             <a href="{{ route('customers.index') }}" class="btn btn-primary float-end">Back</a>
         </h1>
-        <form action="{{ route('customers.store') }}" method="POST">
+        <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-3">
                 <label for="name" class="form-label">Name:</label>
@@ -45,10 +45,14 @@
                 <label for="address" class="form-label">Address:</label>
                 <textarea class="form-control" id="address" name="address"></textarea>
             </div>
+
+            <div class="mb-3">
+                <label for="image" class="form-label">Image:</label>
+                <input type="file" class="form-control" id="image" name="image">
+            </div>
+
             <button type="submit" class="btn btn-danger">Add</button>
         </form>
     </div>
-
- 
 </body>
 </html>

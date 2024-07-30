@@ -64,7 +64,7 @@
 <body>
     <div class="checkoutLayout">
         <div class="right">
-            <h1>Order No.</h1>
+            <h1>Order #</h1>
             <form action="{{ route('cart.checkout') }}" method="POST">
                 @csrf
                 <div class="form">

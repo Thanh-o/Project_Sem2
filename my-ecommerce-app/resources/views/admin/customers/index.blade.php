@@ -1,58 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-        crossorigin="anonymous">
-</head>
-<body>
-    <a href="{{ route('admin.dashboard') }}">DashBoard</a>
-    <div class="container">
-        <h1 class="mt-5 mb-4">Customer List</h1>
-        <a class="btn btn-primary mb-3" href="{{ route('customers.create') }}">Add New Customer</a>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Username</th>
-                    <th>Address</th>
-                </thead>
-                <tbody>
-                    @php $counter = 1; @endphp
-                    @foreach ($customers as $customer)
-                        <tr>
-                            <td>{{ $counter }}</td>
-                            <td>{{ $customer->name }}</td>
-                            <td>{{ $customer->email }}</td>
-                            <td>{{ $customer->phone }}</td>
-                            <td>{{ $customer->username }}</td>
-                            <td>{{ $customer->address }}</td>
-                            <td>
-                            <a href="{{ route('customers.edit', $customer->customer_id) }}" class="btn btn-sm btn-warning me-2">Edit</a>
-                        <form action="{{ route('customers.delete', $customer->customer_id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this customer?')">Delete</button>
-                        </form>
-                            </td>
-                        </tr>
-                        @php $counter++; @endphp
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    
-</body>
-</html> --}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -462,14 +407,32 @@
 
         <div class="container">
           <div class="page-inner">
-            <div
-              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
-            >
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
                 <h3 class="fw-bold mb-3">Dashboard</h3>
               </div>
               <div class="ms-md-auto py-2 py-md-0">
-                <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
+                <a href="#" id="dateDisplay" class="btn btn-label-info btn-round me-2"></a>
+                <script>
+                  
+                  const now = new Date();
+                  
+                  
+                  const day = now.getDate();
+                  const month = now.getMonth() + 1;
+                  const year = now.getFullYear();
+                  
+                  
+                  const formattedDay = String(day).padStart(2, '0');
+                  const formattedMonth = String(month).padStart(2, '0');
+                  
+                  
+                  const dateString = `${formattedDay}-${formattedMonth}-${year}`;
+                  
+                  
+                  document.getElementById('dateDisplay').innerHTML = dateString;
+              </script>
+              
                 <a href="{{ route('customers.create') }}" class="btn btn-primary btn-round">Add Customer</a>
               </div>
             </div>
@@ -524,13 +487,13 @@
                         <div
                           class="icon-big text-center icon-success bubble-shadow-small"
                         >
-                          <i class="fas fa-luggage-cart"></i>
+                        <i class="fa-solid fa-xmark"></i>
                         </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Product</a></p>
-                          <h4 class="card-title">{{ $totalPro }}</h4>
+                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Order Cancelled</a></p>
+                          <h4 class="card-title">{{ $cancel }}</h4>
                         </div>
                       </div>
                     </div>
@@ -550,8 +513,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order</a></p>
-                          <h4 class="card-title">{{ $totalOrders }}</h4>
+                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order Completed</a></p>
+                          <h4 class="card-title">{{ $complete }}</h4>
                         </div>
                       </div>
                     </div>

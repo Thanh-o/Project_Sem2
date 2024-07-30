@@ -7,8 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Cart;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\DB;
+
 
 
 class CartController extends Controller
@@ -21,42 +20,6 @@ class CartController extends Controller
 
         return view('cart.index', compact('carts', 'products'));
     }
-
-    // Add
-
-// public function addToCart(Request $request)
-// {
-//     $data = $request->json()->all();
-
-//     $request->validate([
-//         'product_id' => 'required|exists:products,product_id',
-//         'quantity' => 'required|integer|min:1'
-//     ]);
-
-//     $product = Product::findOrFail($data['product_id']);
-
-
-//     $cartItem = Cart::where('product_id', $product->product_id)->first();
-//     if ($cartItem) {
- 
-//         $cartItem->quantity += $data['quantity'];
-//         $cartItem->save();
-//     } else {
-  
-//         $cartItem = Cart::create([
-//             'product_id' => $data['product_id'],
-//             'quantity' => $data['quantity']
-//         ]);
-//     }
-
-  
-//     $cartItem->load('product'); 
-    
-//     return response()->json([
-//         'success' => true,
-//         'cartItem' => $cartItem,
-//     ], 200);
-// }
 
 public function addToCart(Request $request)
 {
@@ -103,7 +66,7 @@ public function getCartItems()
 public function checkout(Request $request)
 {
     $carts = Cart::all();
-
+    
     $totalAmount = $carts->sum(function ($cart) {
         return $cart->product->price * $cart->quantity;
     });
@@ -111,13 +74,14 @@ public function checkout(Request $request)
     try {
         $order = new Order();
         $order->customer_id = $request->input('customer_id', 1);
-        $order->employee = 'Default Employee'; 
+        $order->employee = 'Waiting'; 
         $order->total_amount = $totalAmount;
         $order->status = 'Processing'; 
         $order->payment = $request->input('payment_method');
         $order->address = $request->input('delivery_address');
         $order->delivery = $request->input('delivery_method');
         $order->phone = $request->input('phone_number');
+        $order->name = $request->input('name');
         $order->save();
     
         foreach ($carts as $cart) {
@@ -131,9 +95,9 @@ public function checkout(Request $request)
         // Clear the cart
         Cart::truncate();
 
-        return redirect()->route('admin.orders.index')->with('status', 'Order paid successfully!!!');
+        return redirect()->route('order.show', ['order' => $order->ordere_id])->with('status', 'Order paid successfully!');
     } catch (\Exception $e) {
-        return redirect()->route('admin.orders.index')->with('error', 'An error occurred while processing your order.');
+        return redirect()->route('order.show', ['order' => $order->order_id])->with('error', 'An error occurred while processing your order.');
     }
 }
 

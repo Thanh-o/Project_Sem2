@@ -8,10 +8,18 @@
     <link rel="stylesheet" href="{{ asset('Css/styles.css') }}">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" 
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" 
+    integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
+    crossorigin="anonymous" 
+    referrerpolicy="no-referrer" />
 </head>
 <body>
+    
     <div class="container">
-        <div class="forms-container">
+        
+        <div class="forms-container">          
+            
             <div class="signIn-signUp">
                 <form method="POST" action="{{ route('customers.login.submit') }}" class="sign-in-form">
                     @csrf
@@ -75,7 +83,7 @@
         <div class="panels-container">
             <div class="panel left-panel">
                 <div class="content">
-                    <h3>New here?</h3>
+                    <h3><a href="{{ route('home') }}" style="color: #fff">Home!</a></h3>
                     <p>Welcome to our platform! Please enter your username and password to access your account. If you don't have an account, you can sign up for free.</p>
                     <button class="btn transparent" id="sign-up-btn">Sign Up</button>
                 </div>

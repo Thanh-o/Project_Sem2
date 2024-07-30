@@ -9,7 +9,7 @@
   font-family: Arial, sans-serif;
 }
 
-.main {  
+main {  
   background-color: #ffffff;  
   margin-top: 50px; 
   display: flex;
@@ -177,7 +177,7 @@
 .remove-btn:hover {
   color: darkred;
 }
-
+/* 
 .cart-subtotal {  
   display: flex;  
   justify-content: space-between;  
@@ -186,7 +186,7 @@
 
 .cart-amount {  
   font-weight: bold;  
-}  
+}   */
 
 .checkout-btn a {  
   display: inline-block;  
@@ -281,7 +281,7 @@
 
 /* Medium Devices, Tablets */
 @media (max-width: 992px) {
-  .main {
+  main {
       flex-direction: column;
       align-items: center;
   }
@@ -383,3 +383,4 @@
 #change-bank-button {
   margin-left: 10px;
 }
+

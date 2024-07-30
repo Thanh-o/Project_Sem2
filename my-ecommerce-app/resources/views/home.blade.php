@@ -737,7 +737,7 @@
         <div class="text-5">
             <div class="text-1">‘’</div>
             <div class="text-2">
-                <p>Customer satisfaction is the driving force that helps T2M continuously improve, bringing more and more
+                <p>Customer satisfaction is the driving force that helps FPTTECH continuously improve, bringing more and more
                     positive values ​​to the community.&nbsp;&nbsp;&nbsp;&nbsp;<br />Today&#39;s customers are future
                     teammates! Together we spread positive values ​​to the gaming community and all technology lovers in
                     Vietnam.&#34;</p>
@@ -774,7 +774,7 @@
         </div>
        </div>
 
-</main>
+  </main>
 @include('footer')
 
 <script src="{{ asset('Js/home.js') }}"></script>

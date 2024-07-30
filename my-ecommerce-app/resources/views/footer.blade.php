@@ -35,7 +35,7 @@
           </div>
           <div class="footer-about">
               <div class="about-content">
-                  <div class="section-title">T2M</div>
+                  <div class="section-title">FPTTECH</div>
                   <p class="about-text">For a community of gamers and all technology lovers in Vietnam.</p>
               </div>
               <div class="social-links">

@@ -148,15 +148,22 @@ class ProductController extends Controller
         {
             $products = Product::with(['category', 'images'])->paginate(10);
             $newproducts = Product::latest()->take(5)->get();
-            $totalOrders = Order::count();
             $totalCus = Customer::count();
             $totalEm = Employee::count();
             $categories = Category::all();
             $totalPro = Product::count();
-            
+            $complete = Order::where('status', 'Completed')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+    
+            $cancel = Order::where('status', 'Cancelled')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
             
             $maxCateId = Category::max('cate_id') + 1;
-            return view('admin.product.index', compact('products', 'newproducts', 'totalOrders', 'totalCus', 'totalEm', 'categories', 'totalPro', 'maxCateId'));
+            return view('admin.product.index', compact('products', 'newproducts', 'complete','cancel', 'totalCus', 'totalEm', 'categories', 'totalPro', 'maxCateId'));
         }
         
         public function getProductsByCategory($cate_id)

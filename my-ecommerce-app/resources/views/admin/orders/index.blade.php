@@ -1,139 +1,3 @@
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Orders</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-</head>
-<body>
-    <a href="{{ route('admin.dashboard') }}">DashBoard</a>
-<div class="container">
-    
-    <h1 class="mt-5 mb-4">Orders</h1>
-
-    @if (session('status'))
-        <div class="alert alert-success">
-            {{ session('status') }}
-        </div>
-    @endif
-
-    <a class="btn btn-primary mb-3" href="{{ route('orders.create') }}">Add New Order</a>
-
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>ID</th>
-                <th>Customer Name</th>
-                <th>Employee Name</th>
-                <th>Total Amount</th>
-                <th>Status</th>
-                <th>Payment</th>
-                <th>Action</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach ($orders as $index => $order)
-                <tr>
-                    <td>{{ $index + 1 }}</td> 
-                    <td>{{ optional($order->customer)->name ?? 'N/A' }}</td>
-                    <td>N/A</td>
-                    
-                    <td>{{ $order->total_amount }}</td>
-                    <td>
-                        @php
-                            $statusLabels = [
-                                'cancelled' => 'Cancelled',
-                                'processing' => 'Processing',
-                                'completed' => 'Completed'
-                            ];
-                        @endphp
-                        {{ $statusLabels[$order->status] ?? 'N/A' }}
-                    </td>
-                    <td>
-                        @php
-                            $paymentLabels = [
-                                'paycash' => 'Pay Cash',
-                                'deposit' => 'Deposit',
-                                'installment' => 'Installment',
-                            ];
-                        @endphp
-                        {{ $paymentLabels[$order->payment] ?? 'N/A' }}
-                    </td>
-                    <td>
-                        <a href="{{ route('admin.orders.index', $order->order_id) }}" class="btn btn-info btn-sm">View</a>
-                        <a href="{{ route('orders.edit', $order->order_id) }}" class="btn btn-primary btn-sm">Edit</a>
-                        <form action="{{ route('orders.delete', $order->order_id) }}" method="POST" style="display: inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Are you sure you want to delete this order?')">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @endforeach
-        </tbody>
-    </table>
-</div>
-
-</body>
-</html> --}}
-
-{{-- <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Customer List</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" 
-        rel="stylesheet" 
-        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" 
-        crossorigin="anonymous">
-</head>
-<body>
-    <a href="{{ route('admin.dashboard') }}">DashBoard</a>
-    <div class="container">
-        <h1 class="mt-5 mb-4">Customer List</h1>
-        <a class="btn btn-primary mb-3" href="{{ route('customers.create') }}">Add New Customer</a>
-        <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                    <th>ID</th>
-                    <th>Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Username</th>
-                    <th>Address</th>
-                </thead>
-                <tbody>
-                    @php $counter = 1; @endphp
-                    @foreach ($customers as $customer)
-                        <tr>
-                            <td>{{ $counter }}</td>
-                            <td>{{ $customer->name }}</td>
-                            <td>{{ $customer->email }}</td>
-                            <td>{{ $customer->phone }}</td>
-                            <td>{{ $customer->username }}</td>
-                            <td>{{ $customer->address }}</td>
-                            <td>
-                            <a href="{{ route('customers.edit', $customer->customer_id) }}" class="btn btn-sm btn-warning me-2">Edit</a>
-                        <form action="{{ route('customers.delete', $customer->customer_id) }}" method="POST" style="display:inline;">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this customer?')">Delete</button>
-                        </form>
-                            </td>
-                        </tr>
-                        @php $counter++; @endphp
-                    @endforeach
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-    
-</body>
-</html> --}}
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -163,6 +27,38 @@
   .logo-header .logo img {
     border-radius: 50%;
   }
+  #pagination {
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    .page-btn {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 5px 5px;
+        font-size: 14px;
+        color: #007bff; 
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
+
+    .page-btn:hover,
+    .page-btn.active {
+        background-color: #007bff;
+        color: #ffffff; 
+        border-color: #007bff; 
+    }
+
+    .page-btn.disabled {
+        color: #6c757d; 
+        background-color: #e9ecef; 
+        border-color: #dee2e6; 
+        cursor: not-allowed; 
+    }
 </style>
   </head>
   <body>
@@ -251,14 +147,6 @@
                 
               </li>
               
-              <li class="nav-item">
-                <a href="{{ route('orderdetails.index') }}">
-                  <i class="fa-solid fa-circle-info"></i>
-                <p>Order Details Management</p>
-                </a>
-                
-              </li>
-
             </ul>
           </div>
         </div>
@@ -543,14 +431,32 @@
 
         <div class="container">
           <div class="page-inner">
-            <div
-              class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4"
-            >
+            <div class="d-flex align-items-left align-items-md-center flex-column flex-md-row pt-2 pb-4">
               <div>
                 <h3 class="fw-bold mb-3">Dashboard</h3>
               </div>
               <div class="ms-md-auto py-2 py-md-0">
-                <a href="#" class="btn btn-label-info btn-round me-2">Manage</a>
+                <a href="#" id="dateDisplay" class="btn btn-label-info btn-round me-2"></a>
+                <script>
+                  
+                  const now = new Date();
+                  
+                  
+                  const day = now.getDate();
+                  const month = now.getMonth() + 1;
+                  const year = now.getFullYear();
+                  
+                  
+                  const formattedDay = String(day).padStart(2, '0');
+                  const formattedMonth = String(month).padStart(2, '0');
+                  
+                  
+                  const dateString = `${formattedDay}-${formattedMonth}-${year}`;
+                  
+                  
+                  document.getElementById('dateDisplay').innerHTML = dateString;
+              </script>
+              
                 <a href="{{ route('orders.create') }}" class="btn btn-primary btn-round">Add Order</a>
               </div>
             </div>
@@ -605,13 +511,13 @@
                         <div
                           class="icon-big text-center icon-success bubble-shadow-small"
                         >
-                          <i class="fas fa-luggage-cart"></i>
+                        <i class="fa-solid fa-xmark"></i>
                         </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Product</a></p>
-                          <h4 class="card-title">{{ $totalPro }}</h4>
+                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Order Cancelled</a></p>
+                          <h4 class="card-title">{{ $cancel }}</h4>
                         </div>
                       </div>
                     </div>
@@ -631,8 +537,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order</a></p>
-                          <h4 class="card-title">{{ $totalOrders }}</h4>
+                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order Completed</a></p>
+                          <h4 class="card-title">{{ $complete }}</h4>
                         </div>
                       </div>
                     </div>
@@ -666,57 +572,15 @@
                                           <th scope="col" class="text-end">Action</th>
                                       </tr>
                                   </thead>
-                                  <tbody>
-                                      {{-- @php
-                                          use Carbon\Carbon;
-                                      @endphp --}}
-                                      @if (isset($orders))
-                                          @foreach ($orders as $order)
-                                              <tr>
-                                                  <th scope="row">{{ $order->order_id }}</th>
-                                                  <td>
-                                                      <a href="{{ route('orders.edit', $order->order_id) }}" style="color: #000;"><b>{{ optional($order->customer)->name ?? 'N/A' }}</b></a>
-                                                  </td>
-                                                  <td class="text-end">N/A</td>
-                                                  <td class="text-end">{{ $order->total_amount }}</td>
-                                                  <td class="text-end">
-                                                    @php
-                                                        $statusLabels = [
-                                                            'cancelled' => 'Cancelled',
-                                                            'processing' => 'Processing',
-                                                            'completed' => 'Completed'
-                                                        ];
-                                                    @endphp
-                                                    {{ $statusLabels[$order->status] ?? 'N/A' }}
-                                                  </td>
-                                                  <td class="text-end">
-                                                    @php
-                                                        $paymentLabels = [
-                                                            'paycash' => 'Pay Cash',
-                                                            'deposit' => 'Deposit',
-                                                            'installment' => 'Installment',
-                                                        ];
-                                                    @endphp
-                                                    {{ $paymentLabels[$order->payment] ?? 'N/A' }}
-                                                  </td>
-                                                  {{-- <td class="text-end">
-                                                    {{ \Carbon\Carbon::parse($customer->create_at)->format('M d, Y, g.i A') }}
-                                                  </td> --}}
-                                                  
-                                                  <td class="text-end">
-                                                      <form action="{{ route('orders.delete', $order->order_id)}}" method="POST" style="display:inline;">
-                                                          @csrf
-                                                          @method('DELETE')
-                                                          <button type="submit" class="btn btn-sm delete-button" onclick="return confirm('Are you sure you want to delete this order?')" style="padding: 0; font-size: 16px; width: 30px; height: 30px; background: none; border: none; color: red;"><i class="fa-solid fa-xmark"></i></button>
-                                                      </form>
-                                                  </td>
-                                              </tr>
-                                          @endforeach
-                                      @endif
-                     
+                                  <tbody id="orders-container">
                                   </tbody>
+ 
                               </table>
-                          </div>
+                              <div id="pagination"></div>
+
+                        </div>
+                    
+
                       </div>
                   </div>
               </div>
@@ -724,11 +588,99 @@
           
           </div>
         </div>
-
+        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+        <script>  
+          $(document).ready(function() {  
+              let currentPage = 1;  
+      
+              function loadOrders(page) {  
+                  $.ajax({  
+                      url: '/orders?page=' + page,  
+                      type: 'GET',  
+                      success: function(data) {  
+                          const orders = data.data;  
+                          $('#orders-container').empty();  
+      
+                          if (orders.length > 0) {  
+                              $.each(orders, function(index, order) {  
+                                  $('#orders-container').append(`  
+                                      <tr id="order-row-${order.order_id}">  
+                                          <th scope="row">${order.order_id}</th>  
+                                          <td>  
+                                              <a href="/order/${order.order_id}" style="color: #000;"><b>${order.customer.name}</b></a>  
+                                          </td>  
+                                          <td class="text-end">${order.employee}</td>  
+                                          <td class="text-end">${order.total_amount}</td>  
+                                          <td class="text-end">${order.status}</td>  
+                                          <td class="text-end">${order.payment}</td>  
+                                          <td class="text-end">  
+                                              <button onclick="deleteOrder(${order.order_id})" class="btn btn-sm delete-button" style="padding: 0; font-size: 16px; width: 30px; height: 30px; background: none; border: none; color: red;">  
+                                                  <i class="fa-solid fa-xmark"></i>  
+                                              </button>  
+                                          </td>  
+                                      </tr>  
+                                  `);  
+                              });  
+                          }  
+      
+                          loadPagination(data);  
+                      }  
+                  });  
+              }  
+      
+              function loadPagination(data) {  
+                  $('#pagination').empty();  
+                  const totalPages = data.last_page;  
+      
+                  for (let i = 1; i <= totalPages; i++) {  
+                      $('#pagination').append(`  
+                          <button class="page-btn" data-page="${i}">${i}</button>  
+                      `);  
+                  }  
+      
+                  $('.page-btn[data-page="' + currentPage + '"]').addClass('active');  
+              }  
+      
+              window.deleteOrder = function(orderId) {  
+                  if (!confirm('Are you sure you want to delete this order?')) {  
+                      return;  
+                  }  
+      
+                  $.ajax({  
+                      url: `/orders/${orderId}`,  
+                      type: 'DELETE',  
+                      headers: {  
+                          'X-CSRF-TOKEN': '{{ csrf_token() }}',  
+                      },  
+                      success: function() {  
+                          $(`#order-row-${orderId}`).remove();  
+                          alert('The order has been successfully deleted.');  
+                      },  
+                      error: function(xhr) {  
+                          const errorMessage = xhr.responseJSON && xhr.responseJSON.message  
+                              ? xhr.responseJSON.message  
+                              : 'An error occurred while deleting the order.';  
+                          alert(errorMessage);  
+                      }  
+                  });  
+              }  
+      
+              loadOrders(currentPage);  
+      
+              $(document).on('click', '.page-btn', function() {  
+                  currentPage = $(this).data('page');  
+                  loadOrders(currentPage);  
+                  $('.page-btn').removeClass('active');  
+                  $(this).addClass('active');   
+              });  
+          });  
+      </script>
+       
+      
 
     </div>
     <!--   Core JS Files   -->
-    <script src="{{ asset('assets/js/core/jquery-3.7.1.min.js') }}"></script>
+    <script src="assets/js/core/jquery-3.7.1.min.js"></script>
     <script src="{{ asset('assets/js/core/popper.min.js') }}"></script>
     <script src="{{ asset('assets/js/core/bootstrap.min.js') }}"></script>
     

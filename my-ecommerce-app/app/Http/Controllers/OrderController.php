@@ -7,6 +7,7 @@ use App\Models\OrderDetail;
 use App\Models\Customer;
 use App\Models\Employee;
 use App\Models\Product;
+use App\Models\Cart;
 
 class OrderController extends Controller
 {
@@ -15,17 +16,6 @@ class OrderController extends Controller
 {
     return view('orders.create', [
         'customers' => Customer::all(),
-        // 'employees' => Employee::all(),
-        'statuses' => [
-            'cancelled' => 'Cancelled',
-            'processing' => 'Processing',
-            'completed' => 'Completed',
-        ],
-        'payments' => [
-            'paycash' => 'Pay Cash',
-            'deposit' => 'Deposit',
-            'installment' => 'Installment',
-        ],
     ]);
 }
 
@@ -38,15 +28,38 @@ public function store(Request $request)
 
 
     // READ
-    public function index()
-{
-    $orders = Order::with(['customer'])->get();
-    $totalOrders = Order::count();
+
+public function index(Request $request)  
+{  
+    $orders = Order::with('customer')->paginate(10);  
+
+    if ($request->ajax()) {  
+        return response()->json($orders);  
+    }  
+
     $totalCus = Customer::count();
+
     $totalEm = Employee::count();
+
     $totalPro = Product::count();
-    return view('admin.orders.index', compact('orders', 'totalOrders', 'totalCus', 'totalEm', 'totalPro'));
+
+    $complete = Order::where('status', 'Completed')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+
+        $cancel = Order::where('status', 'Cancelled')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+
+        $cancels = Order::where('status', 'Cancelled')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year);
+        
+    return view('admin.orders.index', compact('orders',  'totalCus', 'totalEm', 'totalPro', 'complete', 'cancel' , 'cancels'));
 }
+
 
     // UPDATE
     public function edit($id)
@@ -56,17 +69,6 @@ public function store(Request $request)
     return view('orders.edit', [
         'order' => $order,
         'customers' => Customer::all(),
-        // 'employees' => Employee::all(),
-        'statuses' => [
-            'cancelled' => 'Cancelled',
-            'processing' => 'Processing',
-            'completed' => 'Completed',
-        ],
-        'payments' => [
-            'paycash' => 'Pay Cash',
-            'deposit' => 'Deposit',
-            'installment' => 'Installment',
-        ],
     ]);
 }
 
@@ -88,16 +90,18 @@ public function update(Request $request, $id)
         
         $order->delete();
         
-        return redirect()->back()->with('status', 'Order deleted successfully');
+        return response()->json(['message' => 'Order deleted successfully']);
     }
+    
 
     //Show
     public function show($orderId)
     {
         $order = Order::with('orderDetails.product')
                         ->findOrFail($orderId);
+                        $carts = Cart::all();
 
-        return view('orders.show', compact('order'));
+        return view('orders.show', compact('order', 'carts'));
     }
 
     //Cancel 

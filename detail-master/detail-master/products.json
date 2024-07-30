@@ -1,0 +1,58 @@
+[
+    {
+        "id": 1,
+        "name": "Product_01",
+        "price": 100,
+        "image": "./img/1.webp.jpg",
+        "description": "Tùy chọn tất cả Linh kiện theo nhu cầu của bạn. Linh kiện được gợi ý sẵn để tối ưu về giá tiền và hiệu năng. Tất cả linh kiện đều luôn sẵn hàng. Cam kết giá tốt nhất thị trường."
+    },
+    {
+        "id": 2,
+        "name": "Product_02",
+        "price": 100,
+        "image": "./img/2.webp.jpg",
+        "description": "Tùy chọn tất cả Linh kiện theo nhu cầu của bạn. Linh kiện được gợi ý sẵn để tối ưu về giá tiền và hiệu năng. Tất cả linh kiện đều luôn sẵn hàng. Cam kết giá tốt nhất thị trường."
+    },
+    {
+        "id": 3,
+        "name": "Product_03",
+        "price": 100,
+        "image": "./img/3.webp.jpg",
+        "description": "Tùy chọn tất cả Linh kiện theo nhu cầu của bạn. Linh kiện được gợi ý sẵn để tối ưu về giá tiền và hiệu năng. Tất cả linh kiện đều luôn sẵn hàng. Cam kết giá tốt nhất thị trường."
+    },
+    {
+        "id": 4,
+        "name": "Product_04",
+        "price": 100,
+        "image": "./img/4.webp.jpg",
+        "description": "Tùy chọn tất cả Linh kiện theo nhu cầu của bạn. Linh kiện được gợi ý sẵn để tối ưu về giá tiền và hiệu năng. Tất cả linh kiện đều luôn sẵn hàng. Cam kết giá tốt nhất thị trường."
+    },
+    {
+        "id": 5,
+        "name": "Product_05",
+        "price": 100,
+        "image": "./img/5.webp.jpg",
+        "description": "Tùy chọn tất cả Linh kiện theo nhu cầu của bạn. Linh kiện được gợi ý sẵn để tối ưu về giá tiền và hiệu năng. Tất cả linh kiện đều luôn sẵn hàng. Cam kết giá tốt nhất thị trường."
+    },
+    {
+        "id": 6,
+        "name": "Product_06",
+        "price": 100,
+        "image": "./img/6.webp.jpg",
+        "description": "Tùy chọn tất cả Linh kiện theo nhu cầu của bạn. Linh kiện được gợi ý sẵn để tối ưu về giá tiền và hiệu năng. Tất cả linh kiện đều luôn sẵn hàng. Cam kết giá tốt nhất thị trường."
+    },
+    {
+        "id": 7,
+        "name": "Product_07",
+        "price": 100,
+        "image": "./img/7.webp.png",
+        "description": "Tùy chọn tất cả Linh kiện theo nhu cầu của bạn. Linh kiện được gợi ý sẵn để tối ưu về giá tiền và hiệu năng. Tất cả linh kiện đều luôn sẵn hàng. Cam kết giá tốt nhất thị trường."
+    },
+    {
+        "id": 8,
+        "name": "Product_08",
+        "price": 100,
+        "image": "./img/8.webp.png",
+        "description": "Tùy chọn tất cả Linh kiện theo nhu cầu của bạn. Linh kiện được gợi ý sẵn để tối ưu về giá tiền và hiệu năng. Tất cả linh kiện đều luôn sẵn hàng. Cam kết giá tốt nhất thị trường."
+    }
+]

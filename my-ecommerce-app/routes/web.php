@@ -19,22 +19,10 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
 Route::get('products', [ProductController::class, 'indexp'])->name('products');
-// Route::get('products', [ProductController::class, 'index'])->name('products.index');
-// Route::get('/products/create', [ProductController::class, 'create'])->name('products.create');
-//     Route::post('/products', [ProductController::class, 'store'])->name('products.store');
-//     Route::get('/products/{id}/edit', [ProductController::class, 'edit'])->name('products.edit');
-//     Route::put('/products/{id}', [ProductController::class, 'update'])->name('products.update');
-//     Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('products.delete');
-//     Route::delete('/products/delete-image/{id}', [ProductController::class, 'deleteImage'])->name('products.deleteImage');
 
 use App\Http\Controllers\CustomerController;
 
 Route::get('/customers', [CustomerController::class, 'cindex'])->name('customers.index');
-// Route::get('/customers/create', [CustomerController::class, 'create'])->name('customers.create');
-// Route::post('/customers', [CustomerController::class, 'store'])->name('customers.store');
-// Route::get('/customers/{id}/edit', [CustomerController::class, 'edit'])->name('customers.edit');
-// Route::put('/customers/{id}', [CustomerController::class, 'update'])->name('customers.update');
-// Route::delete('/customers/{id}', [CustomerController::class, 'delete'])->name('customers.delete');
 Route::prefix('customers')->group(function () {
     Route::get('login', [CustomerController::class, 'showLoginForm'])->name('customers.login');
     Route::post('login', [CustomerController::class, 'login'])->name('customers.login.submit');
@@ -44,7 +32,6 @@ Route::prefix('customers')->group(function () {
     Route::post('signup', [CustomerController::class, 'signup'])->name('customers.signup.submit');
 
     Route::middleware('customers')->group(function () {
-        // Route::get('/', [CustomerController::class, 'dashboard'])->name('customers.dashboard');
     });
 });
 
@@ -58,19 +45,9 @@ Route::get('/contact', [HomeController::class, 'contact'])->name('contact');
 Route::get('/about_us', [HomeController::class, 'about_us'])->name('about_us');
 
 
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
-
 use App\Http\Controllers\EmployeeController;
 
 Route::get('employees', [EmployeeController::class, 'eindex'])->name('employees.index');
-// Route::get('/employees/create', [EmployeeController::class, 'create'])->name('employees.create');
-// Route::post('/employees', [EmployeeController::class, 'store'])->name('employees.store');
-// Route::get('/employees/{id}/edit', [EmployeeController::class, 'edit'])->name('employees.edit');
-// Route::put('/employees/{id}', [EmployeeController::class, 'update'])->name('employees.update');
-// Route::delete('/employees/{id}', [EmployeeController::class, 'delete'])->name('employees.delete');
-
 
 use App\Http\Controllers\OrderController;
 
@@ -80,29 +57,6 @@ Route::put('/order/{order}/complete', [OrderController::class, 'complete'])->nam
 
 
 use App\Http\Controllers\OrderDetailController;
-
-// Route::get('/orderdetails', [OrderDetailController::class, 'index'])->name('orderdetails.index');
-// Route::get('/orderdetails/create', [OrderDetailController::class, 'create'])->name('orderdetails.create');
-// Route::post('/orderdetails', [OrderDetailController::class, 'store'])->name('orderdetails.store');
-// Route::get('/orderdetails/{id}/edit', [OrderDetailController::class, 'edit'])->name('orderdetails.edit');
-// Route::put('/orderdetails/{id}', [OrderDetailController::class, 'update'])->name('orderdetails.update');
-// Route::delete('/orderdetails/{id}', [OrderDetailController::class, 'delete'])->name('orderdetails.delete');
-
-// use App\Http\Controllers\AuthController;
-
-// Route::get('/auth', [AuthController::class, 'showForm'])->name('auth.form');
-// Route::post('/signin', [AuthController::class, 'signIn'])->name('signin');
-// Route::post('/signup', [AuthController::class, 'signUp'])->name('signup');
-
-// Route::get('home', function () {
-//     return view('home');
-// });
-
-//Category
-// Route::get('/categories', [ProductController::class, 'indexcate'])->name('categories.index');
-// Route::post('/categories', [ProductController::class, 'addcate'])->name('categories.store');
-// Route::put('/categories/{id}', [ProductController::class, 'editcate'])->name('categories.update');
-// Route::delete('/categories/{id}', [ProductController::class, 'deletecate'])->name('categories.delete');
 
 
 use App\Http\Controllers\AdminController;
@@ -117,6 +71,7 @@ Route::prefix('admin')->group(function () {
     });
     // Order Management
     Route::get('orders', [OrderController::class, 'index'])->name('admin.orders.index');
+    
     Route::get('/orders/create', [OrderController::class, 'create'])->name('orders.create');
     Route::post('/orders', [OrderController::class, 'store'])->name('orders.store');
     Route::get('/orders/{id}/edit', [OrderController::class, 'edit'])->name('orders.edit');
@@ -167,15 +122,11 @@ Route::prefix('admin')->group(function () {
 use App\Http\Controllers\CartController;
 
 Route::get('/cart', [CartController::class, 'index'])->name('cart.index');
-
 Route::post('/cart/add', [CartController::class, 'addToCart'])->name('cart.add');
-
 Route::delete('/cart/remove/{id}', [CartController::class, 'remove'])->name('cart.remove');
-
 Route::post('/cart/checkout', [CartController::class, 'checkout'])->name('cart.checkout');
-
 Route::post('/cart/update/{product}', [CartController::class, 'update'])->name('cart.update');
 Route::post('/cart/total', [CartController::class, 'calculateTotals'])->name('cart.calculateTotals');
 
-
 Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
+Route::get('/orders', [OrderController::class, 'index']);

@@ -46,20 +46,33 @@ class AdminController extends Controller
     {
         $customers = $this->getNewCustomers();
         $orders = $this->getNewOrders();
-        $totalOrders = Order::count();
         $totalCus = Customer::count();
         $totalEm = Employee::count();
         $totalPro = Product::count();
-        // $products = $this->pindex();
+        
+        $complete = Order::where('status', 'Completed')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+
+        $cancel = Order::where('status', 'Cancelled')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+        $cancels = Order::where('status', 'Cancelled')
+        ->whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->get();
 
         return view('admin.dashboard', [
             'customers' => $customers,
             'orders' => $orders,
-            'totalOrders' => $totalOrders,
+            'complete' => $complete,
+            'cancel' => $cancel,
             'totalCus' => $totalCus,
             'totalEm' => $totalEm,
             'totalPro' => $totalPro,
-            // 'products' => $products,
+            'cancels' => $cancels,
         ]);
     }
 

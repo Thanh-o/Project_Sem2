@@ -18,11 +18,19 @@ class CustomerController extends Controller
         public function index()
         {
             $customers = Customer::all();
-            $totalOrders = Order::count();
             $totalCus = Customer::count();
             $totalEm = Employee::count();
             $totalPro = Product::count();
-            return view('admin.customers.index', compact('customers', 'totalOrders', 'totalCus', 'totalEm', 'totalPro'));
+            $complete = Order::where('status', 'Completed')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+    
+            $cancel = Order::where('status', 'Cancelled')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+            return view('admin.customers.index', compact('customers', 'complete','cancel', 'totalCus', 'totalEm', 'totalPro'));
         }
         
         public function cindex()
@@ -37,22 +45,45 @@ class CustomerController extends Controller
             return view('customers.create');
         }
     
+ 
+        
         public function store(Request $request)
         {
-            $data = $request->only(['name', 'email', 'phone', 'username', 'password', 'address']);
-    
-            $data['password'] = Hash::make($data['password']);
-    
-            Customer::create($data);
-    
-            if (Session::has('admin_logged_in') && Session::get('admin_logged_in') === true) {
             
+            $request->validate([
+                'name' => 'required|string|max:255',
+                'email' => 'required|email|unique:customers,email',
+                'phone' => 'nullable|string|max:20',
+                'username' => 'required|string|min:6|max:50|unique:customers,username',
+                'password' => 'required|string|min:6',
+                'address' => 'nullable|string',
+                'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
+            ]);
+        
+            $data = $request->only(['name', 'email', 'phone', 'username', 'password', 'address']);
+            
+            
+            $data['password'] = Hash::make($data['password']);
+        
+            
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $imageName = time() . '.' . $image->getClientOriginalExtension();
+                $image->move(public_path('images'), $imageName);
+                $data['image'] = $imageName; 
+            }
+        
+            
+            Customer::create($data);
+        
+            
+            if (Session::has('admin_logged_in') && Session::get('admin_logged_in') === true) {
                 return redirect()->route('admin.customers.index')->with('status', 'Customer added successfully');
             } else {
-                
                 return redirect()->route('customers.index')->with('status', 'Customer added successfully');
             }
         }
+        
     
         // UPDATE
         public function edit($id)
@@ -94,7 +125,8 @@ class CustomerController extends Controller
     // Show signup form
     public function showSignupForm()
     {
-        return view('customers.signup');
+        $carts = Cart::all();
+        return view('customers.signup', compact('carts'));
     }
 
     // Sign up
@@ -117,7 +149,8 @@ class CustomerController extends Controller
     // Show login form
     public function showLoginForm()
     {
-        return view('customers.login');
+        $carts = Cart::all();
+        return view('customers.login', compact('carts'));
     }
 
     // Login

@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const csrfToken = document.querySelector('meta[name="csrf-token"]').getAttribute('content');
 
+
+
     function updateCartTotal() {
         let totalQuantity = 0;
         let totalPrice = 0;
@@ -189,7 +191,6 @@ document.querySelectorAll('#bank-list li').forEach(function(bankItem) {
         var bankButton = document.getElementById('bank-button');
         var selectedBankName = document.getElementById('selected-bank-name');
         
-        // bankButton.textContent = 'Select Bank : ' + bankItem.textContent;
         selectedBankName.textContent = 'Selected Bank : ' + bankItem.textContent;
         
         document.getElementById('selected-bank').value = selectedBank;

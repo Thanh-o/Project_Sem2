@@ -38,7 +38,7 @@
                 <h1>Welcome to FPTTECH - Your Premier Technology Shopping Destination</h1>
                 <p>At FPTTECH, we believe that online shopping should be a simple and enjoyable experience. Established since 2001, we have been providing high-quality products from reputable brands worldwide.</p>
                 <p>Our team consists of experts with many years of experience in e-commerce. We are always ready to listen and support you throughout your shopping journey.</p>
-                <p>Come and explore our unique collection and enjoy a wonderful shopping experience at.</p>
+                <p>Come and explore our unique collection and enjoy a wonderful shopping experience.</p>
                 <div class="founder"> 
                     "Customers are always the driving force for us to continuously improve and develop. We are committed to delivering the best technology products and perfect services to our customers."
                 </div>
