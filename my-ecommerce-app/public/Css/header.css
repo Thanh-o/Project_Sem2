@@ -6,6 +6,7 @@ header {
   
 }  
 
+
 header .header {  
   display: flex;  
   align-items: center;  
@@ -197,29 +198,54 @@ header .user-menu {
   background-color: #1b7e9f;
   padding: 10px 20px;
   border-radius: 4px;
+  
 }  
 
-header .user-options .fa-solid {  
+.dropdown-content::before {
+  content: "";
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+  margin-left: 75%;
+  top: -10px;
+  position: absolute;
+
+ }
+
+.user-options .fa-solid {  
   font-size: 20px;  
   color: #fff;  
   
 }  
 
 
-header .dropdown-content {  
-  display: none;  
-  position: absolute;  
+.dropdown-content {
+  opacity: 0;
+  transform: translateY(-10px);
   background-color: #fff;  
-  min-width: 250px;  
+  width: 25%;  
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);  
-  z-index: 1;  
-  right: 0px;
-  top: 40;
   padding: 20px;
   border-radius: 8px;
-}  
+  overflow: visible;
+  position: fixed;
+  top: 100px;
+  height: 20vh;
+  z-index: 1000; 
+  right: 5%;
+transition: opacity 0.4s ease, transform 0.4s ease;
+  display: none; 
+}
 
-header .hello{
+
+.dropdown-content.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0); 
+}
+
+
+.hello{
   display: flex;
   align-items: center;
   gap: 20px;
@@ -229,28 +255,25 @@ header .hello{
 
 
 
-header .login-bottom{
+.login-bottom{
   display: flex;
   justify-content: center;
   gap: 20px;
   margin-top: 30px;
 }
-
-header .login-bottom a{
+.login-bottom a{
   width: 150px;
   
   text-align: center;
 }
-
-header .login-box{
+.login-box{
   background-color: #000;
   border-radius: 4px;
   color: #fff;
   border: 1px solid #000;
 }
 
-
-header .signup-box{
+.signup-box{
   background-color: #fff;
   border-radius: 4px;
   color: #000;
@@ -258,12 +281,7 @@ header .signup-box{
 }
 
 
-
-header .user-menu:hover .dropdown-content {  
-  display: block;  
-}  
-
-header .dropdown-content a {  
+.dropdown-content a {  
   
   padding: 12px 16px;  
   text-decoration: none;  
@@ -312,7 +330,10 @@ header .cart-count {
     font-size: 18px; 
     cursor: pointer;
     font-weight: 700;
+    
+
   }
+  
 
   header .navigation-bar {
     display: none;
@@ -320,10 +341,16 @@ header .cart-count {
 
   header .bar-menu {
     display: none;
-    position: absolute;  
     font-size: 15px;
+    overflow: visible;
+z-index: 1000; 
+height: 70vh;
+position: fixed;
+
   }
 
+
+  
   header .bar-menu ul {
     flex-direction: column;
     background-color: #fff;  
@@ -333,9 +360,7 @@ header .cart-count {
     border-radius: 8px;
   }
 
-  header .menu:hover .bar-menu {  
-    display: block;  
-  }
+
 
   header .bar-menu ul li {
     position: relative;
@@ -422,7 +447,8 @@ header .cart-count {
   cursor: pointer;
 }
 .left-cart {
-  display: none;
+  opacity: 0;
+  transform: translateX(20px); 
   position: fixed;
   top: 100px;
   height: 70vh;
@@ -430,13 +456,31 @@ header .cart-count {
   padding: 20px;  
   background-color: #fff;  
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);  
-  overflow: hidden;
-  transition: right 1s;
   z-index: 1000; 
-  right: 220px;
+  right: 155px;
   border-radius: 8px;
+  overflow: visible;
+  transition: opacity 0.3s ease, transform 0.3s ease; 
+  display: none;
 }
 
+.left-cart.show {
+  display: block;
+  opacity: 1;
+  transform: translateX(0);
+}
+
+
+.left-cart::before{
+  content: "";
+  position: absolute;
+  border-width: 0 10px 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent white transparent;
+  left: 90%;
+  top: -10px;
+  
+}
 
 .left-cart .empty-cart {
   text-align: center;

@@ -1,10 +1,23 @@
 footer {  
-  /* background-color: #4A90E2;  */
+  
   background: linear-gradient(135deg, #6f86d6, #48c6ef); 
   color: #fff; 
   padding: 40px 20px;
   margin-top: 100px; 
+  position: relative;
+  
 }  
+.footer::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+a {
+    pointer-events: auto; /* Đảm bảo liên kết có thể nhấp được */
+    z-index: auto; /* Đảm bảo không bị chồng lên bởi các phần tử khác */
+}
+
 
 footer .footer {  
   max-width: 1200px; 

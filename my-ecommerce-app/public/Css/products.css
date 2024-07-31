@@ -1,0 +1,251 @@
+body{
+    background-color: #fff;
+}
+
+main{
+    width: 100%;
+    overflow: hidden;
+}
+
+main .top{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    box-shadow: 0 0 10px #ddd;
+    background-color: #fff;
+    position: relative;
+    width: 100%;
+    padding: 10px;
+}
+
+main .top b{
+    color: #c45500;
+}
+
+main .section{
+    display: flex;
+    gap: 10px;
+}
+
+main .left{
+    width: 15%;
+    padding: 10px;
+    border-right: 1px solid #ddd;
+}
+
+
+
+main .left .category{
+}
+
+main .right{
+    width: 80%;
+    padding: 10px;
+}
+main .right .product-list {
+    border-bottom: 1px solid #999;
+}
+
+main .right .product-card {
+    display: flex;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    margin-bottom: 10px;
+}
+
+main .right .product-image {
+    width: 250px;
+    height: 250px;
+    
+    overflow: hidden;
+    border-radius: 8px;
+    margin-right: 20px;
+    position: relative;
+    background-color: #fff;
+}
+
+main .right .product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain; 
+    object-position: center;
+    display: block;
+    max-width: 100%;
+    max-height: 100%;
+}
+
+main .right .product-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    max-width: 60%;
+}
+
+main .right .product-title {
+    font-size: 1.2em;
+    margin: 0 0 10px;
+    line-height: 1.4;
+    height: 2.8em; 
+    overflow: hidden; 
+    text-overflow: ellipsis; 
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical; 
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+main .right .product-title a{
+    color: #000;
+    text-decoration: none;
+}
+
+main .right .product-rating {
+    color: #f39c12;
+}
+
+main .right .stars {
+    margin-right: 5px;
+}
+
+main .right .rating-count {
+    color: #555;
+}
+
+main .right .product-info {
+    color: #555;
+}
+
+main .right .product-price {
+    font-size: 1.5em;
+}
+
+main .right .current-price {
+    color: #e91e63;
+    font-weight: bold;
+}
+
+main .right .old-price {
+    color: #999;
+    text-decoration: line-through;
+    margin-left: 10px;
+}
+
+main .right .delivery-info {
+    font-size: 0.9em;
+    color: #555;
+}
+
+main .right .add-to-cart {
+    background-color: #28a745;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1em;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    width: 140px;
+}
+
+main .right .add-to-cart:hover {
+    background-color: #218838;
+}
+
+main .right .product-view {
+    display: flex;
+    width: 100%;
+    gap: 30px;
+}
+
+main .right .product-view .card img {
+    min-width: 300px;
+    max-width: 360px;
+}
+
+main .right .img-orther {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+main .right .img-orther img {
+    max-width: 60%;
+    border: 1px solid #ddd;
+}
+
+/* Media queries */
+@media (max-width: 768px) {
+    main .top {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 10px;
+    }
+
+    main .section {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    main .left, main .right {
+        width: 100%;
+        padding: 0;
+        border: none;
+    }
+
+    main .left {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+    }
+
+    main .right .product-card {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    main .right .product-image, main .right .product-details {
+        width: 100%;
+        margin-right: 0;
+        max-width: 100%;
+    }
+
+    main .right .product-title {
+        font-size: 1em;
+    }
+
+    main .right .product-price {
+        font-size: 1.2em;
+    }
+
+    main .right .add-to-cart {
+        width: 100%;
+    }
+    main .right .product-view {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    main .right .product-view .card {
+        width: 100%;
+        max-width: 100%;
+        margin-bottom: 20px;
+    }
+
+    main .right .product-view .card img {
+        width: 100%;
+        max-width: 100%;
+    }
+
+    main .right .img-orther img {
+        max-width: 100%;
+        width: 80%;
+        border: 1px solid #ddd;
+    }
+}

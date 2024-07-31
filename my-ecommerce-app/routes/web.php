@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProductController;
 
 Route::get('products', [ProductController::class, 'indexp'])->name('products');
+Route::get('/products/{id}', [ProductController::class, 'show'])->name('products.show');
+
 
 use App\Http\Controllers\CustomerController;
 
@@ -36,6 +38,9 @@ Route::prefix('customers')->group(function () {
 });
 
 Route::get('/dashboard', [CustomerController::class, 'dashboard'])->name('customers.dashboard');
+
+Route::get('/active-users', [CustomerController::class, 'showActiveUsers'])->name('active.users');  
+
 
 use App\Http\Controllers\HomeController;
 
@@ -91,9 +96,11 @@ Route::prefix('admin')->group(function () {
     Route::post('/product', [ProductController::class, 'astore'])->name('admin.product.store');
     Route::get('/product/{id}/edit', [ProductController::class, 'aedit'])->name('admin.product.edit');
     Route::put('/product/{id}', [ProductController::class, 'aupdate'])->name('admin.product.update');
-    Route::delete('/products/{id}', [ProductController::class, 'adelete'])->name('admin.product.delete');
+    Route::delete('/products/{id}', [ProductController::class, 'delete'])->name('admin.product.delete');
     Route::delete('/products/delete-image/{id}', [ProductController::class, 'adeleteImage'])->name('admin.product.deleteImage');
     Route::get('/{cate_id}/products', [ProductController::class, 'getProductsByCategory'])->name('admin.category');
+    Route::get('/product/favorite', [ProductController::class, 'getFavoriteProducts']);
+
     
 
     //Employee Managent    
@@ -130,3 +137,5 @@ Route::post('/cart/total', [CartController::class, 'calculateTotals'])->name('ca
 
 Route::get('/order/{order}', [OrderController::class, 'show'])->name('order.show');
 Route::get('/orders', [OrderController::class, 'index']);
+
+Route::get('/api/customers-online', [CustomerController::class,'getCustomersOnline']);

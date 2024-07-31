@@ -530,7 +530,7 @@
                   <div class="card card-round">
                       <div class="card-header">
                           <div class="card-head-row card-tools-still-right">
-                              <div class="card-title">Employee List</div>
+                              <div class="card-title">Customer List</div>
                       
                           </div>
                       </div>

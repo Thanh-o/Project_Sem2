@@ -70,9 +70,6 @@
                 <i class="gg-menu-left"></i>
               </button>
             </div>
-            {{-- <button class="topbar-toggler more">
-              <i class="gg-more-vertical-alt"></i>
-            </button> --}}
           </div>
           <!-- End Logo Header -->
         </div>
@@ -80,14 +77,6 @@
           <div class="sidebar-content">
             <ul class="nav nav-secondary">
               <li class="nav-item active">
-                {{-- <a
-                  data-bs-toggle="collapse"
-                  href="{{ route('admin.dashboard') }}"
-                  class="collapsed"
-                  aria-expanded="false"
-                >
-                  <i class="fas fa-home"></i>
-                  <p>Dashboard</p> --}}
                   <a href="{{ route('admin.dashboard') }}"><i class="fas fa-home"></i><p>Dashboard</p></a>  
               </li>
               <li class="nav-section">
@@ -125,13 +114,7 @@
                 </a>
                 
               </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.product.category') }}">
-                    <i class="fa-solid fa-list"></i>
-                <p>Category Management</p>
-                </a>
-                
-              </li>
+
               <li class="nav-item">
                 <a href="{{ route('cart.index') }}">
                   <i class="fa-solid fa-cart-shopping"></i>
@@ -139,72 +122,6 @@
                 </a>
                 
               </li>
-              
-              <li class="nav-item">
-                <a href="{{ route('orderdetails.index') }}">
-                  <i class="fa-solid fa-circle-info"></i>
-                <p>Order Details Management</p>
-                </a>
-                
-              </li>
-              <!--<li class="nav-item">
-                <a href="widgets.html">
-                  <i class="fas fa-desktop"></i>
-                  <p>Widgets</p>
-                  <span class="badge badge-success">4</span>
-                </a>
-              </li> -->
-              <!-- <li class="nav-item">
-                <a data-bs-toggle="collapse" href="#submenu">
-                  <i class="fas fa-bars"></i>
-                  <p>Menu Levels</p>
-                  <span class="caret"></span>
-                </a>
-                <div class="collapse" id="submenu">
-                  <ul class="nav nav-collapse">
-                    <li>
-                      <a data-bs-toggle="collapse" href="#subnav1">
-                        <span class="sub-item">Level 1</span>
-                        <span class="caret"></span>
-                      </a>
-                      <div class="collapse" id="subnav1">
-                        <ul class="nav nav-collapse subnav">
-                          <li>
-                            <a href="#">
-                              <span class="sub-item">Level 2</span>
-                            </a>
-                          </li>
-                          <li>
-                            <a href="#">
-                              <span class="sub-item">Level 2</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li>
-                      <a data-bs-toggle="collapse" href="#subnav2">
-                        <span class="sub-item">Level 1</span>
-                        <span class="caret"></span>
-                      </a>
-                      <div class="collapse" id="subnav2">
-                        <ul class="nav nav-collapse subnav">
-                          <li>
-                            <a href="#">
-                              <span class="sub-item">Level 2</span>
-                            </a>
-                          </li>
-                        </ul>
-                      </div>
-                    </li>
-                    <li>
-                      <a href="#">
-                        <span class="sub-item">Level 1</span>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
-              </li>-->
             </ul>
           </div>
         </div>
@@ -639,7 +556,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.customers.index') }}" style="color: #8d9498">Customers</a></p>
+                          <p class="card-category"><a href="{{ route('admin.customers.index') }}" style="color: #8d9498">Customer</a></p>
                           <h4 class="card-title">{{ $totalCus }}</h4>
                         </div>
                       </div>
@@ -660,7 +577,7 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Employees</p>
+                          <p class="card-category"><a href="{{ route('admin.employees.index') }}" style="color: #8d9498">Employee</a></p>
                           <h4 class="card-title">{{ $totalEm }}</h4>
                         </div>
                       </div>
@@ -676,13 +593,13 @@
                         <div
                           class="icon-big text-center icon-success bubble-shadow-small"
                         >
-                        <i class="fa-solid fa-xmark"></i>
+                        <i class="fa-solid fa-cart-shopping"></i>
                         </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Order Cancelled</a></p>
-                          <h4 class="card-title">{{ $cancel }}</h4>
+                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Product</a></p>
+                          <h4 class="card-title">{{ $totalPro }}</h4>
                         </div>
                       </div>
                     </div>
@@ -702,8 +619,8 @@
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order Completed</a></p>
-                          <h4 class="card-title">{{ $complete }}</h4>
+                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order</a></p>
+                          <h4 class="card-title">{{ $totalOrder }}</h4>
                         </div>
                       </div>
                     </div>
@@ -711,7 +628,7 @@
                 </div>
               </div>
             </div>
-            {{-- <div class="row">
+            <div class="row">
               <div class="col-md-8">
                 <div class="card card-round">
                   <div class="card-header">
@@ -749,54 +666,33 @@
                   <div class="card-header">
                     <div class="card-head-row">
                       <div class="card-title">Daily Sales</div>
-                      <div class="card-tools">
-                        <div class="dropdown">
-                          <!--<button
-                            class="btn btn-sm btn-label-light dropdown-toggle"
-                            type="button"
-                            id="dropdownMenuButton"
-                            data-bs-toggle="dropdown"
-                            aria-haspopup="true"
-                            aria-expanded="false"
-                          >
-                            Export
-                          </button>-->
-                          <div
-                            class="dropdown-menu"
-                            aria-labelledby="dropdownMenuButton"
-                          >
-                            <a class="dropdown-item" href="#">Action</a>
-                            <a class="dropdown-item" href="#">Another action</a>
-                            <a class="dropdown-item" href="#"
-                              >Something else here</a
-                            >
-                          </div>
-                        </div>
-                      </div>
                     </div>
-                    <div class="card-category">March 25 - April 02</div>
+                    <div class="card-category">{{ $startDate->format('F d'); }} - {{ $endDate->format('F d'); }}</div>
                   </div>
                   <div class="card-body pb-0">
                     <div class="mb-4 mt-2">
-                      <h1>$4,578.58</h1>
+                      <h1>$ {{ number_format($totalamount, 0) }}</h1>
                     </div>
                     <div class="pull-in">
                       <canvas id="dailySalesChart"></canvas>
                     </div>
                   </div>
                 </div>
-                <div class="card card-round">
-                  <div class="card-body pb-0">
-                    <div class="h1 fw-bold float-end text-primary">+5%</div>
-                    <h2 class="mb-2">17</h2>
-                    <p class="text-muted">Users online</p>
-                    <div class="pull-in sparkline-fix">
-                      <div id="lineChart"></div>
-                    </div>
-                  </div>
-                </div>
+                <div class="card card-round">  
+                  <div class="card-body pb-0">  
+                      <div class="h1 fw-bold float-end text-primary">+5%</div>  
+                      <h2 class="mb-2">{{ $activeUsersCount }}</h2> 
+                      <p class="text-muted">User Online</p>  
+                      <div class="pull-in sparkline-fix">  
+                          <div id="lineChart"></div>  
+                      </div>  
+                  </div>  
               </div>
-            </div> --}}
+                
+
+                
+              </div>
+            </div>
             <div class="row">
             </div>
             <div class="row">
@@ -805,18 +701,6 @@
                       <div class="card-body">
                           <div class="card-head-row card-tools-still-right">
                               <div class="card-title">New Customers</div>
-                              <div class="card-tools">
-                                  <div class="dropdown">
-                                      <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          <i class="fas fa-ellipsis-h"></i>
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Action</a>
-                                          <a class="dropdown-item" href="#">Another action</a>
-                                          <a class="dropdown-item" href="#">Something else here</a>
-                                      </div>
-                                  </div>
-                              </div>
                           </div>
                           <div class="card-list py-4">
                               @if (isset($customers))
@@ -850,18 +734,7 @@
                       <div class="card-header">
                           <div class="card-head-row card-tools-still-right">
                               <div class="card-title">Transaction History</div>
-                              <div class="card-tools">
-                                  <div class="dropdown">
-                                      <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          <i class="fas fa-ellipsis-h"></i>
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Action</a>
-                                          <a class="dropdown-item" href="#">Another action</a>
-                                          <a class="dropdown-item" href="#">Something else here</a>
-                                      </div>
-                                  </div>
-                              </div>
+
                           </div>
                       </div>
                       <div class="card-body p-0">
@@ -911,223 +784,28 @@
           </div>
         </div>
 
-         <!--<footer class="footer">
+         <footer class="footer">
           <div class="container-fluid d-flex justify-content-between">
             <nav class="pull-left">
               <ul class="nav">
                 <li class="nav-item">
-                  <a class="nav-link" href="#"> Help </a>
+                  {{-- <a class="nav-link" href="#"> Help </a> --}}
                 </li>
                 <li class="nav-item">
-                  <a class="nav-link" href="#"> Licenses </a>
+                  {{-- <a class="nav-link" href="#"> Licenses </a> --}}
                 </li>
               </ul>
             </nav>
             <div class="copyright">
-              2024, made with <i class="fa fa-heart heart text-danger"></i> by
-              <a href="http://www.themekita.com">ThemeKita</a>
+              2024, made with <i class="fa fa-heart heart text-danger"></i> by Thanh
+
             </div>
             <div>
-              Distributed by
-              <a target="_blank" href="https://themewagon.com/">ThemeWagon</a>.
+              Distributed by FPTTECH.
             </div>
           </div>
         </footer>
-      </div> -->
-
-      <!-- Custom template | don't include it in your project! -->
-      {{-- <div class="custom-template">
-        <div class="title">Settings</div>
-        <div class="custom-content">
-          <div class="switcher">
-            <div class="switch-block">
-              <h4>Logo Header</h4>
-              <div class="btnSwitch">
-                <button
-                  type="button"
-                  class="selected changeLogoHeaderColor"
-                  data-color="dark"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="blue"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="purple"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="light-blue"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="green"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="orange"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="red"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="white"
-                ></button>
-                <br />
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="dark2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="blue2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="purple2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="light-blue2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="green2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="orange2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeLogoHeaderColor"
-                  data-color="red2"
-                ></button>
-              </div>
-            </div>
-            <div class="switch-block">
-              <h4>Navbar Header</h4>
-              <div class="btnSwitch">
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="dark"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="blue"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="purple"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="light-blue"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="green"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="orange"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="red"
-                ></button>
-                <button
-                  type="button"
-                  class="selected changeTopBarColor"
-                  data-color="white"
-                ></button>
-                <br />
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="dark2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="blue2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="purple2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="light-blue2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="green2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="orange2"
-                ></button>
-                <button
-                  type="button"
-                  class="changeTopBarColor"
-                  data-color="red2"
-                ></button>
-              </div>
-            </div>
-            <div class="switch-block">
-              <h4>Sidebar</h4>
-              <div class="btnSwitch">
-                <button
-                  type="button"
-                  class="changeSideBarColor"
-                  data-color="white"
-                ></button>
-                <button
-                  type="button"
-                  class="selected changeSideBarColor"
-                  data-color="dark"
-                ></button>
-                <button
-                  type="button"
-                  class="changeSideBarColor"
-                  data-color="dark2"
-                ></button>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="custom-toggle">
-          <i class="icon-settings"></i>
-        </div>
-      </div> --}}
+      </div> 
       <!-- End Custom template -->
     </div>
     <!--   Core JS Files   -->
@@ -1164,7 +842,7 @@
     <script src="assets/js/kaiadmin.min.js"></script>
 
     <!-- Kaiadmin DEMO methods, don't include it in your project! -->
-    {{-- <script src="assets/js/setting-demo.js"></script>
+    {{-- <script src="assets/js/setting-demo.js"></script> --}}
     <script src="assets/js/demo.js"></script>
     <script>
       $("#lineChart").sparkline([102, 109, 120, 99, 110, 105, 115], {
@@ -1193,6 +871,6 @@
         lineColor: "#ffa534",
         fillColor: "rgba(255, 165, 52, .14)",
       });
-    </script> --}}
+    </script>
   </body>
 </html>

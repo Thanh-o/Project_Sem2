@@ -27,53 +27,44 @@
   .logo-header .logo img {
     border-radius: 50%;
   }
-  .pagination-wrapper {
-    display: flex;
-    justify-content: center;
-    padding: 1rem;
-}
+  #pagination {
+        text-align: center;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
 
-.pagination {
-    display: flex;
-    list-style: none;
-    padding: 0;
-}
+    .page-btn {
+        display: inline-block;
+        padding: 10px 15px;
+        margin: 5px 5px;
+        font-size: 14px;
+        color: #007bff; 
+        background-color: #f8f9fa;
+        border: 1px solid #dee2e6;
+        border-radius: 5px;
+        text-decoration: none;
+        cursor: pointer;
+        transition: background-color 0.3s, color 0.3s;
+    }
 
-.pagination li {
-    margin: 0 0.25rem;
-}
+    .page-btn:hover,
+    .page-btn.active {
+        background-color: #007bff;
+        color: #ffffff; 
+        border-color: #007bff; 
+    }
 
-.pagination li a,
-.pagination li span {
-    display: block;
-    padding: 0.5rem 0.75rem;
-    color: #007bff;
-    text-decoration: none;
-    border: 1px solid #dee2e6;
-    border-radius: 0.25rem;
-}
-
-.pagination li a:hover {
-    background-color: #e9ecef;
-    border-color: #dee2e6;
-}
-
-.pagination li.active span {
-    background-color: #007bff;
-    color: white;
-    border-color: #007bff;
-}
-
-.pagination li.disabled span {
-    color: #6c757d;
-    pointer-events: none;
-    background-color: #ffffff;
-    border-color: #dee2e6;
-}
+    .page-btn.disabled {
+        color: #6c757d; 
+        background-color: #e9ecef; 
+        border-color: #dee2e6; 
+        cursor: not-allowed; 
+    }
 
 </style>
   </head>
   <body>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <div class="wrapper">
       <!-- Sidebar -->
       <div class="sidebar" data-background-color="dark">
@@ -144,25 +135,11 @@
                 </a>
                 
               </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.product.category') }}">
-                    <i class="fa-solid fa-list"></i>
-                <p>Category Management</p>
-                </a>
-                
-              </li>
+
               <li class="nav-item">
                 <a href="{{ route('cart.index') }}">
                   <i class="fa-solid fa-cart-shopping"></i>
                 <p>Cart Management</p>
-                </a>
-                
-              </li>
-              
-              <li class="nav-item">
-                <a href="{{ route('orderdetails.index') }}">
-                  <i class="fa-solid fa-circle-info"></i>
-                <p>Order Details Management</p>
                 </a>
                 
               </li>
@@ -477,11 +454,11 @@
                   document.getElementById('dateDisplay').innerHTML = dateString;
               </script>
               
-                <a href="{{ route('orders.create') }}" class="btn btn-primary btn-round">Add Order</a>
+                <a href="{{ route('admin.product.create') }}" class="btn btn-primary btn-round">Add Product</a>
               </div>
             </div>
             <div class="row">
-              <div class="col-sm-6 col-md-3">
+              <div class="col-sm-6 col-md-3" id="total-product">
                 <div class="card card-stats card-round">
                   <div class="card-body">
                     <div class="row align-items-center">
@@ -489,41 +466,45 @@
                         <div
                           class="icon-big text-center icon-primary bubble-shadow-small"
                         >
-                          <i class="fas fa-users"></i>
+                        <i class="fa-solid fa-laptop"></i>
+
                         </div>
                       </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
+                      <div class="col col-stats ms-3 ms-sm-0" id="total-order-button">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.customers.index') }}" style="color: #8d9498">Customers</a></p>
-                          <h4 class="card-title">{{ $totalCus }}</h4>
+                          <p class="card-category">Total Product</p>
+
+                          <h4 class="card-title">{{ $totalPro }}</h4>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-md-3">
+              <div class="col-sm-6 col-md-3" id="most-price">
                 <div class="card card-stats card-round">
                   <div class="card-body">
                     <div class="row align-items-center">
                       <div class="col-icon">
-                        <div
-                          class="icon-big text-center icon-info bubble-shadow-small"
+                        <div class="icon-big text-center icon-info bubble-shadow-small" 
                         >
-                          <i class="fas fa-user-check"></i>
+                        <i class="fa-solid fa-dollar-sign"></i>
+
                         </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category">Employees</p>
-                          <h4 class="card-title">{{ $totalEm }}</h4>
+                          <p class="card-category">Most Price</p>
+
+
+                          
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-md-3">
+              <div class="col-sm-6 col-md-3" id="most-quantity">
                 <div class="card card-stats card-round">
                   <div class="card-body">
                     <div class="row align-items-center">
@@ -531,20 +512,20 @@
                         <div
                           class="icon-big text-center icon-success bubble-shadow-small"
                         >
-                        <i class="fa-solid fa-xmark"></i>
-                        </div>
+                        <i class="fa-solid fa-box"></i>
+                      </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Order Cancelled</a></p>
-                          <h4 class="card-title">{{ $cancel }}</h4>
+                          <p class="card-category">Most Quantity</p>
+                          
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-sm-6 col-md-3">
+              <div class="col-sm-6 col-md-3"  id="new-product">
                 <div class="card card-stats card-round">
                   <div class="card-body">
                     <div class="row align-items-center">
@@ -552,13 +533,13 @@
                         <div
                           class="icon-big text-center icon-secondary bubble-shadow-small"
                         >
-                          <i class="far fa-check-circle"></i>
-                        </div>
+                        <i class="fa-solid fa-heart"></i>
+                      </div>
                       </div>
                       <div class="col col-stats ms-3 ms-sm-0">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order Completed</a></p>
-                          <h4 class="card-title">{{ $complete }}</h4>
+                          <p class="card-category">New Product</p>
+                          
                         </div>
                       </div>
                     </div>
@@ -570,121 +551,6 @@
             <div class="row">
             </div>
             <div class="row2" style="--bs-gutter-x:1.5rem;--bs-gutter-y:0;flex-wrap:wrap;margin-top:calc(-1 * var(--bs-gutter-y));margin-right:calc(-.5 * var(--bs-gutter-x));margin-left:calc(-.5 * var(--bs-gutter-x))">
-              <div class="col-md-5" style="flex:0 0 auto;width:100%;display: flex; gap: 40px;">
-                  <div class="card card-round" style="width: 40%;height: 400px;">
-                      <div class="card-body">
-                          <div class="card-head-row card-tools-still-right">
-                              <div class="card-title">New Products</div>
-                              <div class="card-tools">
-                                  <div class="dropdown">
-                                      <button class="btn btn-icon btn-clean me-0" type="button" id="dropdownMenuButton" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                          <i class="fas fa-ellipsis-h"></i>
-                                      </button>
-                                      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                                          <a class="dropdown-item" href="#">Action</a>
-                                          <a class="dropdown-item" href="#">Another action</a>
-                                          <a class="dropdown-item" href="#">Something else here</a>
-                                      </div>
-                                  </div>
-                              </div>
-                          </div>
-                          <div class="card-list py-4">
-                              @if (isset($newproducts))
-                                  @foreach ($newproducts as $index => $product)
-                                      <div class="item-list d-flex align-items-center">
-                                          <div class="item-id">{{ $product->product_id }}</div>
-                                          <div class="avatar" style="margin-left: 50px">
-                                              @php
-                                                  $firstImage = $product->images->firstWhere('file_type', 'image');
-                                              @endphp
-                                              @if ($firstImage)
-                                                  <img id="main-media-{{ $index }}" src="{{ asset('storage/' . $firstImage->file_path) }}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                                              @else
-                                                  <b>N/A</b>
-                                              @endif
-                                          </div>
-                                          <div class="info-user ms-5">
-                                              <div class="username"><a href="{{ route('admin.product.edit', $product->product_id) }}" style="color: #000">{{ $product->product_name }}</a></div>
-                                              <div class="status">{{ $product->category->cate_name ?? 'N/A' }}</div>
-                                          </div>
-                                          <div class="created-at">{{ $product->created_at }}</div>
-                                      </div>
-                                  @endforeach
-                              @endif
-                          </div>
-                      </div>
-                  </div>
-                  <div class="card card-round" style="width: 60%;">
-                    <div class="card-body">
-                      <div style="align-items: center">
-                        <div class="card-title">Category</div>
-                        <div class="card-body p-0">
-                          <div class="table-responsive">
-                              <table class="table align-items-center mb-0">
-                                  <thead class="thead-light">
-                                      <tr>
-                                          <th scope="col" style="width: 20%;">ID</th>
-                                          <th scope="col">Category</th>
-                                          <th scope="col" class="text-end">Action</th>
-
-                                      </tr>
-                                  </thead>
-                                  <tbody>
-                                    <tr>
-                                      <form action="{{ route('categories.add') }}" method="POST" style="display: inline;">
-                                        @csrf
-                                        @method('POST')
-                                      <td scope="row"><input type="number" class="form-control" name="cate_id" style="width: 80%;" min="1" value="{{ $maxCateId }}"></td>
-                                      <td scope="row"><input type="text" class="form-control" name="cate_name"></td>
-                                      <td class="text-end">
-                                        <button type="submit" 
-                                        class="btn btn-outline-danger" 
-                                        style="padding: 0; font-size: 16px; width: 30px; height: 30px;">
-                                        <i class="fa-solid fa-plus"></i>
-                                        </button></td>
-                                      </form>
-                                    </tr>
-                                    @foreach ($categories as $category)
-                                        <tr>
-                                            <td>{{ $category->cate_id }}</td>
-                                            <td><form action="{{ route('categories.edit', $category->cate_id) }}" method="POST" enctype="multipart/form-data">
-                                                @csrf
-                                                @method('PUT')
-                                                <input type="text" class="form-control" name="cate_name" value="{{ $category->cate_name }}">
-                                            </td>
-                                            <td class="text-end">
-                                                <button type="submit" 
-                                                class="btn btn-outline-info" 
-                                                onclick="return confirm('Are you sure you want to edit this category?')" 
-                                                style="padding: 0; font-size: 16px; width: 30px; height: 30px;">
-                                                <i class="fa-solid fa-check"></i>
-                                              </button>
-                                            </form>
-                                            
-                                            
-                                
-                                            <form action="{{ route('categories.delete', $category->cate_id) }}" method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" 
-                                            class="btn btn-outline-danger" 
-                                            onclick="return confirm('Are you sure you want to delete this category?')" 
-                                            style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red;">
-                                            <i class="fa-solid fa-xmark"></i>
-                                            </button>
-                                            </form>
-                                
-                                          </td>
-                                          </tr>
-                                    @endforeach
-                                  </tbody>
-                              </table>
-                          </div>
-                      </div>
-                      </div>
-                    </div>
-                  </div>
-              </div>
               <div style="flex:0 0 auto;width:100%">
                 <div class="card card-round">
                     <div class="card-header">
@@ -706,57 +572,287 @@
                     </div>
                     <div class="card-body p-0">
                         <div class="table-responsive">
-                            <table class="table align-items-center mb-0">
-                                <thead class="thead-light">
-                                    <tr>
-                                        <th scope="col">ID</th>
-                                        <th scope="col">Product</th>
-                                        <th scope="col" class="text-end">Date & Time</th>
-                                        <th scope="col" class="text-end">Price</th>
-                                        <th scope="col" class="text-end">Quantity</th>
-                                        <th scope="col" class="text-end">Delete</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @php
-                                        use Carbon\Carbon;
-                                    @endphp
-                                    @if (isset($products))
-                                        @foreach ($products as $index => $product)
-                                            <tr>
-                                                <th scope="row">{{ $product->product_id }}</th>
-                                                <td>
-                                                    @php
-                                                        $firstImage = $product->images->firstWhere('file_type', 'image');
-                                                    @endphp
-                                                    @if ($firstImage)
-                                                        <img src="{{ asset('storage/' . $firstImage->file_path) }}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                                                    @else
-                                                        <span>N/A</span>
-                                                    @endif
-                                                    <a href="{{ route('admin.product.edit', $product->product_id) }}" style="color: #000; margin-left: 10px">{{ $product->product_name }}</a>
-                                                </td>
-                                                <td class="text-end">
-                                                    {{ \Carbon\Carbon::parse($product->updated_at)->format('M d, Y, g.i A') }}
-                                                </td>
-                                                <td class="text-end">${{ $product->price }}</td>
-                                                <td class="text-end">{{ $product->quantity }}</td>
-                                                <td class="text-end">
-                                                    <form action="{{ route('admin.product.delete', $product->product_id)}}" method="POST" style="display:inline;">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-sm delete-button" onclick="return confirm('Are you sure you want to delete this product?')" style="padding: 0; font-size: 16px; width: 30px; height: 30px; background: none; border: none; color: red;"><i class="fa-solid fa-xmark"></i></button>
-                                                    </form>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
-                                </tbody>
-                            </table>
+                          
+                            <table class="table align-items-center mb-0">  
+                                <thead class="thead-light">  
+                                    <tr>  
+                                        <th scope="col">ID</th>  
+                                        <th scope="col">Product</th>  
+                                        <th scope="col" class="text-end">Date & Time</th>  
+                                        <th scope="col" class="text-end">Price</th>  
+                                        <th scope="col" class="text-end">Quantity</th>  
+                                        <th scope="col" class="text-end">Delete</th>  
+                                    </tr>  
+                                </thead>  
+                                <tbody id="product-list">  
+                                    <!-- Các sản phẩm sẽ được thêm vào đây qua AJAX -->  
+                                </tbody>  
+                            </table>  
+                        
+                        
+                            <div id="pagination"></div>
                         </div>
-                        <div class="card-footer pagination-wrapper">
-                            {{ $products->links('pagination::bootstrap-4') }}
-                        </div>
+                        <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+<script>  
+$(document).ready(function() {  
+    let currentPage = 1;  
+
+
+$('#total-product').on('click', function() {
+    
+    loadProducts(1, 'all');
+});
+
+$('#most-price').on('click', function() {
+    
+    loadProducts(1, 'most-price');
+});
+
+$('#most-quantity').on('click', function() {
+    
+    loadProducts(1, 'most-quantity');
+});
+
+$('#new-product').on('click', function() {
+   
+    loadProducts(1, 'new-product');
+});
+
+function loadProducts(page, type = '') {
+    $.ajax({
+        url: '/admin/product?page=' + page + (type ? '&type=' + type : ''),
+        type: 'GET',
+        dataType: 'json',
+        success: function(data) {
+            $('#product-list').empty(); 
+
+            if (type === 'most-price') {
+                data.data.sort(function(a, b) {
+                    return b.price - a.price;
+                });
+
+                var topProducts = data.data.slice(0, 5);
+                
+                $.each(topProducts, function(index, product) {
+                    var html = `<tr id="product-row-${product.product_id}">
+                        <th scope="row">${product.product_id}</th>
+                        <td>
+                            <img src="/storage/${product.images[0]?.file_path}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
+                            <a href="/admin/product/edit/${product.product_id}" style="color: #000; margin-left: 10px">${product.product_name}</a>
+                        </td>
+                        <td class="text-end">${new Date(product.updated_at).toLocaleString()}</td>
+                        <td class="text-end">$${product.price}</td>
+                        <td class="text-end">${product.quantity}</td>
+                        <td class="text-end">
+                            <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
+                                <i class="fa-solid fa-xmark"></i>  
+                            </button> 
+                        </td>
+                    </tr>`;
+                    $('#product-list').append(html);
+                });
+            } else if (type === 'most-quantity') {
+                data.data.sort(function(a, b) {
+                    return b.quantity - a.quantity;
+                });
+
+                var topProducts = data.data.slice(0, 5);
+                
+                $.each(topProducts, function(index, product) {
+                    var html = `<tr id="product-row-${product.product_id}">
+                        <th scope="row">${product.product_id}</th>
+                        <td>
+                            <img src="/storage/${product.images[0]?.file_path}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
+                            <a href="/admin/product/edit/${product.product_id}" style="color: #000; margin-left: 10px">${product.product_name}</a>
+                        </td>
+                        <td class="text-end">${new Date(product.updated_at).toLocaleString()}</td>
+                        <td class="text-end">$${product.price}</td>
+                        <td class="text-end">${product.quantity}</td>
+                        <td class="text-end">
+                            <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
+                                <i class="fa-solid fa-xmark"></i>  
+                            </button> 
+                        </td>
+                    </tr>`;
+                    $('#product-list').append(html);
+                });
+              } else if (type === 'new-product') {
+                data.data.sort(function(a, b) {
+                    return new Date(b.updated_at) - new Date(a.updated_at);
+                });
+
+                var newProducts = data.data.slice(0, 5);
+                
+                $.each(newProducts, function(index, product) {
+                    var html = `<tr id="product-row-${product.product_id}">
+                        <th scope="row">${product.product_id}</th>
+                        <td>
+                            <img src="/storage/${product.images[0]?.file_path}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
+                            <a href="/admin/product/edit/${product.product_id}" style="color: #000; margin-left: 10px">${product.product_name}</a>
+                        </td>
+                        <td class="text-end">${new Date(product.updated_at).toLocaleString()}</td>
+                        <td class="text-end">$${product.price}</td>
+                        <td class="text-end">${product.quantity}</td>
+                        <td class="text-end">
+                            <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
+                                <i class="fa-solid fa-xmark"></i>  
+                            </button> 
+                        </td>
+                    </tr>`;
+                    $('#product-list').append(html);
+                });
+            }else {
+                $.each(data.data, function(index, product) {
+                    var html = `<tr id="product-row-${product.product_id}">
+                        <th scope="row">${product.product_id}</th>
+                        <td>
+                            <img src="/storage/${product.images[0]?.file_path}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
+                            <a href="/admin/product/edit/${product.product_id}" style="color: #000; margin-left: 10px">${product.product_name}</a>
+                        </td>
+                        <td class="text-end">${new Date(product.updated_at).toLocaleString()}</td>
+                        <td class="text-end">$${product.price}</td>
+                        <td class="text-end">${product.quantity}</td>
+                        <td class="text-end">
+                            <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
+                                <i class="fa-solid fa-xmark"></i>  
+                            </button> 
+                        </td>
+                    </tr>`;
+                    $('#product-list').append(html);
+                });
+            } 
+                
+            
+
+            loadPagination(data);
+        },
+        error: function(xhr) {
+            Swal.fire('Error', 'An error occurred while loading the products.', 'error');
+        }
+    });
+}
+
+
+
+ 
+
+    function loadPagination(data) {
+    $('#pagination').empty();
+    const totalPages = data.last_page;
+    const currentPage = data.current_page;
+
+    let paginationHtml = '';
+
+    
+    if (totalPages > 1) {
+        paginationHtml += '<button class="page-btn" data-page="1"><<</button>';
+    }
+
+    
+    if (currentPage > 1) {
+        paginationHtml += `<button class="page-btn" data-page="${currentPage - 1}"><</button>`;
+    }
+
+    
+    const maxPagesToShow = 5;
+    const halfRange = Math.floor(maxPagesToShow / 2);
+    let startPage = Math.max(1, currentPage - halfRange);
+    let endPage = Math.min(totalPages, currentPage + halfRange);
+
+    
+    if (endPage - startPage + 1 < maxPagesToShow) {
+        if (startPage > 1) {
+            endPage = Math.min(totalPages, endPage + (maxPagesToShow - (endPage - startPage + 1)));
+        } else if (endPage < totalPages) {
+            startPage = Math.max(1, startPage - (maxPagesToShow - (endPage - startPage + 1)));
+        }
+    }
+
+    
+    if (startPage > 1) {
+        paginationHtml += '<button class="page-btn" data-page="' + (startPage - 1) + '">...</button>';
+    }
+
+    
+    for (let i = startPage; i <= endPage; i++) {
+        paginationHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+
+    
+    if (endPage < totalPages) {
+        paginationHtml += '<button class="page-btn" data-page="' + (endPage + 1) + '">...</button>';
+    }
+
+    
+    if (currentPage < totalPages) {
+        paginationHtml += `<button class="page-btn" data-page="${currentPage + 1}">></button>`;
+    }
+
+    
+    if (totalPages > 1) {
+        paginationHtml += '<button class="page-btn" data-page="' + totalPages + '">>></button>';
+    }
+
+    $('#pagination').append(paginationHtml);
+}
+
+    window.deleteProduct = function(productId) {  
+        Swal.fire({  
+            title: 'Are you sure?',  
+            text: "You won't be able to revert this!",  
+            icon: 'warning',  
+            showCancelButton: true,  
+            confirmButtonColor: '#3085d6',  
+            cancelButtonColor: '#d33',  
+            confirmButtonText: 'Yes, delete it!'  
+        }).then((result) => {  
+            if (result.isConfirmed) {  
+              url = "{{ route('admin.product.delete', ':id') }}";  
+              url = url.replace(':id', productId);  
+                $.ajax({  
+                    url: url,  
+                    type: 'DELETE',  
+                    headers: {  
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),  
+                    },  
+                    success: function() {  
+                        $(`#product-row-${productId}`).remove(); // Xóa hàng sản phẩm khỏi bảng  
+                        Swal.fire('Deleted!', 'The product has been successfully deleted.', 'success');  
+                    },  
+                    error: function(xhr) {  
+                        const errorMessage = xhr.responseJSON && xhr.responseJSON.message  
+                            ? xhr.responseJSON.message  
+                            : 'An error occurred while deleting the product.';  
+                        Swal.fire('Error', errorMessage, 'error');  
+                    }  
+                });  
+            }  
+        });  
+    }  
+
+    
+    loadProducts(currentPage);  
+
+    $('#total-order-button').on('click', function() {
+            $('#orders-container').toggle(); 
+            loadOrders(currentPage); 
+        });
+
+    $(document).on('click', '#pagination .page-btn', function() {  
+        const page = $(this).data('page');  
+        if (page && page !== currentPage) {  
+            currentPage = page;  
+            loadProducts(currentPage);  
+            $('#pagination .page-btn').removeClass('active');  
+            $(this).addClass('active');  
+        }  
+    });  
+});
+
+
+</script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+
                     </div>
                 </div>
               </div>

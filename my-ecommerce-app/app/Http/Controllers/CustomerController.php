@@ -140,6 +140,7 @@ class CustomerController extends Controller
 
         $data = $request->only(['email', 'username', 'password']);
         $data['password'] = Hash::make($data['password']);
+        $data['status'] = 'active';
 
         Customer::create($data);
 
@@ -161,21 +162,54 @@ class CustomerController extends Controller
             'password' => 'required',
         ]);
 
+        $activeUsersCount = Customer::where('status', 'active')->count();
+
+        if ($activeUsersCount === 0) {
+            return back()->withErrors(['message' => 'No active users available.']);
+        }
+
         $customer = Customer::where('username', $request->username)->first();
 
         if ($customer && Hash::check($request->password, $customer->password)) {
+            $customer->status = 'active';
+            $customer->save();
+
             Session::put('customer_logged_in', true);
+            Session::put('customer_id', $customer->customer_id); 
             return redirect()->route('customers.dashboard');
         }
 
         return back()->withErrors(['message' => 'Invalid credentials.']);
     }
 
+    public function showActiveUsers()  
+    {  
+        $activeUsersCount = Customer::where('status', 'active')->count();  
+        $activeUsers = Customer::where('status', 'active')->get();
+
+        return view('active_users', [
+            'activeUsersCount' => $activeUsersCount,
+            'activeUsers' => $activeUsers,
+        ]);  
+    }  
+
+
+
     // Logout
     public function logout()
     {
+        $customerId = Session::get('customer_id');
+
+        if ($customerId) {
+            $customer =Customer::find($customerId); 
+            $customer->status = 'inactive';
+            $customer->save();
+        }
+
         Session::forget('customer_logged_in');
-        return redirect()->route('customers.login');
+        Session::forget('customer_id');
+
+        return redirect()->route('customers.login')->with('status', 'You have been logged out successfully.');
     }
 
     // Dashboard

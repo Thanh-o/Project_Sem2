@@ -10,6 +10,8 @@ use App\Models\Customer;
 use App\Models\Order;
 use App\Models\Employee;
 use App\Models\Product;
+use Carbon\Carbon;
+
 
 class AdminController extends Controller
 {
@@ -46,33 +48,39 @@ class AdminController extends Controller
     {
         $customers = $this->getNewCustomers();
         $orders = $this->getNewOrders();
-        $totalCus = Customer::count();
-        $totalEm = Employee::count();
-        $totalPro = Product::count();
-        
-        $complete = Order::where('status', 'Completed')
-        ->whereMonth('created_at', now()->month)
+        $totalCus = Customer::whereMonth('created_at', now()->month)
         ->whereYear('created_at', now()->year)
         ->count();
+        $totalEm = Employee::whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+        $totalPro = Product::whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+        $totalOrder = Order::whereMonth('created_at', now()->month)
+        ->whereYear('created_at', now()->year)
+        ->count();
+        $activeUsersCount = Customer::where('status', 'active')->count();  
+        $activeUsers = Customer::where('status', 'active')->get();
+        $startDate = Carbon::now()->subDays(10)->startOfDay(); 
+        $endDate = Carbon::now()->endOfDay();
 
-        $cancel = Order::where('status', 'Cancelled')
-        ->whereMonth('created_at', now()->month)
-        ->whereYear('created_at', now()->year)
-        ->count();
-        $cancels = Order::where('status', 'Cancelled')
-        ->whereMonth('created_at', now()->month)
-        ->whereYear('created_at', now()->year)
-        ->get();
+        $totalamount = Order::whereBetween('created_at', [$startDate, $endDate])
+                            ->sum('total_amount');
 
         return view('admin.dashboard', [
             'customers' => $customers,
             'orders' => $orders,
-            'complete' => $complete,
-            'cancel' => $cancel,
             'totalCus' => $totalCus,
             'totalEm' => $totalEm,
             'totalPro' => $totalPro,
-            'cancels' => $cancels,
+            'totalOrder' => $totalOrder,
+            'activeUsersCount' => $activeUsersCount,
+            'activeUsers' => $activeUsers,
+            'totalamount' => $totalamount,
+            'startDate' => $startDate,
+            'endDate' => $endDate
+
         ]);
     }
 

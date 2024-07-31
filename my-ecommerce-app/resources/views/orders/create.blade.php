@@ -9,7 +9,7 @@
 <body>
  
     <div class="container">
-        <a href="{{ route('orders.index') }}">Back</a>
+        <a href="{{ route('admin.orders.index') }}">Back</a>
         <h2>Add Order</h2>
         @if (session('status'))
             <div class="alert alert-success">
@@ -31,12 +31,7 @@
 
             <div class="mb-3">
                 <label for="employee_id" class="form-label">Employee:</label>
-                {{-- <select class="form-control" id="employee_id" name="employee_id" required>
-                    <option value="">Select Employee</option>
-                    @foreach ($employees as $employee)
-                        <option value="{{ $employee->employee_id }}">{{ $employee->name }}</option>
-                    @endforeach
-                </select> --}}
+
             </div>
 
             <div class="mb-3">
@@ -47,18 +42,16 @@
             <div class="mb-3">
                 <label for="status" class="form-label">Status:</label>
                 <select class="form-select" id="status" name="status" required>
-                    @foreach ($statuses as $key => $label)
-                        <option value="{{ $key }}">{{ $label }}</option>
-                    @endforeach
+                    
+                        <option>Processing</option>
+                    
                 </select>
             </div>
 
             <div class="form-group">
                 <label for="payment">Payment</label>
                 <select class="form-select" id="payment" name="payment" required>
-                    @foreach ($payments as $key => $label)
-                        <option value="{{ $key }}">{{ $label }}</option>
-                    @endforeach
+
                 </select>
             </div>
 

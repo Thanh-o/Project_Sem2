@@ -11,6 +11,9 @@ use App\Models\Order;
 use App\Models\Employee;
 use App\Models\OrderDetail;
 use App\Models\Cart;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
+
 
 class ProductController extends Controller
 {
@@ -78,19 +81,6 @@ class ProductController extends Controller
         return redirect()->route('products.index')->with('status', 'Product updated successfully!');
     }
 
-    //DELETE
-    public function delete($id)
-    {
-        $product = Product::find($id);
-
-        if (!$product) {
-            return redirect()->route('products.index')->with('error', 'Product not found.');
-        }
-        $product->images()->delete();
-        $product->delete();
-        return redirect()->route('products.index')->with('success', 'Product deleted successfully.');
-    }
-
     public function deleteImage($id)
     {
         $image = Image::findOrFail($id);
@@ -132,38 +122,49 @@ class ProductController extends Controller
 
     public function indexp()
     {
-        $products = Product::with(['category', 'images'])->get();
-        return view('products', compact('products'));
+        $carts = Cart::all();
+        $products = Product::with(['category', 'images' => function($query) {
+            $query->orderBy('image_id', 'asc');
+        }])->get();
+        return view('products', compact('products', 'carts'));
     }
-
     //Show
     public function show($id)
     {
-    $product = Product::find($id);
-    return view('products.show', compact('product'));
+        $carts = Cart::all();
+        $product = Product::with(['images', 'category'])->findOrFail($id);
+        return view('products.show', compact('product', 'carts'));
     }
 
         //ADMIN
-        public function aindex()
-        {
-            $products = Product::with(['category', 'images'])->paginate(10);
-            $newproducts = Product::latest()->take(5)->get();
-            $totalCus = Customer::count();
-            $totalEm = Employee::count();
-            $categories = Category::all();
-            $totalPro = Product::count();
-            $complete = Order::where('status', 'Completed')
-            ->whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->count();
-    
-            $cancel = Order::where('status', 'Cancelled')
-            ->whereMonth('created_at', now()->month)
-            ->whereYear('created_at', now()->year)
-            ->count();
+        public function aindex(Request $request)  
+        {  
+
+            $perPage = 10;  
+            $products = Product::with('category', 'images')->paginate($perPage);  
             
-            $maxCateId = Category::max('cate_id') + 1;
-            return view('admin.product.index', compact('products', 'newproducts', 'complete','cancel', 'totalCus', 'totalEm', 'categories', 'totalPro', 'maxCateId'));
+            if ($request->ajax()) {  
+                return response()->json($products);   
+            }  
+            
+            $newproducts = Product::latest()->take(5)->get();  
+            
+            $topPriceProducts = Product::orderBy('price', 'desc')->take(10)->get();
+    
+            $topFavoriteProducts = Product::select('products.product_id', 'products.product_name', 'products.description', 'products.price', 'products.quantity', 'products.cate_id')
+            ->leftJoin('orderdetails', 'products.product_id', '=', 'orderdetails.product_id')
+            ->selectRaw('COUNT(orderdetails.product_id) as order_count')
+            ->groupBy('products.product_id', 'products.product_name', 'products.description', 'products.price', 'products.quantity', 'products.cate_id')
+            ->orderBy('order_count', 'desc')
+            ->take(5)
+            ->get(); 
+
+            $topQuantityProducts = Product::orderBy('quantity', 'desc')->take(10)->get();  
+            $categories = Category::all();  
+            $totalPro = Product::count();             
+            $maxCateId = Category::max('cate_id') + 1;  
+            
+            return view('admin.product.index', compact('products', 'newproducts', 'categories', 'totalPro', 'maxCateId', 'topQuantityProducts', 'topPriceProducts', 'topFavoriteProducts'));  
         }
         
         public function getProductsByCategory($cate_id)
@@ -260,38 +261,32 @@ class ProductController extends Controller
     
     
    //Delete
-    public function adelete($id)
-    {
-        
-        $product = Product::find($id);
-    
-        if (!$product) {
-            return redirect()->route('admin.product.index')->with('error', 'Product not found.');
-        }
-    
-        
-        $product->images()->delete();
-    
-        
-        $product->delete();
-    
-        
-        OrderDetail::where('product_id', $id)->delete();
-    
-        
-        Cart::where('product_id', $id)->delete();
-    
-        $orders = Order::whereHas('orderDetails', function ($query) use ($id) {
-            $query->where('product_id', $id);
-        })->get();
-    
-        foreach ($orders as $order) {
-            $order->orderDetails()->where('product_id', $id)->delete();
-            $order->updateTotalAmount();
-        }
-    
-        return redirect()->route('admin.product.index')->with('success', 'Product deleted successfully.');
-    }
+   public function delete($id)
+   {
+       $product = Product::find($id);
+       
+       if (!$product) {
+           return response()->json(['message' => 'Product not found.'], 404);
+       }
+   
+       
+        $product->orderDetails()->delete();
+        $product->carts()->delete();
+        $product->delete(); 
+        $product->images()->delete(); 
+
+       $orders = Order::whereHas('orderDetails', function ($query) use ($id) {
+           $query->where('product_id', $id);
+       })->get();
+   
+       foreach ($orders as $order) {
+           $order->orderDetails()->where('product_id', $id)->delete();
+           $order->updateTotalAmount();
+       }
+   
+       return response()->json(['message' => 'Product deleted successfully.']);
+   }
+   
     
 
     public function adeleteImage($id)
@@ -331,4 +326,5 @@ class ProductController extends Controller
             Category::findOrFail($id)->delete();
             return redirect()->route('admin.product.index')->with('success', "Deleted category successfully!");
         }  
+
 }

@@ -29,7 +29,8 @@
   }
   #pagination {
         text-align: center;
-        margin-top: 20px;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
     .page-btn {
@@ -62,6 +63,8 @@
 </style>
   </head>
   <body>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     <div class="wrapper">
       <!-- Sidebar -->
       <div class="sidebar" data-background-color="dark">
@@ -469,13 +472,13 @@
                         <div
                           class="icon-big text-center icon-primary bubble-shadow-small"
                         >
-                          <i class="fas fa-users"></i>
+                          <i class="fas fa-list-alt"></i>
                         </div>
                       </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
+                      <div class="col col-stats ms-3 ms-sm-0" id="total-order-button">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.customers.index') }}" style="color: #8d9498">Customers</a></p>
-                          <h4 class="card-title">{{ $totalCus }}</h4>
+                          <p class="card-category">Total Order</p>
+                          <h4 class="card-title">{{ $totalOrder }}</h4>
                         </div>
                       </div>
                     </div>
@@ -490,13 +493,13 @@
                         <div
                           class="icon-big text-center icon-info bubble-shadow-small"
                         >
-                          <i class="fas fa-user-check"></i>
+                        <i class="fas fa-cogs"></i> 
                         </div>
                       </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
+                      <div class="col col-stats ms-3 ms-sm-0 filter" data-status="Processing">
                         <div class="numbers">
-                          <p class="card-category">Employees</p>
-                          <h4 class="card-title">{{ $totalEm }}</h4>
+                          <p class="card-category">Processing</p>
+                          <h4 class="card-title">{{ $process }}</h4>
                         </div>
                       </div>
                     </div>
@@ -514,9 +517,10 @@
                         <i class="fa-solid fa-xmark"></i>
                         </div>
                       </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
+                      <div class="col col-stats ms-3 ms-sm-0 filter" data-status="Cancelled">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.product.index') }}" style="color: #8d9498">Order Cancelled</a></p>
+                          <p class="card-category">Order Cancelled</p>
+
                           <h4 class="card-title">{{ $cancel }}</h4>
                         </div>
                       </div>
@@ -535,9 +539,9 @@
                           <i class="far fa-check-circle"></i>
                         </div>
                       </div>
-                      <div class="col col-stats ms-3 ms-sm-0">
+                      <div class="col col-stats ms-3 ms-sm-0 filter" data-status="Completed">
                         <div class="numbers">
-                          <p class="card-category"><a href="{{ route('admin.orders.index') }}" style="color: #8d9498">Order Completed</a></p>
+                          <p class="card-category">Order Completed</p>
                           <h4 class="card-title">{{ $complete }}</h4>
                         </div>
                       </div>
@@ -590,93 +594,173 @@
         </div>
         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
         <script>  
-          $(document).ready(function() {  
-              let currentPage = 1;  
-      
-              function loadOrders(page) {  
-                  $.ajax({  
-                      url: '/orders?page=' + page,  
-                      type: 'GET',  
-                      success: function(data) {  
-                          const orders = data.data;  
-                          $('#orders-container').empty();  
-      
-                          if (orders.length > 0) {  
-                              $.each(orders, function(index, order) {  
-                                  $('#orders-container').append(`  
-                                      <tr id="order-row-${order.order_id}">  
-                                          <th scope="row">${order.order_id}</th>  
-                                          <td>  
-                                              <a href="/order/${order.order_id}" style="color: #000;"><b>${order.customer.name}</b></a>  
-                                          </td>  
-                                          <td class="text-end">${order.employee}</td>  
-                                          <td class="text-end">${order.total_amount}</td>  
-                                          <td class="text-end">${order.status}</td>  
-                                          <td class="text-end">${order.payment}</td>  
-                                          <td class="text-end">  
-                                              <button onclick="deleteOrder(${order.order_id})" class="btn btn-sm delete-button" style="padding: 0; font-size: 16px; width: 30px; height: 30px; background: none; border: none; color: red;">  
-                                                  <i class="fa-solid fa-xmark"></i>  
-                                              </button>  
-                                          </td>  
-                                      </tr>  
-                                  `);  
-                              });  
-                          }  
-      
-                          loadPagination(data);  
-                      }  
-                  });  
-              }  
-      
-              function loadPagination(data) {  
-                  $('#pagination').empty();  
-                  const totalPages = data.last_page;  
-      
-                  for (let i = 1; i <= totalPages; i++) {  
-                      $('#pagination').append(`  
-                          <button class="page-btn" data-page="${i}">${i}</button>  
-                      `);  
-                  }  
-      
-                  $('.page-btn[data-page="' + currentPage + '"]').addClass('active');  
-              }  
-      
-              window.deleteOrder = function(orderId) {  
-                  if (!confirm('Are you sure you want to delete this order?')) {  
-                      return;  
-                  }  
-      
-                  $.ajax({  
-                      url: `/orders/${orderId}`,  
-                      type: 'DELETE',  
-                      headers: {  
-                          'X-CSRF-TOKEN': '{{ csrf_token() }}',  
-                      },  
-                      success: function() {  
-                          $(`#order-row-${orderId}`).remove();  
-                          alert('The order has been successfully deleted.');  
-                      },  
-                      error: function(xhr) {  
-                          const errorMessage = xhr.responseJSON && xhr.responseJSON.message  
-                              ? xhr.responseJSON.message  
-                              : 'An error occurred while deleting the order.';  
-                          alert(errorMessage);  
-                      }  
-                  });  
-              }  
-      
-              loadOrders(currentPage);  
-      
-              $(document).on('click', '.page-btn', function() {  
-                  currentPage = $(this).data('page');  
-                  loadOrders(currentPage);  
-                  $('.page-btn').removeClass('active');  
-                  $(this).addClass('active');   
-              });  
-          });  
+$(document).ready(function() {  
+    let currentPage = 1;  
+    let currentStatus = '';
+
+    function loadOrders(page, status = '') {  
+        $.ajax({  
+            url: '/orders',  
+            type: 'GET',  
+            data: { page: page, status: status },  
+            success: function(data) {  
+                const orders = data.data;  
+                $('#orders-container').empty();  
+
+                if (orders.length > 0) {  
+                    $.each(orders, function(index, order) {  
+                        $('#orders-container').append(`  
+                            <tr id="order-row-${order.order_id}">  
+                                <th scope="row">${order.order_id}</th>  
+                                <td>  
+                                    <a href="/order/${order.order_id}" style="color: #000;"><b>${order.customer.name}</b></a>  
+                                </td>  
+                                <td class="text-end">${order.employee}</td>  
+                                <td class="text-end">${order.total_amount}</td>  
+                                <td class="text-end">${order.status}</td>  
+                                <td class="text-end">${order.payment}</td>  
+                                <td class="text-end">  
+                                    <button type="button"   
+                                        class="btn btn-outline-danger delete-btn"   
+                                        onclick="deleteOrder(${order.order_id})"   
+                                        style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
+                                        <i class="fa-solid fa-xmark"></i>  
+                                    </button>  
+                                </td>  
+                            </tr>  
+                        `);  
+                    });  
+                }  
+
+                loadPagination(data);  
+            },  
+            error: function(xhr) {  
+                Swal.fire('Error', 'An error occurred while loading the orders.', 'error');
+            }  
+        });  
+    }  
+
+    function loadPagination(data) {
+    $('#pagination').empty();
+    const totalPages = data.last_page;
+    const currentPage = data.current_page;
+
+    let paginationHtml = '';
+
+    
+    if (totalPages > 1) {
+        paginationHtml += '<button class="page-btn" data-page="1"><<</button>';
+    }
+
+    
+    if (currentPage > 1) {
+        paginationHtml += `<button class="page-btn" data-page="${currentPage - 1}"><</button>`;
+    }
+
+    
+    const maxPagesToShow = 5;
+    const halfRange = Math.floor(maxPagesToShow / 2);
+    let startPage = Math.max(1, currentPage - halfRange);
+    let endPage = Math.min(totalPages, currentPage + halfRange);
+
+    
+    if (endPage - startPage + 1 < maxPagesToShow) {
+        if (startPage > 1) {
+            endPage = Math.min(totalPages, endPage + (maxPagesToShow - (endPage - startPage + 1)));
+        } else if (endPage < totalPages) {
+            startPage = Math.max(1, startPage - (maxPagesToShow - (endPage - startPage + 1)));
+        }
+    }
+
+    
+    if (startPage > 1) {
+        paginationHtml += '<button class="page-btn" data-page="' + (startPage - 1) + '">...</button>';
+    }
+
+    
+    for (let i = startPage; i <= endPage; i++) {
+        paginationHtml += `<button class="page-btn ${i === currentPage ? 'active' : ''}" data-page="${i}">${i}</button>`;
+    }
+
+    
+    if (endPage < totalPages) {
+        paginationHtml += '<button class="page-btn" data-page="' + (endPage + 1) + '">...</button>';
+    }
+
+    
+    if (currentPage < totalPages) {
+        paginationHtml += `<button class="page-btn" data-page="${currentPage + 1}">></button>`;
+    }
+
+    
+    if (totalPages > 1) {
+        paginationHtml += '<button class="page-btn" data-page="' + totalPages + '">>></button>';
+    }
+
+    $('#pagination').append(paginationHtml);
+}
+
+
+    window.deleteOrder = function(orderId) {  
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                url = "{{ route('orders.delete', ':id') }}";  
+                url = url.replace(':id', orderId);  
+
+                $.ajax({  
+                    url: url,  
+                    type: 'DELETE', 
+                    headers: {  
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content'),  
+                    },  
+                    success: function() {  
+                        $(`#order-row-${orderId}`).remove();  
+                        Swal.fire('Deleted!', 'The order has been successfully deleted.', 'success');
+                    },  
+                    error: function(xhr) {  
+                        const errorMessage = xhr.responseJSON && xhr.responseJSON.message  
+                            ? xhr.responseJSON.message  
+                            : 'An error occurred while deleting the order.';  
+                        Swal.fire('Error', errorMessage, 'error');
+                    }  
+                });  
+            }
+        });
+    }
+
+    $('#total-order-button').on('click', function() {
+            $('#orders-container').toggle(); 
+            loadOrders(currentPage); 
+        });
+
+    $(document).on('click', '.filter', function() {  
+        currentStatus = $(this).data('status');  
+        currentPage = 1;
+        loadOrders(currentPage, currentStatus);  
+    });
+
+    $(document).on('click', '.page-btn', function() {  
+        currentPage = $(this).data('page');  
+        loadOrders(currentPage, currentStatus);  
+        $('.page-btn').removeClass('active');  
+        $(this).addClass('active');  
+    });
+
+    loadOrders(currentPage, currentStatus);  
+});
+
       </script>
-       
-      
+<!-- SweetAlert2 -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11/dist/sweetalert2.min.css">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
     </div>
     <!--   Core JS Files   -->

@@ -15,7 +15,7 @@ class Employee extends Model
     public $incrementing = false;
     
     protected $fillable = [
-        'name', 'email', 'phone', 'username', 'password', 'hire_date', 'job_title'
+        'name', 'email', 'phone', 'username', 'password', 'hire_date', 'job_title', 'created_at'
     ];
 
     protected $hidden = [

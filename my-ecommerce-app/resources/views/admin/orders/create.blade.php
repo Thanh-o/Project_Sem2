@@ -9,7 +9,7 @@
 <body>
  
     <div class="container">
-        <a href="{{ route('orders.index') }}">Back</a>
+        <a href="{{ route('admin.orders.index') }}">Back</a>
         <h2>Add Order</h2>
         @if (session('status'))
             <div class="alert alert-success">

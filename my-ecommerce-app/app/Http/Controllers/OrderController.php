@@ -29,36 +29,44 @@ public function store(Request $request)
 
     // READ
 
-public function index(Request $request)  
-{  
-    $orders = Order::with('customer')->paginate(10);  
-
-    if ($request->ajax()) {  
-        return response()->json($orders);  
-    }  
-
-    $totalCus = Customer::count();
-
-    $totalEm = Employee::count();
-
-    $totalPro = Product::count();
-
-    $complete = Order::where('status', 'Completed')
-        ->whereMonth('created_at', now()->month)
+    public function index(Request $request)  
+    {  
+        $status = $request->input('status');
+        $query = Order::with('customer');
+    
+        if ($status) {
+            $query->where('status', $status);
+        }
+    
+        $orders = $query->paginate(10);
+    
+        if ($request->ajax()) {  
+            return response()->json($orders);  
+        }  
+    
+        $totalCus = Customer::count();
+        $totalPro = Product::count();
+    
+        $totalOrder = Order::whereMonth('created_at', now()->month)
         ->whereYear('created_at', now()->year)
-        ->count();
-
+        ->count(); 
+        $complete = Order::where('status', 'Completed')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+    
         $cancel = Order::where('status', 'Cancelled')
+            ->whereMonth('created_at', now()->month)
+            ->whereYear('created_at', now()->year)
+            ->count();
+        
+        $process = Order::where('status', 'Processing')
         ->whereMonth('created_at', now()->month)
         ->whereYear('created_at', now()->year)
         ->count();
-
-        $cancels = Order::where('status', 'Cancelled')
-        ->whereMonth('created_at', now()->month)
-        ->whereYear('created_at', now()->year);
-        
-    return view('admin.orders.index', compact('orders',  'totalCus', 'totalEm', 'totalPro', 'complete', 'cancel' , 'cancels'));
-}
+        return view('admin.orders.index', compact('orders', 'totalCus', 'totalOrder', 'totalPro', 'complete', 'cancel', 'process'));
+    }
+    
 
 
     // UPDATE
@@ -86,11 +94,13 @@ public function update(Request $request, $id)
     {
         $order = Order::findOrFail($id);
         
-        $order->orderDetails()->delete();
-        
-        $order->delete();
-        
-        return response()->json(['message' => 'Order deleted successfully']);
+        if ($order) {  
+            $order->orderDetails()->delete();
+            $order->delete();  
+            return response()->json(['message' => 'Order deleted successfully.']);  
+        } else {  
+            return response()->json(['message' => 'Order not found.'], 404);  
+        }
     }
     
 

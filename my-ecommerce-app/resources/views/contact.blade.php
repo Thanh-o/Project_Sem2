@@ -19,13 +19,6 @@
 <body>
     <div class="frame">
         @include('header')
-
-        <div class="link-bre">
-            <a href="{{ route('home') }}">Home</a>
-            <i class="fa fa-angle-right" aria-hidden="true"></i>
-            <a href="#">Contact</a>
-        </div>
-
         <div class="main">
             <div class="contact-container">
             

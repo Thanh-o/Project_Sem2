@@ -12,7 +12,7 @@
                 <ul>
                     <li><a href="{{ route('home') }}">Home</a></li>
                     <li>
-                        <a href="#">Products</a>
+                        <a href="#">Product</a>
                         <div class="drop-category">
                             <a href="#">Laptop</a>
                             <a href="#">PC</a>
@@ -48,7 +48,7 @@
             <ul>
                 <li><a href="{{ route('home') }}">Home</a></li>
                 <li>
-                    <a href="#">Products</a>
+                    <a href="#">Product</a>
                     <div class="drop-category">
                         <a href="#">Laptop</a>
                         <a href="#">PC</a>
@@ -67,23 +67,12 @@
         </div>  
         <div class="user-options">  
             <div class="cart">  
-                {{-- <a href="{{ route('cart.index') }}">   --}}
                     <i class="fa-solid fa-cart-shopping"></i>  
                     <span class="cart-count"></span>   
-                {{-- </a>   --}}
             </div> 
             <div class="user-menu">  
-                <a href="#" class="login"><i class="fa-solid fa-circle-user"></i></a>  
-                <div class="dropdown-content">
-                    <div class="hello">
-                        <i class="fa-regular fa-hand-point-right"></i>
-                        <div class="thing-name">Hello, do you have an account yet?</div>
-                    </div>  
-                    <div class="login-bottom">
-                        <a href="{{ route('customers.login') }}" class="login-box">Login</a>  
-                        <a href="{{ route('customers.signup') }}" class="signup-box">Sign Up</a> 
-                    </div>
-                </div> 
+                <i class="fa-solid fa-circle-user"></i> 
+
             </div>  
     
         </div> 
@@ -94,8 +83,17 @@
 </header>  
 <link rel="stylesheet" href="{{ asset('Css/header.css') }}">
 <script src="{{ asset('Js/header.js') }}"></script>
+<div class="dropdown-content">
+    <div class="hello">
+        <i class="fa-regular fa-hand-point-right"></i>
+        <div class="thing-name">Hello, do you have an account yet?</div>
+    </div>  
+    <div class="login-bottom">
+        <a href="{{ route('customers.login') }}" class="login-box">Login</a>  
+        <a href="{{ route('customers.signup') }}" class="signup-box">Sign Up</a> 
+    </div>
+</div> 
 <div class="left-cart">
-    {{-- <button class="esc-cart"><i class="fas fa-times"></i></button> --}}
     <div class="cart-header">
         
         <b><i class="fa-solid fa-cart-shopping"></i> Cart</b>
@@ -159,19 +157,78 @@
 
 </div>
 <script>
-        let cart = document.querySelector('.left-cart');
-let iconCart = document.querySelector('.user-options .cart');
-let container = document.querySelector('body');
-let close = document.querySelector('.esc-cart');
-iconCart.addEventListener('click', () => {
-    if (cart.style.display == 'none') {
-        cart.style.display = 'block';
+document.addEventListener('DOMContentLoaded', function () {
+    let cart = document.querySelector('.left-cart');
+    let iconCart = document.querySelector('.user-options .cart');
+    
+    iconCart.addEventListener('click', (event) => {
+        event.stopPropagation();
+        if (cart.classList.contains('show')) {
+            cart.classList.remove('show');
+            setTimeout(() => {
+                cart.style.display = 'none';
+            }, 400);
+        } else {
+            cart.style.display = 'block';
+            setTimeout(() => {
+                cart.classList.add('show');
+            }, 10);
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!cart.contains(event.target) && !iconCart.contains(event.target)) {
+            cart.classList.remove('show');
+            setTimeout(() => {
+                cart.style.display = 'none';
+            }, 400);
+        }
+    });
+});
+
+
+    document.addEventListener('DOMContentLoaded', function () {
+    let login = document.querySelector('.dropdown-content');
+    let iconLogin = document.querySelector('.user-options .user-menu');
+
+    iconLogin.addEventListener('click', (event) => {
+        event.preventDefault();
+        if (login.classList.contains('show')) {
+            login.classList.remove('show');
+            setTimeout(() => {
+                login.style.display = 'none';
+            }, 400); 
+        } else {
+            login.style.display = 'block';
+            setTimeout(() => {
+                login.classList.add('show');
+            }, 10); 
+        }
+    });
+
+    document.addEventListener('click', (event) => {
+        if (!login.contains(event.target) && !iconLogin.contains(event.target)) {
+            login.classList.remove('show');
+            setTimeout(() => {
+                login.style.display = 'none';
+            }, 400); 
+        }
+    });
+});
+
+
+
+let menu = document.querySelector('header .bar-menu');
+let iconMenu = document.querySelector('header .menu');
+let contain = document.querySelector('.menu');
+iconMenu.addEventListener('click', () => {
+    event.preventDefault();
+    if (menu.style.display == 'none') {
+        menu.style.display = 'block';
     } else {
-        cart.style.display = 'none';
+        menu.style.display = 'none';
     }
+    
 });
-close.addEventListener('click', () => {
-    cart.style.right = '-45%';
-    container.style.transform = 'translateX(0)';
-});
+
 </script>
