@@ -12,6 +12,7 @@ class Cart extends Model
     protected $primaryKey = 'id';
     public $timestamps = false;
     protected $fillable = [
+        'customer_id',
         'product_id',
         'quantity',
     ];
@@ -19,5 +20,8 @@ class Cart extends Model
     {
         return $this->belongsTo(Product::class, 'product_id', 'product_id');
     }
-    
+    public function customers()
+    {
+        return $this->belongsTo(Product::class, 'customer_id', 'customer_id');
+    }
 }

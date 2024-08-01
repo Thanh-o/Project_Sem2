@@ -100,28 +100,6 @@
                 </a>
                 
               </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.product.category') }}">
-                    <i class="fa-solid fa-list"></i>
-                <p>Category Management</p>
-                </a>
-                
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('cart.index') }}">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                <p>Cart Management</p>
-                </a>
-                
-              </li>
-              
-              <li class="nav-item">
-                <a href="{{ route('orderdetails.index') }}">
-                  <i class="fa-solid fa-circle-info"></i>
-                <p>Order Details Management</p>
-                </a>
-                
-              </li>
 
             </ul>
           </div>
@@ -353,11 +331,11 @@
                     aria-expanded="false"
                   >
                     <div class="avatar-sm">
-                      <img
+                      {{-- <img
                         src="{{ asset('images/5729521e7786aeff31bbc85e33ce470b.jpg') }}"
                         alt="..."
                         class="avatar-img rounded-circle"
-                      />
+                      /> --}}
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
@@ -436,7 +414,7 @@
                 <a href="{{ route('customers.create') }}" class="btn btn-primary btn-round">Add Customer</a>
               </div>
             </div>
-            <div class="row">
+            {{-- <div class="row">
               <div class="col-sm-6 col-md-3">
                 <div class="card card-stats card-round">
                   <div class="card-body">
@@ -521,7 +499,7 @@
                   </div>
                 </div>
               </div>
-            </div>
+            </div> --}}
  
             <div class="row">
             </div>

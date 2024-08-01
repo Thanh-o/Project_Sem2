@@ -162,7 +162,7 @@
                     </div>
                 </div>
             </div>
-
+            @foreach ($products as $product)
             <div class="box">
                 <div class="top">
                     <div class="percent">
@@ -174,12 +174,17 @@
                     </div>
                 </div>
                 <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
+                    @if ($product->images->isNotEmpty())
+                    <img src="{{ asset('storage/' . $product->images->first()->file_path) }}" alt="Product Image">
+                @else
+                    <img src="{{ asset('images/default-placeholder.png') }}" alt="No Image Available">
+                @endif
                 </div>
                 <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
+                    <div class="name"><a href="{{ route('products.show', $product->product_id) }}" style="color: #000; text-decoration: none;">{{ $product->product_name }}</a>
+                    </div>
                     <div class="price">
-                        <p>$120</p>
+                        <p>${{ $product->price }}</p>
                         <p class="cost">$160</p>
                     </div>
                     <div class="stars">
@@ -193,245 +198,8 @@
                 </div>
             </div>
 
-            <div class="box">
-                <div class="top">
-                    <div class="percent">
-                        <b>- 40%</b>
-                    </div>
-                    <div class="icon">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-regular fa-eye"></i>
-                    </div>
-                </div>
-                <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
-                </div>
-                <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
-                    <div class="price">
-                        <p>$120</p>
-                        <p class="cost">$160</p>
-                    </div>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <p class="number">(88)</p>
-                    </div>
-                </div>
-            </div>
+            @endforeach
 
-            <div class="box">
-                <div class="top">
-                    <div class="percent">
-                        <b>- 40%</b>
-                    </div>
-                    <div class="icon">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-regular fa-eye"></i>
-                    </div>
-                </div>
-                <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
-                </div>
-                <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
-                    <div class="price">
-                        <p>$120</p>
-                        <p class="cost">$160</p>
-                    </div>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <p class="number">(88)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="top">
-                    <div class="percent">
-                        <b>- 40%</b>
-                    </div>
-                    <div class="icon">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-regular fa-eye"></i>
-                    </div>
-                </div>
-                <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
-                </div>
-                <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
-                    <div class="price">
-                        <p>$120</p>
-                        <p class="cost">$160</p>
-                    </div>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <p class="number">(88)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="top">
-                    <div class="percent">
-                        <b>- 40%</b>
-                    </div>
-                    <div class="icon">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-regular fa-eye"></i>
-                    </div>
-                </div>
-                <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
-                </div>
-                <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
-                    <div class="price">
-                        <p>$120</p>
-                        <p class="cost">$160</p>
-                    </div>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <p class="number">(88)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="top">
-                    <div class="percent">
-                        <b>- 40%</b>
-                    </div>
-                    <div class="icon">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-regular fa-eye"></i>
-                    </div>
-                </div>
-                <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
-                </div>
-                <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
-                    <div class="price">
-                        <p>$120</p>
-                        <p class="cost">$160</p>
-                    </div>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <p class="number">(88)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="top">
-                    <div class="percent">
-                        <b>- 40%</b>
-                    </div>
-                    <div class="icon">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-regular fa-eye"></i>
-                    </div>
-                </div>
-                <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
-                </div>
-                <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
-                    <div class="price">
-                        <p>$120</p>
-                        <p class="cost">$160</p>
-                    </div>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <p class="number">(88)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="top">
-                    <div class="percent">
-                        <b>- 40%</b>
-                    </div>
-                    <div class="icon">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-regular fa-eye"></i>
-                    </div>
-                </div>
-                <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
-                </div>
-                <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
-                    <div class="price">
-                        <p>$120</p>
-                        <p class="cost">$160</p>
-                    </div>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <p class="number">(88)</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="box">
-                <div class="top">
-                    <div class="percent">
-                        <b>- 40%</b>
-                    </div>
-                    <div class="icon">
-                        <i class="fa-regular fa-heart"></i>
-                        <i class="fa-regular fa-eye"></i>
-                    </div>
-                </div>
-                <div class="product-img">
-                    <img src="{{ asset('images/img/g92-2-500x500-1.png') }}" />
-                </div>
-                <div class="bottom">
-                    <div class="name">HAVIT HV-G92 Gamepad</div>
-                    <div class="price">
-                        <p>$120</p>
-                        <p class="cost">$160</p>
-                    </div>
-                    <div class="stars">
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <i class="fa-solid fa-star"></i>
-                        <p class="number">(88)</p>
-                    </div>
-                </div>
-            </div>
 
         </div>
         <div class="chevron">

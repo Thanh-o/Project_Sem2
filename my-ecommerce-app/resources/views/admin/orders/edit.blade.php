@@ -26,13 +26,7 @@
 
             <div class="form-group">
                 <label for="employee_id">Employee:</label>
-                {{-- <select class="form-control" id="customer_id" name="employee_id" required>
-                    @foreach($employees as $employee)
-                        <option value="{{ $employee->employee_id }}" {{ $order->employee_id == $employee->employee_id ? 'selected' : '' }}>{{ $employee->name }}</option>
-                    @endforeach
-                </select> --}}
             </div>
-
             <div class="form-group">
                 <label for="total_amount">Total Amount:</label>
                 <input type="number" class="form-control" id="total_amount" name="total_amount" value="{{ $order->total_amount }}" required>

@@ -114,14 +114,6 @@
                 </a>
                 
               </li>
-
-              <li class="nav-item">
-                <a href="{{ route('cart.index') }}">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                <p>Cart Management</p>
-                </a>
-                
-              </li>
             </ul>
           </div>
         </div>
@@ -459,11 +451,11 @@
                     aria-expanded="false"
                   >
                     <div class="avatar-sm">
-                      <img
+                      {{-- <img
                         src="{{ asset('images/5729521e7786aeff31bbc85e33ce470b.jpg') }}"
                         alt="..."
                         class="avatar-img rounded-circle"
-                      />
+                      /> --}}
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>

@@ -11,9 +11,6 @@ use App\Models\Order;
 use App\Models\Employee;
 use App\Models\OrderDetail;
 use App\Models\Cart;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-
 
 class ProductController extends Controller
 {
@@ -85,7 +82,6 @@ class ProductController extends Controller
     {
         $image = Image::findOrFail($id);
 
-        // Xóa file từ hệ thống lưu trữ
         if (Storage::disk('public')->exists($image->file_path)) {
             Storage::disk('public')->delete($image->file_path);
         }
@@ -120,21 +116,6 @@ class ProductController extends Controller
         return redirect()->route('products.category')->with('success', "Deleted category successfully!");
     }  
 
-    public function indexp()
-    {
-        $carts = Cart::all();
-        $products = Product::with(['category', 'images' => function($query) {
-            $query->orderBy('image_id', 'asc');
-        }])->get();
-        return view('products', compact('products', 'carts'));
-    }
-    //Show
-    public function show($id)
-    {
-        $carts = Cart::all();
-        $product = Product::with(['images', 'category'])->findOrFail($id);
-        return view('products.show', compact('product', 'carts'));
-    }
 
         //ADMIN
         public function aindex(Request $request)  
@@ -327,4 +308,51 @@ class ProductController extends Controller
             return redirect()->route('admin.product.index')->with('success', "Deleted category successfully!");
         }  
 
+
+
+        public function indexp(Request $request)
+        {
+            $searchTerm = $request->input('product_name');
+        
+            $productsQuery = Product::with(['category', 'images' => function($query) {
+                $query->orderBy('image_id', 'asc');
+            }]);
+        
+            if ($searchTerm) {
+                $productsQuery = $productsQuery->where('product_name', 'LIKE', '%' . $searchTerm . '%');
+            }
+        
+            $products = $productsQuery->get();
+            $carts = Cart::all();
+            $cate = Category::all();
+            return view('products', compact('products', 'carts', 'cate'));
+        }
+        
+        //Show
+        public function show($id)
+        {
+            $carts = Cart::all();
+            $product = Product::with(['images', 'category'])->findOrFail($id);
+            return view('products.show', compact('product', 'carts'));
+        }
+        public function filter(Request $request)  
+        {  
+            $categoryId = $request->input('category_id');  
+            
+            // Validate category_id if necessary  
+            if (!$categoryId) {  
+                return response()->json(['error' => 'No category ID provided'], 400);  
+            }  
+        
+            // Fetch products by category  
+            $products = Product::where('category_id', $categoryId)->with('images')->get();  
+        
+            // Check if any products were found  
+            if ($products->isEmpty()) {  
+                return response()->json(['message' => 'No products found for the selected category'], 404);  
+            }  
+        
+            // Return a partial view for the product list  
+            return view('partials.products', compact('products'));  
+        }
 }

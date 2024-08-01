@@ -161,28 +161,6 @@
                 </a>
                 
               </li>
-              <li class="nav-item">
-                <a href="{{ route('admin.product.category') }}">
-                    <i class="fa-solid fa-list"></i>
-                <p>Category Management</p>
-                </a>
-                
-              </li>
-              <li class="nav-item">
-                <a href="{{ route('cart.index') }}">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                <p>Cart Management</p>
-                </a>
-                
-              </li>
-              
-              <li class="nav-item">
-                <a href="{{ route('orderdetails.index') }}">
-                  <i class="fa-solid fa-circle-info"></i>
-                <p>Order Details Management</p>
-                </a>
-                
-              </li>
 
             </ul>
           </div>

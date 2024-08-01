@@ -13,6 +13,14 @@
     integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" 
     crossorigin="anonymous" 
     referrerpolicy="no-referrer" />
+    <style>
+        .alert {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+    </style>
 </head>
 <body>
     
@@ -43,8 +51,9 @@
                     </div>
                 </form>
                 @if($errors->any())
-                 <div>{{ $errors->first() }}</div>
+                <div class="alert alert-danger">{{ $errors->first() }}</div>
                 @endif
+                
                 <form method="POST" action="{{ route('customers.signup.submit') }}" class="sign-up-form">
                     @csrf
                     <h2 class="title">Sign Up</h2>
@@ -76,8 +85,9 @@
                     </div>
                 </form>
                 @if($errors->any())
-                <div>{{ $errors->first() }}</div>
+                    <div class="alert alert-danger">{{ $errors->first() }}</div>
                 @endif
+                
             </div>
         </div>
         <div class="panels-container">
@@ -87,7 +97,7 @@
                     <p>Welcome to our platform! Please enter your username and password to access your account. If you don't have an account, you can sign up for free.</p>
                     <button class="btn transparent" id="sign-up-btn">Sign Up</button>
                 </div>
-                <img src="{{ asset('images/img_1.jpg') }}" alt="" class="img">
+                {{-- <img src="{{ asset('images/img_1.jpg') }}" alt="" class="img"> --}}
             </div>
             <div class="panel right-panel">
                 <div class="content">
@@ -95,7 +105,7 @@
                     <p>If you already have an account, please sign in. We remember you!</p>
                     <button class="btn transparent" id="sign-in-btn">Sign In</button>
                 </div>
-                <img src="{{ asset('images/img_2.jpg') }}" alt="" class="img">
+                {{-- <img src="{{ asset('images/img_2.jpg') }}" alt="" class="img"> --}}
             </div>
         </div>
     </div>

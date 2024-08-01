@@ -11,12 +11,17 @@ use App\Models\Cart;
 use App\Models\Product;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\Auth;
+
+
 
 class CustomerController extends Controller
 {
         // READ
         public function index()
         {
+
             $customers = Customer::all();
             $totalCus = Customer::count();
             $totalEm = Employee::count();
@@ -136,16 +141,25 @@ class CustomerController extends Controller
             'email' => 'required|email|unique:customers,email',
             'username' => 'required|min:6|unique:customers,username',
             'password' => 'required|min:6|confirmed',
+            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048', 
         ]);
-
+    
         $data = $request->only(['email', 'username', 'password']);
         $data['password'] = Hash::make($data['password']);
         $data['status'] = 'active';
-
+    
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('images'), $imageName);
+            $data['image'] = $imageName; 
+        }
+    
         Customer::create($data);
-
+    
         return redirect()->route('customers.dashboard')->with('status', 'Customer signed up successfully');
     }
+    
 
     // Show login form
     public function showLoginForm()
@@ -161,26 +175,24 @@ class CustomerController extends Controller
             'username' => 'required',
             'password' => 'required',
         ]);
-
-        $activeUsersCount = Customer::where('status', 'active')->count();
-
-        if ($activeUsersCount === 0) {
-            return back()->withErrors(['message' => 'No active users available.']);
-        }
-
+    
         $customer = Customer::where('username', $request->username)->first();
-
+    
         if ($customer && Hash::check($request->password, $customer->password)) {
             $customer->status = 'active';
             $customer->save();
-
+    
             Session::put('customer_logged_in', true);
-            Session::put('customer_id', $customer->customer_id); 
+            Session::put('customer_id', $customer->customer_id);
+    
             return redirect()->route('customers.dashboard');
         }
-
+    
         return back()->withErrors(['message' => 'Invalid credentials.']);
     }
+    
+    
+    
 
     public function showActiveUsers()  
     {  
@@ -190,6 +202,7 @@ class CustomerController extends Controller
         return view('active_users', [
             'activeUsersCount' => $activeUsersCount,
             'activeUsers' => $activeUsers,
+
         ]);  
     }  
 
@@ -199,22 +212,38 @@ class CustomerController extends Controller
     public function logout()
     {
         $customerId = Session::get('customer_id');
-
+    
         if ($customerId) {
-            $customer =Customer::find($customerId); 
+            $customer = Customer::find($customerId);
             $customer->status = 'inactive';
             $customer->save();
         }
-
+    
         Session::forget('customer_logged_in');
         Session::forget('customer_id');
-
+    
         return redirect()->route('customers.login')->with('status', 'You have been logged out successfully.');
     }
+    
+    
+    
 
     // Dashboard
     public function dashboard()
     {
-        return view('customers.dashboard');
+        $customerId = Session::get('customer_id');
+        $customer = Customer::find($customerId);
+        $carts = Cart::all();
+        $products = Product::all();
+
+    
+        return view('customers.dashboard', [
+            'customer' => $customer,
+            'carts' => $carts,
+            'products' =>$products,
+        ]);
     }
+    
+    
+    
 }

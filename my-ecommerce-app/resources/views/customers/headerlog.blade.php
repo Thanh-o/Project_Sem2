@@ -112,7 +112,7 @@
           <a href="{{ route('customers.signup') }}" class="signup-box">Sign Up</a> 
       </div>
   </div> 
-  <div class="left-cart">
+  <div class="left-cart" style="right: 280px">
       <div class="cart-header">
           
           <b><i class="fa-solid fa-cart-shopping"></i> Cart</b>

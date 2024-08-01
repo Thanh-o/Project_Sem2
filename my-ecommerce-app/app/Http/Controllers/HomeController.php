@@ -4,13 +4,20 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cart;
+use Illuminate\Support\Facades\Session;
+use App\Models\Product;
 
 class HomeController extends Controller
 {
     public function index()
     {
+        $products = Product::with(['category', 'images'])->get();
+
         $carts = Cart::all();
-        return view('home', compact('carts'));
+        return view('home', [
+            'products' => $products,
+            'carts' => $carts
+        ]);
     }
 
     public function contact()

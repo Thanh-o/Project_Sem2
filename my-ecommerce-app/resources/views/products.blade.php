@@ -17,65 +17,83 @@
     <link rel="stylesheet" href="{{ asset('Css/products.css') }}">
 </head>
 <body>
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     @include('header')
     <main>
-        <div class="top">
-            <p>1-16 of over 50,000 results for <b>"pc gaming"</b></p>
-            <div class="sort">
-                <select name="sort-by" id="sort-by">
-                    <option value="">Featured</option>
-                    <option value="">Price: Low to High</option>
-                    <option value="">Price: High to Low</option>
-                    <option value="">Newest Arrivals</option>
-                </select>
-            </div>
-        </div>
+
         <div class="section">
             <div class="left">
-                <div class="category">
-                    <h3>Category</h3>
-                    <p>laptop</p>
-                    <p>pc</p>
-                    <p>đòng hồ</p>
-                    <p>phone</p>
+                <div class="category">  
+                    <h3>Category</h3>  
+                    @foreach ($cate as $category)  
+                        <p class="category-name" data-category-id="{{ $category->cate_id }}">{{ $category->cate_name }}</p>  
+                    @endforeach  
                 </div>
             </div>
             <div class="right">
+
                 <div class="title">
                     <h2 class="list-title">Product List</h2>
                     <p>Read the specifications carefully to find the right product.</p>
                 </div>
+
+                @php
+                $searchTerm = request()->input('product_name');
+                $productsCount = $products->count();
+            @endphp
+            
+            @if ($productsCount > 0)
+            <div class="top-section">
+                <p>1-10 of over 50,000 results for <b>"{{ request()->input('product_name') }}"</b></p>
+    
+                <div class="sort">
+                    <select name="sort-by" id="sort-by">
+                        <option value="">Featured</option>
+                        <option value="">Price: Low to High</option>
+                        <option value="">Price: High to Low</option>
+                        <option value="">Newest Arrivals</option>
+                    </select>
+                </div>
+            </div>
+            
                 <div class="product-list">
                     @foreach ($products as $product)
-                    <div class="product-card">
-                        <div class="product-image">
-                            @if ($product->images->isNotEmpty())
-                                <img src="
-                                {{ asset('storage/' . $product->images->first()->file_path) }}" alt="Product Image">
-                            @else
-                                <img src="{{ asset('images/default-placeholder.png') }}" alt="No Image Available">
-                            @endif
-                        </div>
-                        <div class="product-details">
-                            <h2 class="product-title">
-                                <a href="{{ route('products.show', $product->product_id) }}">{{ $product->product_name }}</a>
-                            </h2>
-                            <div class="product-rating">
-                                <span class="stars">★★★★☆</span>
-                                <span class="rating-count">(542)</span>
+                        <div class="product-card">
+                            <div class="product-image">
+                                @if ($product->images->isNotEmpty())
+                                    <img src="{{ asset('storage/' . $product->images->first()->file_path) }}" alt="Product Image">
+                                @else
+                                    <img src="{{ asset('images/default-placeholder.png') }}" alt="No Image Available">
+                                @endif
                             </div>
-                            <p class="product-info">1K+ bought in past month</p>
-                            <div class="product-price">
-                                <span class="current-price">{{ $product->price }}</span>
-                                <span class="old-price">$699.99</span>
+                            <div class="product-details">
+                                <h2 class="product-title">
+                                    <a href="{{ route('products.show', $product->product_id) }}">{{ $product->product_name }}</a>
+                                </h2>
+                                <div class="product-rating">
+                                    <span class="stars">★★★★☆</span>
+                                    <span class="rating-count">(542)</span>
+                                </div>
+                                <p class="product-info">1K+ bought in past month</p>
+                                <div class="product-price">
+                                    <span class="current-price">${{ $product->price }}</span>
+                                    <span class="old-price">$699.99</span>
+                                </div>
+                                <p class="delivery-info">Delivery <strong>Wed, Aug 14</strong><br>Ships to Vietnam</p>
+
+                                <button class="add-to-cart" data-product-id="{{ $product->product_id }}">Add to Cart</button>
+
                             </div>
-                            <p class="delivery-info">Delivery <strong>Wed, Aug 14</strong><br>Ships to Vietnam</p>
-                            <button class="add-to-cart">Add to cart</button>
                         </div>
-                    </div>
                     @endforeach
                     <div class="pagination"></div>
                 </div>
+            @else
+                <p>No results found for <b>"{{ $searchTerm }}"</b>. Please try a different search term.</p>
+            @endif
+                
+
+                
                 <div class="help-contact">
                     <h2>Do you need help?</h2>
                     <p>Please contact us to get help as soon as possible.</p>
@@ -205,6 +223,49 @@
             }
         }
     </script> --}}
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> 
+    <script>  
+$(document).ready(function() {  
+    $('.add-to-cart').on('click', function(e) {  
+        e.preventDefault(); 
+
+        var productId = $(this).data('product-id');
+        var quantity = 1; 
+
+        $.ajax({  
+            url: '{{ route("cart.add") }}', 
+            method: 'POST',  
+            data: {  
+                _token: '{{ csrf_token() }}',  
+                product_id: productId,  
+                quantity: quantity  
+            },  
+            success: function(response) {  
+                if (response.success) {  
+                     
+                    updateCartCount(response.cartItem.quantity);  
+                } else {  
+                    alert('error: ' + response.message);  
+                }  
+                loadPagination(data);  
+
+            },  
+            error: function(xhr) {  
+                alert('An error occurred while adding a product.');  
+            }  
+        });  
+    });  
+
+    function updateCartCount(count) {  
+        $('#cart-count').text(count);
+    }
+    
+
+});
+
+    </script>  
+
+
 </body>
 
 </html>

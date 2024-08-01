@@ -87,9 +87,7 @@
                 <i class="gg-menu-left"></i>
               </button>
             </div>
-            {{-- <button class="topbar-toggler more">
-              <i class="gg-more-vertical-alt"></i>
-            </button> --}}
+
           </div>
           <!-- End Logo Header -->
         </div>
@@ -132,14 +130,6 @@
                 <a href="{{ route('admin.product.index') }}">
                   <i class="fas fa-table"></i>
                   <p>Product Management</p>
-                </a>
-                
-              </li>
-
-              <li class="nav-item">
-                <a href="{{ route('cart.index') }}">
-                  <i class="fa-solid fa-cart-shopping"></i>
-                <p>Cart Management</p>
                 </a>
                 
               </li>
@@ -373,12 +363,12 @@
                     href="#"
                     aria-expanded="false"
                   >
-                    <div class="avatar-sm">
+                    {{-- <div class="avatar-sm">
                       <img
                         src="{{ asset('images/5729521e7786aeff31bbc85e33ce470b.jpg') }}"
                         alt="..."
                         class="avatar-img rounded-circle"
-                      />
+                      /> --}}
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
@@ -585,7 +575,6 @@
                                     </tr>  
                                 </thead>  
                                 <tbody id="product-list">  
-                                    <!-- Các sản phẩm sẽ được thêm vào đây qua AJAX -->  
                                 </tbody>  
                             </table>  
                         
@@ -593,6 +582,8 @@
                             <div id="pagination"></div>
                         </div>
                         <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
+                        <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
 <script>  
 $(document).ready(function() {  
     let currentPage = 1;  
@@ -618,6 +609,18 @@ $('#new-product').on('click', function() {
     loadProducts(1, 'new-product');
 });
 
+function shortenText(text, maxLength) {
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+function shortenText(text, maxLength) {
+    return text.length > maxLength ? text.substring(0, maxLength) + '...' : text;
+}
+
+function formatDate(dateString) {
+    return moment(dateString).format('MMM DD, YYYY, h:mmA'); 
+}
+
 function loadProducts(page, type = '') {
     $.ajax({
         url: '/admin/product?page=' + page + (type ? '&type=' + type : ''),
@@ -626,103 +629,42 @@ function loadProducts(page, type = '') {
         success: function(data) {
             $('#product-list').empty(); 
 
+            function createProductRow(product) {
+                var imgSrc = product.images[0] ? `/storage/${product.images[0].file_path}` : '/path/to/default/image.jpg';
+                var shortenedName = shortenText(product.product_name, 20);
+
+                return `<tr id="product-row-${product.product_id}">
+                    <th scope="row">${product.product_id}</th>
+                    <td>
+                        <img src="${imgSrc}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
+                        <a href="/admin/product/${product.product_id}/edit" style="color: #000; margin-left: 10px;">${shortenedName}</a>
+                    </td>
+                    <td class="text-end">${formatDate(product.updated_at)}</td>
+                    <td class="text-end">$${product.price}</td>
+                    <td class="text-end">${product.quantity}</td>
+                    <td class="text-end">
+                        <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
+                            <i class="fa-solid fa-xmark"></i>  
+                        </button> 
+                    </td>
+                </tr>`;
+            }
+
             if (type === 'most-price') {
-                data.data.sort(function(a, b) {
-                    return b.price - a.price;
-                });
-
+                data.data.sort((a, b) => b.price - a.price);
                 var topProducts = data.data.slice(0, 5);
-                
-                $.each(topProducts, function(index, product) {
-                    var html = `<tr id="product-row-${product.product_id}">
-                        <th scope="row">${product.product_id}</th>
-                        <td>
-                            <img src="/storage/${product.images[0]?.file_path}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                            <a href="/admin/product/edit/${product.product_id}" style="color: #000; margin-left: 10px">${product.product_name}</a>
-                        </td>
-                        <td class="text-end">${new Date(product.updated_at).toLocaleString()}</td>
-                        <td class="text-end">$${product.price}</td>
-                        <td class="text-end">${product.quantity}</td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
-                                <i class="fa-solid fa-xmark"></i>  
-                            </button> 
-                        </td>
-                    </tr>`;
-                    $('#product-list').append(html);
-                });
+                $.each(topProducts, (index, product) => $('#product-list').append(createProductRow(product)));
             } else if (type === 'most-quantity') {
-                data.data.sort(function(a, b) {
-                    return b.quantity - a.quantity;
-                });
-
+                data.data.sort((a, b) => b.quantity - a.quantity);
                 var topProducts = data.data.slice(0, 5);
-                
-                $.each(topProducts, function(index, product) {
-                    var html = `<tr id="product-row-${product.product_id}">
-                        <th scope="row">${product.product_id}</th>
-                        <td>
-                            <img src="/storage/${product.images[0]?.file_path}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                            <a href="/admin/product/edit/${product.product_id}" style="color: #000; margin-left: 10px">${product.product_name}</a>
-                        </td>
-                        <td class="text-end">${new Date(product.updated_at).toLocaleString()}</td>
-                        <td class="text-end">$${product.price}</td>
-                        <td class="text-end">${product.quantity}</td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
-                                <i class="fa-solid fa-xmark"></i>  
-                            </button> 
-                        </td>
-                    </tr>`;
-                    $('#product-list').append(html);
-                });
-              } else if (type === 'new-product') {
-                data.data.sort(function(a, b) {
-                    return new Date(b.updated_at) - new Date(a.updated_at);
-                });
-
+                $.each(topProducts, (index, product) => $('#product-list').append(createProductRow(product)));
+            } else if (type === 'new-product') {
+                data.data.sort((a, b) => new Date(b.updated_at) - new Date(a.updated_at));
                 var newProducts = data.data.slice(0, 5);
-                
-                $.each(newProducts, function(index, product) {
-                    var html = `<tr id="product-row-${product.product_id}">
-                        <th scope="row">${product.product_id}</th>
-                        <td>
-                            <img src="/storage/${product.images[0]?.file_path}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                            <a href="/admin/product/edit/${product.product_id}" style="color: #000; margin-left: 10px">${product.product_name}</a>
-                        </td>
-                        <td class="text-end">${new Date(product.updated_at).toLocaleString()}</td>
-                        <td class="text-end">$${product.price}</td>
-                        <td class="text-end">${product.quantity}</td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
-                                <i class="fa-solid fa-xmark"></i>  
-                            </button> 
-                        </td>
-                    </tr>`;
-                    $('#product-list').append(html);
-                });
-            }else {
-                $.each(data.data, function(index, product) {
-                    var html = `<tr id="product-row-${product.product_id}">
-                        <th scope="row">${product.product_id}</th>
-                        <td>
-                            <img src="/storage/${product.images[0]?.file_path}" width="50px" height="50px" alt="Product Image" style="border-radius: 50%;">
-                            <a href="/admin/product/edit/${product.product_id}" style="color: #000; margin-left: 10px">${product.product_name}</a>
-                        </td>
-                        <td class="text-end">${new Date(product.updated_at).toLocaleString()}</td>
-                        <td class="text-end">$${product.price}</td>
-                        <td class="text-end">${product.quantity}</td>
-                        <td class="text-end">
-                            <button type="button" class="btn btn-outline-danger delete-btn" onclick="deleteProduct(${product.product_id})" style="padding: 0; font-size: 16px; width: 30px; height: 30px; color: red; border:none;">  
-                                <i class="fa-solid fa-xmark"></i>  
-                            </button> 
-                        </td>
-                    </tr>`;
-                    $('#product-list').append(html);
-                });
-            } 
-                
-            
+                $.each(newProducts, (index, product) => $('#product-list').append(createProductRow(product)));
+            } else {
+                $.each(data.data, (index, product) => $('#product-list').append(createProductRow(product)));
+            }
 
             loadPagination(data);
         },
@@ -731,6 +673,8 @@ function loadProducts(page, type = '') {
         }
     });
 }
+
+
 
 
 

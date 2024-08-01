@@ -31,12 +31,7 @@
 
             <div class="mb-3">
                 <label for="employee_id" class="form-label">Employee:</label>
-                {{-- <select class="form-control" id="employee_id" name="employee_id" required>
-                    <option value="">Select Employee</option>
-                    @foreach ($employees as $employee)
-                        <option value="{{ $employee->employee_id }}">{{ $employee->name }}</option>
-                    @endforeach
-                </select> --}}
+
             </div>
 
             <div class="mb-3">

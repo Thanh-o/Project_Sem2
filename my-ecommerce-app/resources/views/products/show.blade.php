@@ -18,6 +18,8 @@
 
 </head>  
 <body>  
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
     @include('header')
     <main>
         <div class="product-detail">  
@@ -53,7 +55,7 @@
                     <strong>Category:</strong> {{ $product->category->cate_name }}  
                 </div>  
     
-                <button class="add-to-cart"><i class="fa-solid fa-cart-shopping"></i> Add to cart</button>  
+                <button class="add-to-cart" data-product-id="{{ $product->product_id }}"><i class="fa-solid fa-cart-shopping"></i> Add to cart</button>  
                 <div class="description">{{ $product->description }}</</div> 
                 <p><b>Note: </b>Please read the instruction manual carefully before use</p>
             </div>
@@ -63,7 +65,7 @@
         </div> 
     </main>
     @include('footer')
-
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>  
     <script>  
         document.addEventListener('DOMContentLoaded', function () {  
             const images = document.querySelectorAll('.carousel-image');  
@@ -87,6 +89,41 @@
                 showImage(currentIndex);  
             });  
         });  
+
+        $(document).ready(function() {  
+    $('.add-to-cart').on('click', function(e) {  
+        e.preventDefault(); 
+
+        var productId = $(this).data('product-id');
+        var quantity = 1; 
+
+        $.ajax({  
+            url: '{{ route("cart.add") }}', 
+            method: 'POST',  
+            data: {  
+                _token: '{{ csrf_token() }}',  
+                product_id: productId,  
+                quantity: quantity  
+            },  
+            success: function(response) {  
+                if (response.success) {  
+                     
+                    updateCartCount(response.cartItem.quantity);  
+                } else {  
+                    alert('error: ' + response.message);  
+                }  
+            },  
+            error: function(xhr) {  
+                alert('An error occurred while adding a product.');  
+            }  
+        });  
+    });  
+
+    function updateCartCount(count) {  
+        $('#cart-count').text(count);
+    }  
+});
+
     </script>  
 </body>  
 </html>

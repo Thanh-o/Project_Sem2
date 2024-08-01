@@ -40,7 +40,8 @@
                         <a href="{{ route('home') }}"><b>Buy now</b></a>
                     </div>
                    @else
-    
+                   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>  
+
                    <div id="cart-items" class="scroll">
                     @foreach ($carts as $cart)
                         <div class="cart-item" data-cart-id="{{ $cart->id }}">
@@ -201,26 +202,7 @@
                     <li data-bank="acb">ACB</li>
                 </ul>
             </div>
-        </div>
-
-        <h2 class="mt-5 mb-4" >Product List:</h2>
-
-        <ul>
-            @foreach ($products as $product)
-                <li>
-                    {{ $product->product_name }} - 
-                    Giá: {{ $product->price }}
-                    <form class="add-to-cart-form" data-product-id="{{ $product->product_id }}">
-                        @csrf
-                        <input type="number" name="quantity" value="1" min="1" step="1">
-                        <button class="btn btn-danger btn-sm" type="submit">+</button>
-                    </form>
-                </li>
-            @endforeach
-        </ul>
-        
-
-
+        </div>    
                     
         @include('footer')
         <script src="{{ asset('Js/cart.js') }}"></script>
