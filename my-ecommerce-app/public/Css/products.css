@@ -166,7 +166,7 @@ main .right .product-view {
 }
 
 main .right .product-view .card img {
-    min-width: 300px;
+    min-height: 300px;
     max-width: 360px;
 }
 

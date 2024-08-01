@@ -71,6 +71,9 @@ Route::get('/orders', [OrderController::class, 'index']);
 
 Route::get('/active-users', [CustomerController::class, 'showActiveUsers'])->name('active.users');  
 
+    Route::post('orders/{id}/cancel', [OrderController::class, 'cancel'])->name('order.cancel');
+    Route::post('orders/{id}/complete', [OrderController::class, 'complete'])->name('order.complete');
+    Route::post('orders/{id}/processing', [OrderController::class, 'processing'])->name('order.processing');
 
 
 

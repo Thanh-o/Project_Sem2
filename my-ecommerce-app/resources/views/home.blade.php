@@ -222,14 +222,14 @@
      <div class="pro-list">
         <div class="cate">
             <div class="component">
-                <img src="{{ asset('images/img/image-30-2.png') }}" />
-                <b>Custom Build</b>
+                <img src="{{ asset('images/anhbia4.jpg') }}" />
+                <b>Laptop</b>
                 <a href="#">See All Products</a>
             </div>
             <div class="div-3">
                 <div class="product-list">
                     <div class="product">
-                        <img src="{{ asset('images/img/image-29-1.png') }}" />
+                        <img src="{{ asset('images/LapTop/Remove-bg.ai_1722447212398.png') }}" />
                         <div class="stars">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
@@ -243,7 +243,49 @@
                         <b>$499</b>
                     </div>    
                     <div class="product">
-                        <img src="{{ asset('images/img/image-29-1.png') }}" />
+                        <img src="{{ asset('images/LapTop/Remove-bg.ai_1722447230451.png') }}" />
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p class="number">Review (4)</p>
+                        </div>
+                        <div class="name">EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On</div>
+                        <p class="cost">$699</p>
+                        <b>$499</b>
+                    </div>  
+                    <div class="product">
+                        <img src="{{ asset('images/LapTop/Remove-bg.ai_1722447236159.png') }}" />
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p class="number">Review (4)</p>
+                        </div>
+                        <div class="name">EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On</div>
+                        <p class="cost">$699</p>
+                        <b>$499</b>
+                    </div>  
+                    <div class="product">
+                        <img src="{{ asset('images/LapTop/Remove-bg.ai_1722447250847.png') }}" />
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p class="number">Review (4)</p>
+                        </div>
+                        <div class="name">EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On</div>
+                        <p class="cost">$699</p>
+                        <b>$499</b>
+                    </div>  
+                    <div class="product">
+                        <img src="{{ asset('images/LapTop/Remove-bg.ai_1722447268176.png') }}" />
                         <div class="stars">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
@@ -298,8 +340,38 @@
                         <p class="cost">$699</p>
                         <b>$499</b>
                     </div>  
+                </div>
+                <div class="chevron">
+                    <div class="arrow-left"><i class="fa-solid fa-chevron-left"></i></div>
+                    <div class="arrow-right"><i class="fa-solid fa-chevron-right"></i></div>
+                </div>
+            </div>
+        </div>
+
+        <div class="cate">
+            <div class="component">
+                <img src="{{ asset('images/anhbia2.jpg') }}" />
+                <b>Gaming</b>
+                <a href="#">See All Products</a>
+            </div>
+            <div class="div-3">
+                <div class="product-list">
                     <div class="product">
-                        <img src="{{ asset('images/img/image-29-1.png') }}" />
+                        <img src="{{ asset('images/Gaming/Remove-bg.ai_1722447706429.png') }}" />
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p class="number">Review (4)</p>
+                        </div>
+                        <div class="name">EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On</div>
+                        <p class="cost">$699</p>
+                        <b>$499</b>
+                    </div>    
+                    <div class="product">
+                        <img src="{{ asset('images/Gaming/Remove-bg.ai_1722447796976.png') }}" />
                         <div class="stars">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>
@@ -313,7 +385,63 @@
                         <b>$499</b>
                     </div>  
                     <div class="product">
-                        <img src="{{ asset('images/img/image-29-1.png') }}" />
+                        <img src="{{ asset('images/Gaming/Remove-bg.ai_1722447799164.png') }}" />
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p class="number">Review (4)</p>
+                        </div>
+                        <div class="name">EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On</div>
+                        <p class="cost">$699</p>
+                        <b>$499</b>
+                    </div>  
+                    <div class="product">
+                        <img src="{{ asset('images/Gaming/Remove-bg.ai_1722447826695.png') }}" />
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p class="number">Review (4)</p>
+                        </div>
+                        <div class="name">EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On</div>
+                        <p class="cost">$699</p>
+                        <b>$499</b>
+                    </div>  
+                    <div class="product">
+                        <img src="{{ asset('images/Gaming/Remove-bg.ai_1722447828144.png') }}" />
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p class="number">Review (4)</p>
+                        </div>
+                        <div class="name">EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On</div>
+                        <p class="cost">$699</p>
+                        <b>$499</b>
+                    </div>  
+                    <div class="product">
+                        <img src="{{ asset('images/Gaming/Remove-bg.ai_1722447829384.png') }}" />
+                        <div class="stars">
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <i class="fa-solid fa-star"></i>
+                            <p class="number">Review (4)</p>
+                        </div>
+                        <div class="name">EX DISPLAY : MSI Pro 16 Flex-036AU 15.6 MULTITOUCH All-In-On</div>
+                        <p class="cost">$699</p>
+                        <b>$499</b>
+                    </div>  
+                    <div class="product">
+                        <img src="{{ asset('images/Gaming/Remove-bg.ai_1722447830761.png') }}" />
                         <div class="stars">
                             <i class="fa-solid fa-star"></i>
                             <i class="fa-solid fa-star"></i>

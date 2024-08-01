@@ -121,12 +121,10 @@ class OrderController extends Controller
     // SHOW
     public function show($orderId)
     {
-        $order = Order::with('orderDetails.product')->findOrFail($orderId);
+        $order = Order::with('orderDetails.product', 'customer')->findOrFail($orderId);
         $carts = Cart::all();
 
-        if (Auth::check() && Auth::id() !== $order->customer_id) {
-            abort(403, 'Unauthorized action.');
-        }
+
 
         return view('orders.show', compact('order', 'carts'));
     }

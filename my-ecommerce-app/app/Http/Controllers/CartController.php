@@ -6,17 +6,19 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\Order;
 use App\Models\Cart;
+use App\Models\Customer;
+
 use Illuminate\Support\Facades\Auth; 
 
 class CartController extends Controller
 {
     public function index()
     {   
-        if (!Auth::check()) {
-            return redirect()->route('customers.login');
-        }
+        // if (!Auth::check()) {
+        //     return redirect()->route('customers.login');
+        // }
         $customerId = Auth::id(); 
-        $carts = Cart::where('customer_id', $customerId)->with('product')->get();
+        $carts = Cart::with('product')->get();
         $products = Product::all();
 
         return view('cart.index', compact('carts', 'products'));
@@ -26,7 +28,7 @@ class CartController extends Controller
     {
         $product_id = $request->input('product_id');
         $quantity = $request->input('quantity');
-        $customerId = Auth::id(); 
+        // $customerId = Auth::id(); 
 
         $product = Product::find($product_id);
 
@@ -35,7 +37,7 @@ class CartController extends Controller
         }
 
         $cartItem = Cart::where('product_id', $product_id)
-                         ->where('customer_id', $customerId)
+                        //  ->where('customer_id', $customerId)
                          ->first();
 
         if ($cartItem) {
@@ -45,7 +47,7 @@ class CartController extends Controller
             $cartItem = new Cart();
             $cartItem->product_id = $product_id;
             $cartItem->quantity = $quantity;
-            $cartItem->customer_id = $customerId;
+            // $cartItem->customer_id = $customerId;
             $cartItem->save();
         }
 
@@ -71,42 +73,43 @@ class CartController extends Controller
     }
 
     // Thanh toán
-    public function checkout(Request $request)
-    {
-        $customerId = Auth::id();
-        $carts = Cart::where('customer_id', $customerId)->get();
-
-        $totalAmount = $carts->sum(function ($cart) {
-            return $cart->product->price * $cart->quantity;
-        });
-
-        try {
-            $order = new Order();
-            $order->customer_id = $customerId; 
-            $order->employee = 'Waiting';
-            $order->total_amount = $totalAmount;
-            $order->status = 'Processing';
-            $order->payment = $request->input('payment_method');
-            $order->address = $request->input('delivery_address');
-            $order->delivery = $request->input('delivery_method');
-            $order->phone = $request->input('phone_number');
-            $order->name = $request->input('name');
-            $order->save();
-
-            foreach ($carts as $cart) {
-                $order->orderDetails()->create([
-                    'product_id' => $cart->product_id,
-                    'quantity' => $cart->quantity,
-                    'total' => $cart->product->price * $cart->quantity,
-                ]);
-            }
-
-            Cart::where('customer_id', $customerId)->delete();
-
-            return redirect()->route('order.show', ['order' => $order->order_id])->with('status', 'Order paid successfully!');
-        } catch (\Exception $e) {
-            return redirect()->route('order.show', ['order' => $order->order_id])->with('error', 'An error occurred while processing your order.');
-        }
+    public function checkout(Request $request)  
+    {  
+        // Retrieve the carts related to the customer based on the provided customer ID  
+        $carts = Cart::where('customer_id', $request->input('customer_id'))->get();  
+    
+        // Calculate total amount  
+        $totalAmount = $carts->sum(function ($cart) {  
+            return $cart->product->price * $cart->quantity;  
+        });   
+            // Create a new order  
+            $order = new Order();  
+            $order->customer_id = $request->input('customer_id',1);  
+            $order->employee = 'Waiting';  
+            $order->total_amount = $totalAmount;  
+            $order->status = 'Processing';  
+            $order->payment = $request->input('payment_method');  
+            $order->address = $request->input('delivery_address');  
+            $order->delivery = $request->input('delivery_method');  
+            $order->phone = $request->input('phone_number');  
+            $order->name = $request->input('name');  
+            $order->save();  
+    
+            // Create order details from each cart item  
+            foreach ($carts as $cart) {  
+                $order->orderDetails()->create([  
+                    'product_id' => $cart->product_id,  
+                    'quantity' => $cart->quantity,  
+                    'total' => $cart->product->price * $cart->quantity,  
+                ]);  
+            }  
+    
+            // Clear the customer's cart after order placement  
+            Cart::where('customer_id', $request->input('customer_id'))->delete();  
+    
+            // Redirect with success message  
+            return redirect()->route('order.show', ['order' => $order->order_id])->with('status', 'Order paid successfully!');  
+        
     }
 
     public function remove(Request $request, $id)

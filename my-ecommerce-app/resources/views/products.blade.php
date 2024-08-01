@@ -108,25 +108,19 @@
                             <div class="img-top">
                                 <img src="{{ asset('images/img/image-30-2.png') }}" alt="">
                             </div>
-                            <div class="img-bottom">
-                                <img src="{{ asset('images/img/image-33-3.png') }}" alt="">
-                            </div>
+
                         </div>
                         <div class="card">
                             <div class="img-top">
-                                <img src="{{ asset('images/img/image-30-2.png') }}" alt="">
+                                <img src="{{ asset('images/anhbia4.jpg') }}" alt="">
                             </div>
-                            <div class="img-bottom">
-                                <img src="{{ asset('images/img/image-33-3.png') }}" alt="">
-                            </div>
+
                         </div>
                         <div class="card">
                             <div class="img-top">
-                                <img src="{{ asset('images/img/image-30-2.png') }}" alt="">
+                                <img src="{{ asset('images/anhbia2.jpg') }}" alt="">
                             </div>
-                            <div class="img-bottom">
-                                <img src="{{ asset('images/img/image-33-3.png') }}" alt="">
-                            </div>
+
                         </div>
                     </div>
                     

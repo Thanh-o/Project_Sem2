@@ -45,7 +45,7 @@
                     <span>N/A</span>
                 @endif
                 <div class="product-details">
-                    <div class="product-name"><a href="{{ route('admin.product.edit', $detail->product->product_id) }}">{{ $detail->product->product_name }}</a></div>
+                    <div class="product-name"><a href="{{ route('products.show', $detail->product->product_id) }}">{{ $detail->product->product_name }}</a></div>
                     <div class="product-price">${{ number_format($detail->total) }}</div>
                 </div>
                 <div class="product-quantity">x{{ $detail->quantity }}</div>
