@@ -365,12 +365,12 @@
                     href="#"
                     aria-expanded="false"
                   >
-                    {{-- <div class="avatar-sm">
+                    <div class="avatar-sm">
                       <img
                         src="{{ asset('images/5729521e7786aeff31bbc85e33ce470b.jpg') }}"
                         alt="..."
                         class="avatar-img rounded-circle"
-                      /> --}}
+                      />
                     </div>
                     <span class="profile-username">
                       <span class="op-7">Hi,</span>
