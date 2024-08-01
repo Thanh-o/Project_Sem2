@@ -34,7 +34,7 @@
                 <img src="{{ asset('images/img/image-26.svg') }}" alt="Image 2">
                 <img src="{{ asset('images/2.jpg ') }}" alt="Image 3">
                 <img src="{{ asset('images/anhbia1.jpg') }}" alt="Image 4">
-                <img src="{{ asset('images/anhbia8.jpg') }}" alt="Image 5">
+                {{-- <img src="{{ asset('images/anhbia8.jpg') }}" alt="Image 5"> --}}
             </div>
             <div class="chevron">
                 <div class="left5"><i class="fa-solid fa-chevron-left"></i></div>

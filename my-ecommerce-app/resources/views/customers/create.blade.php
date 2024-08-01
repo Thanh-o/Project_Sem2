@@ -12,7 +12,7 @@
 <body>
     <div class="container mt-5">
         <h1>Add Customer
-            <a href="{{ route('customers.index') }}" class="btn btn-primary float-end">Back</a>
+            <a href="{{ route('admin.customers.index') }}" class="btn btn-primary float-end">Back</a>
         </h1>
         <form action="{{ route('customers.store') }}" method="POST" enctype="multipart/form-data">
             @csrf

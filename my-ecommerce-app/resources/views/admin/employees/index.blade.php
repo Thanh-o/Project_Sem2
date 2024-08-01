@@ -411,7 +411,7 @@
                   document.getElementById('dateDisplay').innerHTML = dateString;
               </script>
               
-                <a href="{{ route('orders.create') }}" class="btn btn-primary btn-round">Add Order</a>
+                <a href="{{ route('employees.create') }}" class="btn btn-primary btn-round">Add Employee</a>
               </div>
             </div>
             {{-- <div class="row">

@@ -363,8 +363,8 @@
                     href="#"
                     aria-expanded="false"
                   >
-                    {{-- <div class="avatar-sm">
-                      <img
+                     <div class="avatar-sm">
+                    {{-- <img
                         src="{{ asset('images/5729521e7786aeff31bbc85e33ce470b.jpg') }}"
                         alt="..."
                         class="avatar-img rounded-circle"
